@@ -18,7 +18,7 @@ class FormulaireType extends AbstractType
                 
             ],
             EntityType::class, [
-                'class' => ''
+                'attr' => ''
             ])
             ->add('nom_usage')
             ->add('prenom')
