@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulaireController!{% endblock %}
+
+{% block body %}
+<body class="bg-scroll bg-center bg-cover" style="background-image: url('{{ asset('build/images/uimm-stage.jpg')}}')">
+	<div class="flex justify-center w-80 bg-konbini-100">
+		<div class="w-80 bg-konbini-100">
+			{{ form_start(formulaire) }}
+
+			{{ form_row(formulaire.nom) }}
+			{{ form_row(formulaire.nom_usage) }}
+			{{ form_row(formulaire.prenom) }}
+			{{ form_row(formulaire.date_naissance) }}
+			{{ form_row(formulaire.portable) }}
+			{{ form_row(formulaire.fixe) }}
+			{{ form_row(formulaire.email) }}
+			{{ form_row(formulaire.adresse) }}
+			{{ form_row(formulaire.detail) }}
+			{{ form_row(formulaire.cp) }}
+			{{ form_row(formulaire.ville) }}
+			{{ form_row(formulaire.pays) }}
+			{{ form_row(formulaire.nationalite) }}
+			{{ form_row(formulaire.dept) }}
+			{{ form_row(formulaire.ville_naissance) }}
+			{{ form_row(formulaire.pole) }}
+			{{ form_row(formulaire.intitule) }}
+			{{ form_row(formulaire.certif) }}
+			{{ form_row(formulaire.date_debut) }}
+			{{ form_row(formulaire.date_fin) }}
+			{{ form_row(formulaire.diplome) }}
+			{{ form_row(formulaire.qualif) }}
+			{{ form_row(formulaire.date_obtention) }}
+			{{ form_row(formulaire.exp) }}
+			{{ form_row(formulaire.metier) }}
+			{{ form_row(formulaire.duree) }}
+			{{ form_row(formulaire.entreprise) }}
+			{{ form_row(formulaire.remu) }}
+			{{ form_row(formulaire.salarie) }}
+			{{ form_row(formulaire.statut) }}
+			{{ form_row(formulaire.commentaire) }}
+			{{ form_row(formulaire.statut_salarie) }}
+			{{ form_row(formulaire.entreprise_tuteur) }}
+			{{ form_row(formulaire.adresse_entreprise) }}
+			{{ form_row(formulaire.ville_entreprise) }}
+			{{ form_row(formulaire.cp_entreprise) }}
+			{{ form_row(formulaire.nom_tuteur) }}
+			{{ form_row(formulaire.prenom_tuteur) }}
+			{{ form_row(formulaire.mail_tuteur) }}
+			{{ form_row(formulaire.telephone_tuteur) }}
+
+
+			{{ form_end(formulaire)}}
+		</div>
+	</div>
+</body>
+
+
+{% endblock %}
