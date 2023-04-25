@@ -64,6 +64,9 @@ class Coordonees
     #[ORM\Column(length: 255)]
     private ?string $prenomApprenant = null;
 
+    #[ORM\OneToOne(mappedBy: 'user_coord', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -269,6 +272,28 @@ class Coordonees
     public function setPrenomApprenant(string $prenomApprenant): self
     {
         $this->prenomApprenant = $prenomApprenant;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setUserCoord(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getUserCoord() !== $this) {
+            $user->setUserCoord($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

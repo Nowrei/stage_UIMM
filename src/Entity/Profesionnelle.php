@@ -74,6 +74,9 @@ class Profesionnelle
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $telephoneTuteur = null;
 
+    #[ORM\OneToOne(mappedBy: 'user_prof', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -315,6 +318,28 @@ class Profesionnelle
     public function setTelephoneTuteur(?string $telephoneTuteur): self
     {
         $this->telephoneTuteur = $telephoneTuteur;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setUserProf(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getUserProf() !== $this) {
+            $user->setUserProf($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

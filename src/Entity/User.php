@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,6 +36,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?coordonees $user_coord = null;
+
+    #[ORM\ManyToMany(targetEntity: formations::class, inversedBy: 'users')]
+    private Collection $user_form;
+
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?profesionnelle $user_prof = null;
+
+    public function __construct()
+    {
+        $this->user_form = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,6 +141,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getUserCoord(): ?coordonees
+    {
+        return $this->user_coord;
+    }
+
+    public function setUserCoord(?coordonees $user_coord): self
+    {
+        $this->user_coord = $user_coord;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, formations>
+     */
+    public function getUserForm(): Collection
+    {
+        return $this->user_form;
+    }
+
+    public function addUserForm(formations $userForm): self
+    {
+        if (!$this->user_form->contains($userForm)) {
+            $this->user_form->add($userForm);
+        }
+
+        return $this;
+    }
+
+    public function removeUserForm(formations $userForm): self
+    {
+        $this->user_form->removeElement($userForm);
+
+        return $this;
+    }
+
+    public function getUserProf(): ?profesionnelle
+    {
+        return $this->user_prof;
+    }
+
+    public function setUserProf(?profesionnelle $user_prof): self
+    {
+        $this->user_prof = $user_prof;
 
         return $this;
     }
