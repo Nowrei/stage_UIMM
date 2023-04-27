@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Service\ValidationApiService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +42,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName, ValidationApiService $validationApiService): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
@@ -52,7 +53,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         //$email="a@a.com";
         $email = $request->request->get('email', '');
         
-        $exist= ypareo_exists($email);
+        $exist= $validationApiService->ypareo_exists($email);
 
          if ($exist){
             //email already  exist in ypareo - ask form profesionnelle
