@@ -1,10 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./assets/**/*.js",
-    "./templates/**/*.html.twig",
-  ],
+  content: ['./templates/**/*.html.twig',
+  './node_modules/tw-elements/dist/js/**/*.js'],
   theme: {
+    fontSize: {
+      small: ['14px'],
+      b: ['20px'],
+      p: ['14px'],
+      s: ['25px'],
+      big: ['26px'],
+
+    },
     extend: {
       width: {
       '10%': '10%',
@@ -52,6 +58,6 @@ module.exports = {
 
     },},
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin")],
 }
 
