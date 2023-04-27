@@ -42,7 +42,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName, ValidationApiService $validationApiService): ?Response
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
@@ -52,7 +52,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         //echo ypareo_exists($email);
         //$email="a@a.com";
         $email = $request->request->get('email', '');
-        
+        /*
         $exist= $validationApiService->ypareo_exists($email);
 
          if ($exist){
@@ -60,7 +60,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
          }else{
             //ask the form coordonees and form profesionnelle 
          }
-        
+        */
 
 
         // For example:
