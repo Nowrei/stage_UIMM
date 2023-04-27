@@ -12,6 +12,11 @@ module.exports = {
 
     },
     extend: {
+
+      spacing: {
+        '30': '30px',
+      },
+
       width: {
       '10%': '10%',
       '15': '15%',

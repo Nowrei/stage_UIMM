@@ -104,11 +104,22 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('pole', TextType::class, [
-                    'label' => false,
+            ->add('pole', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Pole formation Champagne-Ardenne' => '',
+                    'Marne' => 'Marne',
+                    'Ardennes' => 'Ardennes',
+                    'Aube' => 'Aube',
+                    'Haute-Marne' => 'Haute-Marne',
+               
+                    
+    
+                ],
                 'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    'class' => 'appearance-none  py-1 px-2 w-30 bg-white',
+                ],  ],)
             ->add('intitule', TextType::class, [
                     'label' => false,
                 'attr' => [
@@ -118,9 +129,13 @@ class FormulaireType extends AbstractType
                 'label' => false,
                 'required' => true,
                 'choices' => [
-                    'Séléctioné votre civilité dans la liste' => '',
-                    'Monsieur' => 'Monsieur',
-                    'Madame' => 'Madama',
+                    'Type de certification' => '',
+                    'CQPM' => 'CQPM',
+                    'Bloc de compétence' => 'Bloc de compétences',
+                    'CCPM' => 'CCPM',
+                    'CCPI' => 'CCPI',
+                    'Autre' => 'Autre',
+                    
     
                 ],
                 'attr' => [
@@ -142,11 +157,25 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('qualif', TextType::class, [
-                    'label' => false,
+            ->add('qualif', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Niveau de qualification' => '',
+                    'Niv 1' => 'Niv 1',
+                    'Niv 2 (CFG DNB)' => 'Niv 2 (CFG DNB)',
+                    'Niv 3 (CAP)' => 'Niv 3 (CAP)',
+                    'Niv 4 (Bac)' => 'Niv 4 (Bac)',
+                    'Niv 5 (BAC +2 BTS DUT)' => 'Niv 5 (BAC +2 BTS DUT)',
+                    'Niv 6 (BAC +3)' => 'Niv 6 (BAC +3)',
+                    'Niv 7 (Bac +5)' => 'Niv 7 (Bac +5)',
+                    'Niv 8 (Bac +8)' => 'Niv 8 (Bac +8)',
+                    
+    
+                ],
                 'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    'class' => 'appearance-none  py-1 px-2 bg-white',
+                ], ],)
             ->add('date_obtention', TextType::class, [
                     'label' => false,
                 'attr' => [
@@ -172,31 +201,74 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('remu', TextType::class, [
-                    'label' => false,
+            ->add('remu', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Niveau de qualification' => '',
+                    'Ne souhaite pas répondre' => 'Ne souhaite pas répondre',
+                    'Aucune' => 'Aucune',
+                    'Hors métalurgie' => 'Hors métalurgie',
+                    'Inférieur au coef 170' => 'Inférieur au coef 170',
+                    'Entre coef 170 et 215' => 'Entre coef 170 et 215',
+                    'Entre coef 215 et 255' => 'Entre coef 215 et 255',
+                    'Entre coef 255 et 285' => 'Entre coef 255 et 285',
+                    'Supérieur au coef 285' => 'Supérieur au coef 285',
+                    
+    
+                ],
                 'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    'class' => 'appearance-none  py-1 px-2 bg-white',
+                ],  ],)
             ->add('salarie', TextType::class, [
                     'label' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('statut', TextType::class, [
-                    'label' => false,
+            ->add('statut', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Statut' => '',
+                    'CPF' => 'CPF',
+                    'Financement Région' => 'Financement Région',
+                    'POE Individuelle' => 'POE Individuelle',
+                    'POE COllective' => 'POE Collective',
+                    'VAR' => 'VAE',
+                    'Autre' => 'Autre',
+
+                    
+    
+                ],
                 'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    'class' => 'appearance-none  py-1 px-2 bg-white',
+                ],  ],)
             ->add('commentaire', TextType::class, [
                     'label' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('statut_salarie', TextType::class, [
-                    'label' => false,
+            ->add('statut_salarie', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Statut salarié' => '',
+                    'Contrat de professionnalisation' => 'Contrat de professionnalisation',
+                    'Contrat de professionnalisation expérimental' => 'Contrat de professionnalisation expérimental',
+                    'Contrat d\'apprentissage' => 'Contrat d\'apprentissage',
+                    'Contrat pro intérimaire' => 'Contrat pro intérimaire',
+                    'Plan de développement des Compétences' => 'Plan de développement des Compétences',
+                    'CPF' => 'CPF',
+                    'CPF Transition professionnelle' => 'CPF Transition professionnelle',
+                    'Pro A' => 'Pro A',
+                    'VAE' => 'VAE',
+                    'Autre' => 'Autre'
+                    
+    
+                ],
                 'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    'class' => 'appearance-none  py-1 px-2 bg-white',
+                ],  ],)
             ->add('entreprise_tuteur', TextType::class, [
                     'label' => false,
                 'attr' => [
