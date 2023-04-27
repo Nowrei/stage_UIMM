@@ -38,13 +38,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?coordonees $user_coord = null;
+    private ?Coordonees $user_coord = null;
 
-    #[ORM\ManyToMany(targetEntity: formations::class, inversedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Formations::class, inversedBy: 'users')]
     private Collection $user_form;
 
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?profesionnelle $user_prof = null;
+    private ?Profesionnelle $user_prof = null;
 
     public function __construct()
     {
@@ -145,12 +145,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUserCoord(): ?coordonees
+    public function getUserCoord(): ?Coordonees
     {
         return $this->user_coord;
     }
 
-    public function setUserCoord(?coordonees $user_coord): self
+    public function setUserCoord(?Coordonees $user_coord): self
     {
         $this->user_coord = $user_coord;
 
@@ -158,14 +158,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, formations>
+     * @return Collection<int, Formations>
      */
     public function getUserForm(): Collection
     {
         return $this->user_form;
     }
 
-    public function addUserForm(formations $userForm): self
+    public function addUserForm(Formations $userForm): self
     {
         if (!$this->user_form->contains($userForm)) {
             $this->user_form->add($userForm);
@@ -174,19 +174,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeUserForm(formations $userForm): self
+    public function removeUserForm(Formations $userForm): self
     {
         $this->user_form->removeElement($userForm);
 
         return $this;
     }
 
-    public function getUserProf(): ?profesionnelle
+    public function getUserProf(): ?Profesionnelle
     {
         return $this->user_prof;
     }
 
-    public function setUserProf(?profesionnelle $user_prof): self
+    public function setUserProf(?Profesionnelle $user_prof): self
     {
         $this->user_prof = $user_prof;
 
