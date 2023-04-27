@@ -7,12 +7,26 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class FormulaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        ->add('civilite', ChoiceType::class, [
+            'label' => 'Civilité',
+            'required' => true,
+            'choices' => [
+                'Séléctioné votre civilité dans la liste' => '',
+                'Monsieur' => 'Monsieur',
+                'Madame' => 'Madama',
+
+            ],
+            'attr' => [
+                'class' => 'appearance-none w-full py-1 px-2 bg-white',
+            ],
+        ])
             ->add('nom', TextType::class, [
                     'label' => false,
                 'attr' => [
@@ -100,11 +114,19 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('certif', TextType::class, [
-                    'label' => false,
+            ->add('certif', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Séléctioné votre civilité dans la liste' => '',
+                    'Monsieur' => 'Monsieur',
+                    'Madame' => 'Madama',
+    
+                ],
                 'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    'class' => 'appearance-none  py-1 px-2 bg-white',
+                ],
+            ])
             ->add('date_debut', TextType::class, [
                     'label' => false,
                 'attr' => [

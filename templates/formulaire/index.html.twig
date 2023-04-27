@@ -14,6 +14,11 @@
 	<div class="flex justify-center font-extrabold ">
 	</div>
 	<div class="text">
+	<div class="solo p-2">
+	 <fieldset>
+                {{ form_row(formulaire.civilite) }}
+            </fieldset>
+			</div>
 		<div class="duo p-2">
 			<div>
 				<label for="nom">Nom</label>
@@ -132,7 +137,7 @@
 	<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
 </div>
 	<div class="text">
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="diplome">Dernier diplôme obtenu</label>
 				{{ form_row(formulaire.diplome) }}
@@ -148,7 +153,7 @@
 				{{ form_row(formulaire.date_obtention) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="exp">Avez-vous déjà eu une expérience professionnelle ?</label>
 				{{ form_row(formulaire.exp) }}
@@ -164,50 +169,50 @@
 				{{ form_row(formulaire.duree) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 
 				<label for="entreprise">Entreprise</label>
 				{{ form_row(formulaire.entreprise) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="remu">Niveau de rémunération</label>
 				{{ form_row(formulaire.remu) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="salaire">Êtes-vous salarié ?</label>
 				{{ form_row(formulaire.salarie) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="statut">Sous quel statut-allez vous effectuer la formation ?</label>
 				{{ form_row(formulaire.statut) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="commentaire">Commentaire autre formation</label>
 				{{ form_row(formulaire.commentaire) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="statut_salarie">Sous quel statut-allez vous effecteur la formation ?</label>
 				{{ form_row(formulaire.statut_salarie) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="entreprise_tuteur">Entreprise</label>
 				{{ form_row(formulaire.entreprise_tuteur) }}
 			</div>
 		</div>
-		<div class="solo">
+		<div class="solo p-2">
 			<div>
 				<label for="adresse_entreprise">Adresse de l'entreprise</label>
 				{{ form_row(formulaire.adresse_entreprise) }}
@@ -247,7 +252,6 @@
 </div>
 
 {{ form_end(formulaire)}}
-
 
 
 

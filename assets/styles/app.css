@@ -168,12 +168,14 @@ body {
 
 #formulaire_certif {
 
-    width: 100px
+    width: 300px
 }
 
 #formulaire_date_debut {
 
-    width: 100px
+    width: 100px;
+    margin-left: 30px;
+    
 }
 
 #formulaire_date_fin {
