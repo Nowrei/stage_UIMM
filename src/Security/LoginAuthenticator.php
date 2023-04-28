@@ -54,12 +54,14 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         //$email="a@a.com";
         $email = $request->request->get('email', '');
 
+
         $email="o_VRIMzpr";
         
         $validationApiService=new ValidationApiService();
         $exist= $validationApiService -> ypareo_exists($email);
 
    
+
 
          if ($exist){
             //email already  exist in ypareo - ask form profesionnelle
@@ -70,7 +72,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             dd($exist);
             die;
          }
-        
+        */
 
 
         // For example:

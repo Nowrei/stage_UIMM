@@ -1,0 +1,259 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulaireController!
+{% endblock %}
+
+{% block body %}
+{{ form_start(formulaire) }}
+
+<div class="formulaire">
+<div class="solo flex flex-col items-center justify-center pt-10">
+	<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
+	<p class="text-s font-bold tracking-widest">Vos coordonnées</p>
+</div>
+	<div class="flex justify-center font-extrabold ">
+	</div>
+	<div class="text">
+	<div class="solo p-2">
+	 <fieldset>
+                {{ form_row(formulaire.civilite) }}
+            </fieldset>
+			</div>
+		<div class="duo p-2">
+			<div>
+				<label for="nom" class="py-1 px-2">Nom *</label>
+				{{ form_row(formulaire.nom) }}
+			</div>
+			<div>
+				<label for="nom_usage" class="py-1 px-2">Nom d'usage</label>
+				{{ form_row(formulaire.nom_usage) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="prenom" class="py-1 px-2">Prenom *</label>
+				{{ form_row(formulaire.prenom) }}
+			</div>
+			<div>
+				<label for="date_naissance" class="py-1 px-2">Date de naissance *</label>
+				{{ form_row(formulaire.date_naissance) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="portable" class="py-1 px-2">Téléphone portable *</label>
+				{{ form_row(formulaire.portable) }}
+			</div>
+			<div>
+				<label for="fixe" class="py-1 px-2">Téléphone fixe</label>
+				{{ form_row(formulaire.fixe) }}
+			</div>
+		</div>
+
+		<div class="only p-2">
+			<div>
+				<label for="email" class="py-1 px-2">Email *</label>
+				{{ form_row(formulaire.email) }}
+			</div>
+		</div>
+
+		<div class="solo p-2" class="py-1 px-2">
+			<label for="adresse">Adresse *</label>
+			{{ form_row(formulaire.adresse) }}
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="detail" class="py-1 px-2">Détail (Batiment, numéro d'appartement) *</label>
+				{{ form_row(formulaire.detail) }}
+			</div>
+			<div>
+				<label for="cp">Code postal *</label>
+				{{ form_row(formulaire.cp) }}
+			</div>
+		</div>
+		<div class="only p-2">
+			<div>
+				<label for="ville" class="py-1 px-2">Ville *</label>
+				{{ form_row(formulaire.ville) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="pays" class="py-1 px-2">Pays de naissance *</label>
+				{{ form_row(formulaire.pays) }}
+			</div>
+			<div>
+				<label for="nationalite" class="py-1 px-2">Nationalité *</label>
+				{{ form_row(formulaire.nationalite) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="dept" class="py-1 px-2">Département de naissance *</label>
+				{{ form_row(formulaire.dept) }}
+			</div>
+			<div>
+				<label for="naissance" class="py-1 px-2">Ville de naissance *</label>
+				{{ form_row(formulaire.ville_naissance) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="formation mt-10">
+<div class="solo flex flex-col items-center justify-center pt-10 ">
+	<p class="text-s font-bold tracking-widest">Votre formation</p>
+</div>
+	<div class="text">
+		<div class="duo p-2">
+			<div>
+				<label for="pole" class="py-1 px-2">Pôle formation Champagne-Ardenne *</label>
+				{{ form_row(formulaire.pole) }}
+			</div>
+			<div>
+				<label for="intitule" class="py-1 px-2">Intitulé de la formation *</label>
+				{{ form_row(formulaire.intitule) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="certif" class="py-1 px-2">Type de certification</label>
+				{{ form_row(formulaire.certif) }}
+			</div>
+			<div>
+				<label for="debut" class="ml-30 py-1 px-2" >Date de début</label>
+				{{ form_row(formulaire.date_debut) }}
+			</div>
+			<div>
+				<label for="fin" class="py-1 px-2">Date de fin</label>
+				{{ form_row(formulaire.date_fin) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="pro mt-10">
+<div class="solo flex flex-col items-center justify-center pt-10 ">
+	<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
+</div>
+	<div class="text">
+		<div class="solo p-2">
+			<div>
+				<label for="diplome" class="py-1 px-2">Dernier diplôme obtenu *</label>
+				{{ form_row(formulaire.diplome) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="qualif" class="py-1 px-2">Niveau qualification</label>
+				{{ form_row(formulaire.qualif) }}
+			</div>
+			<div>
+				<label for="obtention" class="py-1 px-2">Date d'obtention *</label>
+				{{ form_row(formulaire.date_obtention) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="exp" class="py-1 px-2">Avez-vous déjà eu une expérience professionnelle ?</label>
+				{{ form_row(formulaire.exp) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
+				{{ form_row(formulaire.metier) }}
+			</div>
+			<div>
+				<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
+				{{ form_row(formulaire.duree) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="entreprise" class="py-1 px-2">Entreprise *</label>
+				{{ form_row(formulaire.entreprise) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
+				{{ form_row(formulaire.remu) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
+				{{ form_row(formulaire.salarie) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
+				{{ form_row(formulaire.statut) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
+				{{ form_row(formulaire.commentaire) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
+				{{ form_row(formulaire.statut_salarie) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
+				{{ form_row(formulaire.entreprise_tuteur) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
+				{{ form_row(formulaire.adresse_entreprise) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
+				{{ form_row(formulaire.ville_entreprise) }}
+			</div>
+			<div>
+				<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
+				{{ form_row(formulaire.cp_entreprise) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
+				{{ form_row(formulaire.nom_tuteur) }}
+			</div>
+			<div>
+				<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
+				{{ form_row(formulaire.prenom_tuteur) }}
+			</div>
+		</div>
+		<div class="duo p-2">
+			<div>
+				<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
+				{{ form_row(formulaire.mail_tuteur) }}
+			</div>
+			<div>
+				<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
+				{{ form_row(formulaire.telephone_tuteur) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ form_end(formulaire)}}
+
+
+
+
+
+{% endblock %}

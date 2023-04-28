@@ -1,3 +1,286 @@
 body {
-    background-color: lightgray;
+    background-image: url(https://candidature-cfai-ca.hub3e.com/background-alpha.077b673e77a7ed044a5f.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+  }
+
+.formulaire {
+
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e9e9e9b9;
+    border-radius: 5px;
+    width: 50%;
+
+    
+
+    
 }
+
+.formation {
+
+  margin-left: auto;
+  margin-right: auto;
+    background-color: #e9e9e9b9;
+    border-radius: 5px;
+    width: 50%;
+
+
+    
+}
+
+.pro {
+
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e9e9e9b9;
+    border-radius: 5px;
+    width: 50%;
+
+    
+}
+
+.text {
+
+    padding: 30px;
+}
+
+.duo {
+
+    display: flex;
+    flex-direction: row;
+    grid-template-rows: 30px;
+    margin-left: 30px;
+    margin-right: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+   
+}
+
+.only {
+
+    display: flex;
+    flex-direction: row;
+    grid-template-rows: 30px;
+    margin-left: 30px;
+    margin-right: auto;
+   
+}
+
+
+
+.solo {
+
+    margin-left: 30px;
+}
+
+.only div {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.duo div {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#formulaire_nom {
+
+    width: 250px;
+
+}
+
+#formulaire_nom_usage {
+
+    width: 250px
+}
+
+#formulaire_prenom {
+
+    width: 250px
+}
+#formulaire_date_naissance {
+
+    width: 250px
+}
+#formulaire_portable {
+
+    width: 250px
+}
+#formulaire_fixe {
+
+    width: 250px
+}
+#formulaire_email {
+
+    width: 250px
+}
+#formulaire_adresse {
+
+    width: 585px
+}
+#formulaire_detail {
+
+    width: 250px
+}
+#formulaire_cp {
+
+    width: 250px
+}
+#formulaire_ville {
+
+    width: 250px
+}
+#formulaire_pays {
+
+    width: 250px
+}
+#formulaire_nationalite {
+
+    width: 250px
+}
+
+#formulaire_dept {
+
+    width: 250px
+}
+
+#formulaire_ville_naissance {
+
+    width: 250px
+}
+
+#formulaire_pole {
+
+    width: 300px
+}
+
+#formulaire_intitule {
+
+    width: 250px
+}
+
+#formulaire_certif {
+
+    width: 300px
+}
+
+#formulaire_date_debut {
+
+    width: 100px;
+    margin-left: 30px;
+    
+}
+
+#formulaire_date_fin {
+
+    width: 100px
+}
+
+#formulaire_diplome {
+
+    width: 585px
+}
+
+#formulaire_qualif {
+
+    width: 250px
+}
+
+#formulaire_exp {
+
+    width: 250px
+}
+
+#formulaire_date_obtention {
+
+    width: 250px
+}
+
+#formulaire_metier {
+
+    width: 250px
+}
+
+#formulaire_duree {
+
+    width: 250px
+}
+
+#formulaire_entreprise {
+
+    width: 250px
+}
+
+#formulaire_remu {
+
+    width: 250px
+}
+
+#formulaire_salarie {
+
+    width: 250px
+}
+
+#formulaire_statut {
+
+    width: 250px
+}
+
+#formulaire_commentaire {
+
+    width: 250px
+}
+
+#formulaire_satatut_salarie {
+
+    width: 250px
+}
+
+#formulaire_entreprise_tuteur {
+
+    width: 585px
+}
+
+#formulaire_adresse_entreprise {
+
+    width: 585px
+}
+
+#formulaire_ville_entreprise {
+
+    width: 250px
+}
+
+#formulaire_cp_entreprise {
+
+    width: 250px
+}
+
+#formulaire_nom_tuteur {
+
+    width: 250px
+}
+
+#formulaire_prenom_tuteur {
+
+    width: 250px
+}
+
+#formulaire_mail_tuteur {
+
+    width: 250px
+}
+
+#formulaire_telephone_tuteur {
+
+    width: 250px
+}
+
