@@ -72,7 +72,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             dd($exist);
             die;
          }
-        */
+      
 
 
         // For example:
