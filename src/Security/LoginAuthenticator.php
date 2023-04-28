@@ -15,13 +15,14 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-//use App\Controller\ValidationApiController;
+//use App\Controller\ValidationApiService;
 
 class LoginAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
+    
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
@@ -52,13 +53,24 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         //echo ypareo_exists($email);
         //$email="a@a.com";
         $email = $request->request->get('email', '');
-        /*
-        $exist= $validationApiService->ypareo_exists($email);
+
+
+        $email="o_VRIMzpr";
+        
+        $validationApiService=new ValidationApiService();
+        $exist= $validationApiService -> ypareo_exists($email);
+
+   
+
 
          if ($exist){
             //email already  exist in ypareo - ask form profesionnelle
+            dd($exist);
+            die;
          }else{
             //ask the form coordonees and form profesionnelle 
+            dd($exist);
+            die;
          }
         */
 
