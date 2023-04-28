@@ -6,19 +6,18 @@
 {% block body %}
 {{ form_start(formulaire) }}
 
-<div class="formulaire">
-<div class="solo flex flex-col items-center justify-center pt-10">
-	<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
-	<p class="text-s font-bold tracking-widest">Vos coordonnées</p>
-</div>
-	<div class="flex justify-center font-extrabold ">
+<div class="formulaire mt-1">
+	<div class="solo flex flex-col items-center justify-center pt-10">
+		<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
+		<p class="text-s font-bold tracking-widest">Vos coordonnées</p>
 	</div>
+	<div class="flex justify-center font-extrabold "></div>
 	<div class="text">
-	<div class="solo p-2">
-	 <fieldset>
-                {{ form_row(formulaire.civilite) }}
-            </fieldset>
+		<div class="solo p-2">
+			<label for="nom" class="py-1 px-2">Nom *</label>
+				{{ form_row(formulaire.civilite) }}
 			</div>
+		</div>
 		<div class="duo p-2">
 			<div>
 				<label for="nom" class="py-1 px-2">Nom *</label>
@@ -101,9 +100,9 @@
 </div>
 
 <div class="formation mt-10">
-<div class="solo flex flex-col items-center justify-center pt-10 ">
-	<p class="text-s font-bold tracking-widest">Votre formation</p>
-</div>
+	<div class="solo flex flex-col items-center justify-center pt-10 ">
+		<p class="text-s font-bold tracking-widest">Votre formation</p>
+	</div>
 	<div class="text">
 		<div class="duo p-2">
 			<div>
@@ -121,7 +120,7 @@
 				{{ form_row(formulaire.certif) }}
 			</div>
 			<div>
-				<label for="debut" class="ml-30 py-1 px-2" >Date de début</label>
+				<label for="debut" class="ml-30 py-1 px-2">Date de début</label>
 				{{ form_row(formulaire.date_debut) }}
 			</div>
 			<div>
@@ -133,9 +132,9 @@
 </div>
 
 <div class="pro mt-10">
-<div class="solo flex flex-col items-center justify-center pt-10 ">
-	<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
-</div>
+	<div class="solo flex flex-col items-center justify-center pt-10 ">
+		<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
+	</div>
 	<div class="text">
 		<div class="solo p-2">
 			<div>
@@ -156,10 +155,21 @@
 		<div class="solo p-2">
 			<div>
 				<label for="exp" class="py-1 px-2">Avez-vous déjà eu une expérience professionnelle ?</label>
-				{{ form_row(formulaire.exp) }}
 			</div>
 		</div>
-		<div class="duo p-2">
+		<div class="flex items-center duo">
+	<input id="exp-oui" type="checkbox" class="space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+	<label for="exp-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+	<input id="exp-non" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+	<label for="exp-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+</div>
+<div id="experience-non" class="solo mt-2 text-sm  hidden">
+
+	</div>
+<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
+<div class="duo p-2">
 			<div>
 				<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
 				{{ form_row(formulaire.metier) }}
@@ -181,74 +191,140 @@
 				{{ form_row(formulaire.remu) }}
 			</div>
 		</div>
+</div>
+
+<script>
+  const expOui = document.getElementById("exp-oui");
+  const expNon = document.getElementById("exp-non");
+  const experienceNon = document.getElementById("experience-non");
+  const experienceOui = document.getElementById("experience-oui");
+  
+  expOui.addEventListener("change", () => {
+    if (expOui.checked) {
+      // Code à exécuter si la checkbox "oui" est cochée
+      experienceOui.classList.remove("hidden");
+      experienceOui.classList.add("block");
+      
+      // Vérifie si la case "non" est cochée et masque le contenu correspondant si c'est le cas
+      if (expNon.checked) {
+        expNon.checked = false; 
+        experienceNon.classList.remove("block");
+        experienceNon.classList.add("hidden");
+        experienceNon.classList.remove("selected");
+      }
+      
+      // Ajoute la classe "selected" à l'élément correspondant
+      expOui.classList.add("selected");
+    } else {
+      // Code à exécuter si la checkbox "oui" n'est pas cochée
+      experienceOui.classList.remove("block");
+      experienceOui.classList.add("hidden");
+      experienceOui.classList.remove("selected");
+    }
+  });
+  
+  expNon.addEventListener("change", () => {
+    if (expNon.checked) {
+      // Code à exécuter si la checkbox "non" est cochée
+      experienceNon.classList.remove("hidden");
+      experienceNon.classList.add("block");
+      
+      // Vérifie si la case "oui" est cochée et masque le contenu correspondant si c'est le cas
+      if (expOui.checked) {
+        expOui.checked = false; 
+        experienceOui.classList.remove("block");
+        experienceOui.classList.add("hidden");
+        experienceOui.classList.remove("selected");
+      }
+      
+      // Ajoute la classe "selected" à l'élément correspondant
+      expNon.classList.add("selected");
+    } else {
+      // Code à exécuter si la checkbox "non" n'est pas cochée
+      experienceNon.classList.remove("block");
+      experienceNon.classList.add("hidden");
+      experienceNon.classList.remove("selected");
+    }
+  });
+</script>
 		<div class="solo p-2">
-			<div>
-				<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
-				{{ form_row(formulaire.salarie) }}
+			<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
+		</div>
+		<div class="flex items-center duo ml-32">
+			<input id="checkbox-oui" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+			<label for="checkbox-oui" class="mr-10 ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+			<input id="checkbox-non" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+			<label for="checkbox-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+		</div>
+		<div id="checkbox-text-non" class="solo hidden">
+			<div class="solo p-2">
+				<div>
+					<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
+					{{ form_row(formulaire.statut) }}
+				</div>
+			</div>
+			<div class="solo p-2">
+				<div>
+					<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
+					{{ form_row(formulaire.commentaire) }}
+				</div>
 			</div>
 		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
-				{{ form_row(formulaire.statut) }}
+		<div id="checkbox-text-oui" class=" solo mt-2 text-sm  hidden">
+			<div class="solo p-2">
+				<div>
+					<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
+					{{ form_row(formulaire.statut_salarie) }}
+				</div>
 			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
-				{{ form_row(formulaire.commentaire) }}
+			<div class="solo p-2">
+				<div>
+					<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
+					{{ form_row(formulaire.entreprise_tuteur) }}
+				</div>
 			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
-				{{ form_row(formulaire.statut_salarie) }}
+			<div class="solo p-2">
+				<div>
+					<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
+					{{ form_row(formulaire.adresse_entreprise) }}
+				</div>
 			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
-				{{ form_row(formulaire.entreprise_tuteur) }}
+			<div class="duo p-2">
+				<div>
+					<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
+					{{ form_row(formulaire.ville_entreprise) }}
+				</div>
+				<div>
+					<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
+					{{ form_row(formulaire.cp_entreprise) }}
+				</div>
 			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
-				{{ form_row(formulaire.adresse_entreprise) }}
+			<div class="duo p-2">
+				<div>
+					<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
+					{{ form_row(formulaire.nom_tuteur) }}
+				</div>
+				<div>
+					<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
+					{{ form_row(formulaire.prenom_tuteur) }}
+				</div>
 			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
-				{{ form_row(formulaire.ville_entreprise) }}
-			</div>
-			<div>
-				<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
-				{{ form_row(formulaire.cp_entreprise) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
-				{{ form_row(formulaire.nom_tuteur) }}
-			</div>
-			<div>
-				<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
-				{{ form_row(formulaire.prenom_tuteur) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
-				{{ form_row(formulaire.mail_tuteur) }}
-			</div>
-			<div>
-				<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
-				{{ form_row(formulaire.telephone_tuteur) }}
+			<div class="duo p-2">
+				<div>
+					<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
+					{{ form_row(formulaire.mail_tuteur) }}
+				</div>
+				<div>
+					<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
+					{{ form_row(formulaire.telephone_tuteur) }}
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 
 {{ form_end(formulaire)}}
 

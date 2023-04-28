@@ -3,26 +3,100 @@
 {% block title %}Hello TestController!{% endblock %}
 
 {% block body %}
-<link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.3/dist/flowbite.min.css" />
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/flowbite@1.4.3/dist/flowbite.js"></script>
-<script src="https://unpkg.com/flowbite@1.4.3/dist/datepicker.js"></script>
-<!-- end of CDN -->
-
-<!-- end of datepicker-default -->
-<div class="relative">
-	<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-		<svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-			<path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-		</svg>
-	</div>
-	<input datepicker="" datepicker-autohide type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="Select date">
+<div class="solo p-2">
+<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
 </div>
-<!-- end of datepicker-autohide -->
-<hr>
-<h2 class="text-3xl font-bold underline">
-	Hello world!
-</h2>
-<hr>
+<div class="flex items-center duo">
+	<input id="exp-oui" type="checkbox" class="space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+	<label for="exp-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+	<input id="exp-non" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+	<label for="exp-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+</div>
+<div id="experience-non" class="solo mt-2 text-sm  hidden">
+
+	</div>
+<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
+<div class="duo p-2">
+			<div>
+				<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
+				{{ form_row(formulaire.metier) }}
+			</div>
+			<div>
+				<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
+				{{ form_row(formulaire.duree) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="entreprise" class="py-1 px-2">Entreprise *</label>
+				{{ form_row(formulaire.entreprise) }}
+			</div>
+		</div>
+		<div class="solo p-2">
+			<div>
+				<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
+				{{ form_row(formulaire.remu) }}
+			</div>
+		</div>
+</div>
+
+<script>
+  const expOui = document.getElementById("exp-oui");
+  const expNon = document.getElementById("exp-non");
+  const experienceNon = document.getElementById("experience-non");
+  const experienceOui = document.getElementById("experience-oui");
+  
+  expOui.addEventListener("change", () => {
+    if (expOui.checked) {
+      // Code à exécuter si la checkbox "oui" est cochée
+      experienceOui.classList.remove("hidden");
+      experienceOui.classList.add("block");
+      
+      // Vérifie si la case "non" est cochée et masque le contenu correspondant si c'est le cas
+      if (expNon.checked) {
+        expNon.checked = false; 
+        experienceNon.classList.remove("block");
+        experienceNon.classList.add("hidden");
+        experienceNon.classList.remove("selected");
+      }
+      
+      // Ajoute la classe "selected" à l'élément correspondant
+      expOui.classList.add("selected");
+    } else {
+      // Code à exécuter si la checkbox "oui" n'est pas cochée
+      experienceOui.classList.remove("block");
+      experienceOui.classList.add("hidden");
+      experienceOui.classList.remove("selected");
+    }
+  });
+  
+  expNon.addEventListener("change", () => {
+    if (expNon.checked) {
+      // Code à exécuter si la checkbox "non" est cochée
+      experienceNon.classList.remove("hidden");
+      experienceNon.classList.add("block");
+      
+      // Vérifie si la case "oui" est cochée et masque le contenu correspondant si c'est le cas
+      if (expOui.checked) {
+        expOui.checked = false; 
+        experienceOui.classList.remove("block");
+        experienceOui.classList.add("hidden");
+        experienceOui.classList.remove("selected");
+      }
+      
+      // Ajoute la classe "selected" à l'élément correspondant
+      expNon.classList.add("selected");
+    } else {
+      // Code à exécuter si la checkbox "non" n'est pas cochée
+      experienceNon.classList.remove("block");
+      experienceNon.classList.add("hidden");
+      experienceNon.classList.remove("selected");
+    }
+  });
+</script>
+
+
+
 {% endblock %}

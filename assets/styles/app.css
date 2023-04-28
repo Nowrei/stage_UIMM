@@ -13,7 +13,7 @@ body {
     margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 50%;
+    width: 40%;
 
     
 
@@ -26,7 +26,7 @@ body {
   margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 50%;
+    width: 40%;
 
 
     
@@ -38,7 +38,7 @@ body {
     margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 50%;
+    width: 40%;
 
     
 }
@@ -89,6 +89,12 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
+}
+
+#formulaire_civilite {
+
+    width: 400px;
+
 }
 
 #formulaire_nom {
