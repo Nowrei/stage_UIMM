@@ -1,7 +1,7 @@
 <?php
 echo 'ypareo api send <br>';
-$nomApprenant="camacho";
-$prenomApprenant="jorge";
+$nomApprenant="";
+$prenomApprenant="";
 $emailYpareo;
 $emailFormulaire;
 
@@ -51,7 +51,7 @@ try {
 }
 
 echo "email search <br>";
-//trouver email de l'apprenant
+//trouver email de l'apprenant dans l' array reçu 
 
 // remplacer le text dans valeurcherche avec ceci "emailAppr"
 
