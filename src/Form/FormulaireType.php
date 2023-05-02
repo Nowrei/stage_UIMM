@@ -19,8 +19,8 @@ class FormulaireType extends AbstractType
             'required' => true,
             'choices' => [
                 'Séléctioné votre civilité dans la liste' => '',
-                'Monsieur' => 'Monsieur',
-                'Madame' => 'Madama',
+                'Monsieur' => '1',
+                'Madame' => '2',
 
             ],
             'attr' => [
@@ -181,11 +181,7 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('exp', TextType::class, [
-                    'label' => false,
-                'attr' => [
-                    'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            
             ->add('metier', TextType::class, [
                     'label' => false,
                 'attr' => [
@@ -220,11 +216,7 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ],  ],)
-            ->add('salarie', TextType::class, [
-                    'label' => false,
-                'attr' => [
-                    'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            
             ->add('statut', ChoiceType::class, [
                 'label' => false,
                 'required' => true,

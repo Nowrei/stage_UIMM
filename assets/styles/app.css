@@ -13,7 +13,8 @@ body {
     margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 40%;
+    width: 45%;
+    padding: 10px;
 
     
 
@@ -26,7 +27,8 @@ body {
   margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 40%;
+    width: 45%;
+    padding: 10px;
 
 
     
@@ -38,14 +40,15 @@ body {
     margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 40%;
+    width: 45%;
+    padding: 10px;
 
     
 }
 
 .text {
 
-    padding: 30px;
+    padding: 0px;
 }
 
 .duo {
@@ -93,7 +96,7 @@ body {
 
 #formulaire_civilite {
 
-    width: 400px;
+    width: 655px;
 
 }
 
@@ -130,7 +133,7 @@ body {
 }
 #formulaire_adresse {
 
-    width: 585px
+    width: 655px
 }
 #formulaire_detail {
 
@@ -165,7 +168,7 @@ body {
 
 #formulaire_pole {
 
-    width: 300px
+    width: 250px
 }
 
 #formulaire_intitule {
@@ -175,7 +178,7 @@ body {
 
 #formulaire_certif {
 
-    width: 300px
+    width: 200px
 }
 
 #formulaire_date_debut {
@@ -192,7 +195,7 @@ body {
 
 #formulaire_diplome {
 
-    width: 585px
+    width: 655px
 }
 
 #formulaire_qualif {
@@ -289,4 +292,5 @@ body {
 
     width: 250px
 }
+
 

@@ -3,99 +3,58 @@
 {% block title %}Hello TestController!{% endblock %}
 
 {% block body %}
-<div class="solo p-2">
-<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
-</div>
-<div class="flex items-center duo">
-	<input id="exp-oui" type="checkbox" class="space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
-	<label for="exp-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
 
 
-	<input id="exp-non" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
-	<label for="exp-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
-</div>
-<div id="experience-non" class="solo mt-2 text-sm  hidden">
 
-	</div>
-<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
-<div class="duo p-2">
-			<div>
-				<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
-				{{ form_row(formulaire.metier) }}
-			</div>
-			<div>
-				<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
-				{{ form_row(formulaire.duree) }}
-			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="entreprise" class="py-1 px-2">Entreprise *</label>
-				{{ form_row(formulaire.entreprise) }}
-			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
-				{{ form_row(formulaire.remu) }}
-			</div>
-		</div>
-</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon datepicker</title>
+    <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/forms@0.3.3/dist/forms.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.4.0/dist/typography.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+  </head>
+  <body class="p-4">
+    <div class="relative w-64">
+      <input
+        type="text"
+        class="form-input pr-10"
+        id="datepicker"
+        placeholder="Sélectionner une date"
+      />
+      <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+        <svg class="feather feather-calendar " viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+      </div>
+    </div>
+    <script>
+      flatpickr("#datepicker", {
+        dateFormat: "d-m-Y",
+        locale: "fr",
+        onClose: function(selectedDates, dateStr, instance) {
+          instance.close();
+        },
+      });
+    </script>
+  </body>
+</html>
 
-<script>
-  const expOui = document.getElementById("exp-oui");
-  const expNon = document.getElementById("exp-non");
-  const experienceNon = document.getElementById("experience-non");
-  const experienceOui = document.getElementById("experience-oui");
-  
-  expOui.addEventListener("change", () => {
-    if (expOui.checked) {
-      // Code à exécuter si la checkbox "oui" est cochée
-      experienceOui.classList.remove("hidden");
-      experienceOui.classList.add("block");
-      
-      // Vérifie si la case "non" est cochée et masque le contenu correspondant si c'est le cas
-      if (expNon.checked) {
-        expNon.checked = false; 
-        experienceNon.classList.remove("block");
-        experienceNon.classList.add("hidden");
-        experienceNon.classList.remove("selected");
-      }
-      
-      // Ajoute la classe "selected" à l'élément correspondant
-      expOui.classList.add("selected");
-    } else {
-      // Code à exécuter si la checkbox "oui" n'est pas cochée
-      experienceOui.classList.remove("block");
-      experienceOui.classList.add("hidden");
-      experienceOui.classList.remove("selected");
-    }
-  });
-  
-  expNon.addEventListener("change", () => {
-    if (expNon.checked) {
-      // Code à exécuter si la checkbox "non" est cochée
-      experienceNon.classList.remove("hidden");
-      experienceNon.classList.add("block");
-      
-      // Vérifie si la case "oui" est cochée et masque le contenu correspondant si c'est le cas
-      if (expOui.checked) {
-        expOui.checked = false; 
-        experienceOui.classList.remove("block");
-        experienceOui.classList.add("hidden");
-        experienceOui.classList.remove("selected");
-      }
-      
-      // Ajoute la classe "selected" à l'élément correspondant
-      expNon.classList.add("selected");
-    } else {
-      // Code à exécuter si la checkbox "non" n'est pas cochée
-      experienceNon.classList.remove("block");
-      experienceNon.classList.add("hidden");
-      experienceNon.classList.remove("selected");
-    }
-  });
-</script>
+
+
+
+
+
+
 
 
 
