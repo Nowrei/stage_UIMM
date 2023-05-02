@@ -21,6 +21,14 @@ body {
     
 }
 
+.button {
+
+    margin-left: auto;
+    margin-right: auto; 
+
+   
+}
+
 .formation {
 
   margin-left: auto;
@@ -255,12 +263,12 @@ body {
 
 #formulaire_entreprise_tuteur {
 
-    width: 585px
+    width: 640px
 }
 
 #formulaire_adresse_entreprise {
 
-    width: 585px
+    width: 640px
 }
 
 #formulaire_ville_entreprise {
