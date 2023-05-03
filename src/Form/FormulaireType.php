@@ -25,7 +25,7 @@ class FormulaireType extends AbstractType
 
             ],
             'attr' => [
-                'class' => 'appearance-none w-full py-1 px-2 w-10 bg-white rounded-lg',
+                'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
             ],
         ])
             ->add('nom', TextType::class, [
