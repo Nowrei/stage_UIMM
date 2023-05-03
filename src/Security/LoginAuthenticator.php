@@ -70,7 +70,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             //ask the form coordonees and form profesionnelle 
             return new RedirectResponse($this->urlGenerator->generate('app_formulaire'));
          }
-
+*/
 
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('app_formulaire'));
