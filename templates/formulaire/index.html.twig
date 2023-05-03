@@ -5,105 +5,132 @@
 
 {% block body %}
 {{ form_start(formulaire) }}
+{% block stylesheets %}
+	{{ encore_entry_link_tags('app') }}
+	<link rel="stylesheet" href="https://unpkg.com/@tailwindcss/forms@0.3.3/dist/forms.min.css"/>
+	<link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.4.0/dist/typography.min.css"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+	<style>
+		.datepicker-input {
+			background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='h-5 w-5'%3E%3Cpath d='M5 8h14v12H5z' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 4v2M8 4v2M5 12h14M12 16v4' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+			background-repeat: no-repeat;
+			background-position: right 0.5rem center;
+			background-size: 1.25rem 1.25rem;
+			padding-right: 2.5rem;
+		}
+	</style>
+{% endblock %}
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
 
-<div class="formulaire">
-<div class="solo flex flex-col items-center justify-center pt-10">
-	<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
-	<p class="text-s font-bold tracking-widest">Vos coordonnées</p>
-</div>
-	<div class="flex justify-center font-extrabold ">
+	<script src="assets/js/fin.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+{% endblock %}
+
+  
+<div class="formulaire mt-1">
+	<div class="solo flex flex-col items-center justify-center pt-10">
+		<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
+		<p class="text-s font-bold tracking-widest">Vos coordonnées</p>
 	</div>
+	<div class="flex justify-center font-extrabold "></div>
 	<div class="text">
-	<div class="solo p-2">
-	 <fieldset>
-                {{ form_row(formulaire.civilite) }}
-            </fieldset>
-			</div>
-		<div class="duo p-2">
-			<div>
-				<label for="nom" class="py-1 px-2">Nom *</label>
-				{{ form_row(formulaire.nom) }}
-			</div>
-			<div>
-				<label for="nom_usage" class="py-1 px-2">Nom d'usage</label>
-				{{ form_row(formulaire.nom_usage) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="prenom" class="py-1 px-2">Prenom *</label>
-				{{ form_row(formulaire.prenom) }}
-			</div>
-			<div>
-				<label for="date_naissance" class="py-1 px-2">Date de naissance *</label>
-				{{ form_row(formulaire.date_naissance) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="portable" class="py-1 px-2">Téléphone portable *</label>
-				{{ form_row(formulaire.portable) }}
-			</div>
-			<div>
-				<label for="fixe" class="py-1 px-2">Téléphone fixe</label>
-				{{ form_row(formulaire.fixe) }}
-			</div>
-		</div>
-
-		<div class="only p-2">
-			<div>
-				<label for="email" class="py-1 px-2">Email *</label>
-				{{ form_row(formulaire.email) }}
-			</div>
-		</div>
-
-		<div class="solo p-2" class="py-1 px-2">
-			<label for="adresse">Adresse *</label>
-			{{ form_row(formulaire.adresse) }}
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="detail" class="py-1 px-2">Détail (Batiment, numéro d'appartement) *</label>
-				{{ form_row(formulaire.detail) }}
-			</div>
-			<div>
-				<label for="cp">Code postal *</label>
-				{{ form_row(formulaire.cp) }}
-			</div>
-		</div>
-		<div class="only p-2">
-			<div>
-				<label for="ville" class="py-1 px-2">Ville *</label>
-				{{ form_row(formulaire.ville) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="pays" class="py-1 px-2">Pays de naissance *</label>
-				{{ form_row(formulaire.pays) }}
-			</div>
-			<div>
-				<label for="nationalite" class="py-1 px-2">Nationalité *</label>
-				{{ form_row(formulaire.nationalite) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="dept" class="py-1 px-2">Département de naissance *</label>
-				{{ form_row(formulaire.dept) }}
-			</div>
-			<div>
-				<label for="naissance" class="py-1 px-2">Ville de naissance *</label>
-				{{ form_row(formulaire.ville_naissance) }}
-			</div>
+		<div class="solo p-2">
+			<label for="nom" class="py-1 px-2">Nom *</label>
+			{{ form_row(formulaire.civilite) }}
 		</div>
 	</div>
+	<div class="duo p-2">
+		<div>
+			<label for="nom" class="py-1 px-2">Nom *</label>
+			{{ form_row(formulaire.nom) }}
+		</div>
+		<div>
+			<label for="nom_usage" class="py-1 px-2">Nom d'usage</label>
+			{{ form_row(formulaire.nom_usage) }}
+		</div>
+	</div>
+	<div class="duo p-2">
+		<div>
+			<label for="prenom" class="py-1 px-2">Prenom *</label>
+			{{ form_row(formulaire.prenom) }}
+		</div>
+		<div>
+			<label for="date_naissance" class="py-1 px-2">Date de naissance *</label>
+			<input type="text" class="form-input datepicker-input w-250" id="datepicker" placeholder="Sélectionner une date"/>
+
+
+		</div>
+	</div>
+	<div class="duo p-2">
+		<div>
+			<label for="portable" class="py-1 px-2">Téléphone portable *</label>
+			{{ form_row(formulaire.portable) }}
+		</div>
+		<div>
+			<label for="fixe" class="py-1 px-2">Téléphone fixe</label>
+			{{ form_row(formulaire.fixe) }}
+		</div>
+	</div>
+
+	<div class="only p-2">
+		<div>
+			<label for="email" class="py-1 px-2">Email *</label>
+			{{ form_row(formulaire.email) }}
+		</div>
+	</div>
+
+	<div class="solo p-2" class="py-1 px-2">
+		<label for="adresse">Adresse *</label>
+		{{ form_row(formulaire.adresse) }}
+	</div>
+	<div class="duo p-2">
+		<div>
+			<label for="detail" class="py-1 px-2">Détail (Batiment, numéro d'appartement)*</label>
+			{{ form_row(formulaire.detail) }}
+		</div>
+		<div>
+			<label for="cp" class="py-1 px-2">Code postal *</label>
+			{{ form_row(formulaire.cp) }}
+		</div>
+	</div>
+	<div class="only p-2">
+		<div>
+			<label for="ville" class="py-1 px-2">Ville *</label>
+			{{ form_row(formulaire.ville) }}
+		</div>
+	</div>
+	<div class="duo p-2">
+		<div>
+			<label for="pays" class="py-1 px-2">Pays de naissance *</label>
+			{{ form_row(formulaire.pays) }}
+		</div>
+		<div>
+			<label for="nationalite" class="py-1 px-2">Nationalité *</label>
+			{{ form_row(formulaire.nationalite) }}
+		</div>
+	</div>
+	<div class="duo p-2">
+		<div>
+			<label for="dept" class="py-1 px-2">Département de naissance *</label>
+			{{ form_row(formulaire.dept) }}
+		</div>
+		<div>
+			<label for="naissance" class="py-1 px-2">Ville de naissance *</label>
+			{{ form_row(formulaire.ville_naissance) }}
+		</div>
+	</div>
+
+
 </div>
+
 
 <div class="formation mt-10">
-<div class="solo flex flex-col items-center justify-center pt-10 ">
-	<p class="text-s font-bold tracking-widest">Votre formation</p>
-</div>
+	<div class="solo flex flex-col items-center justify-center pt-10 ">
+		<p class="text-s font-bold tracking-widest">Votre formation</p>
+	</div>
 	<div class="text">
 		<div class="duo p-2">
 			<div>
@@ -121,21 +148,22 @@
 				{{ form_row(formulaire.certif) }}
 			</div>
 			<div>
-				<label for="debut" class="ml-30 py-1 px-2" >Date de début</label>
-				{{ form_row(formulaire.date_debut) }}
+				<label for="debut" class=" py-1 px-2">Date de début</label>
+				<input type="text" class="form-input datepicker-input w-250" id="datepicker" placeholder="Sélectionner une date"/>
 			</div>
 			<div>
 				<label for="fin" class="py-1 px-2">Date de fin</label>
-				{{ form_row(formulaire.date_fin) }}
+				<input type="text" class="form-input datepicker-input w-250" id="datepicker" placeholder="Sélectionner une date"/>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="pro mt-10">
-<div class="solo flex flex-col items-center justify-center pt-10 ">
-	<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
-</div>
+
+	</div>
+<div class="pro mt-10 ">
+	<div class="solo flex flex-col items-center justify-center pt-10 ">
+		<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
+	</div>
 	<div class="text">
 		<div class="solo p-2">
 			<div>
@@ -156,101 +184,200 @@
 		<div class="solo p-2">
 			<div>
 				<label for="exp" class="py-1 px-2">Avez-vous déjà eu une expérience professionnelle ?</label>
-				{{ form_row(formulaire.exp) }}
 			</div>
 		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
-				{{ form_row(formulaire.metier) }}
+		<div class="flex items-center duo">
+			<input id="exp-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+			<label for="exp-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+			<input id="exp-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+			<label for="exp-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+		</div>
+		<div id="experience-non" class="solo mt-2 text-sm  hidden"></div>
+		<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
+			<div class="duo p-2">
+				<div>
+					<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
+					{{ form_row(formulaire.metier) }}
+				</div>
+				<div>
+					<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
+					{{ form_row(formulaire.duree) }}
+				</div>
 			</div>
-			<div>
-				<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
-				{{ form_row(formulaire.duree) }}
+			<div class="solo p-2">
+				<div>
+					<label for="entreprise" class="py-1 px-2">Entreprise *</label>
+					{{ form_row(formulaire.entreprise) }}
+				</div>
+			</div>
+			<div class="solo p-2">
+				<div>
+					<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
+					{{ form_row(formulaire.remu) }}
+				</div>
 			</div>
 		</div>
+
 		<div class="solo p-2">
-			<div>
-				<label for="entreprise" class="py-1 px-2">Entreprise *</label>
-				{{ form_row(formulaire.entreprise) }}
+			<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
+		</div>
+		<div class="flex items-center duo ">
+			<input id="checkbox-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+			<label for="checkbox-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+			<input id="checkbox-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+			<label for="checkbox-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+		</div>
+		<div id="checkbox-text-non" class="solo hidden">
+			<div class="solo p-2">
+				<div>
+					<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
+					{{ form_row(formulaire.statut) }}
+				</div>
+			</div>
+			<div class="solo p-2">
+				<div>
+					<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
+					{{ form_row(formulaire.commentaire) }}
+				</div>
 			</div>
 		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
-				{{ form_row(formulaire.remu) }}
+		<div id="checkbox-text-oui" class=" solo mt-2 text-sm  hidden">
+			<div class="solo p-2">
+				<div>
+					<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
+					{{ form_row(formulaire.statut_salarie) }}
+				</div>
+			</div>
+			<div class="solo p-2">
+				<div>
+					<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
+					{{ form_row(formulaire.entreprise_tuteur) }}
+				</div>
+			</div>
+			<div class="solo p-2">
+				<div>
+					<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
+					{{ form_row(formulaire.adresse_entreprise) }}
+				</div>
+			</div>
+			<div class="duo p-2">
+				<div>
+					<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
+					{{ form_row(formulaire.ville_entreprise) }}
+				</div>
+				<div>
+					<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
+					{{ form_row(formulaire.cp_entreprise) }}
+				</div>
+			</div>
+			<div class="duo p-2">
+				<div>
+					<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
+					{{ form_row(formulaire.nom_tuteur) }}
+				</div>
+				<div>
+					<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
+					{{ form_row(formulaire.prenom_tuteur) }}
+				</div>
+			</div>
+			<div class="duo p-2">
+				<div>
+					<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
+					{{ form_row(formulaire.mail_tuteur) }}
+				</div>
+				<div>
+					<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
+					{{ form_row(formulaire.telephone_tuteur) }}
+				</div>
 			</div>
 		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
-				{{ form_row(formulaire.salarie) }}
-			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
-				{{ form_row(formulaire.statut) }}
-			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
-				{{ form_row(formulaire.commentaire) }}
-			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
-				{{ form_row(formulaire.statut_salarie) }}
-			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
-				{{ form_row(formulaire.entreprise_tuteur) }}
-			</div>
-		</div>
-		<div class="solo p-2">
-			<div>
-				<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
-				{{ form_row(formulaire.adresse_entreprise) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
-				{{ form_row(formulaire.ville_entreprise) }}
-			</div>
-			<div>
-				<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
-				{{ form_row(formulaire.cp_entreprise) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
-				{{ form_row(formulaire.nom_tuteur) }}
-			</div>
-			<div>
-				<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
-				{{ form_row(formulaire.prenom_tuteur) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div>
-				<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
-				{{ form_row(formulaire.mail_tuteur) }}
-			</div>
-			<div>
-				<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
-				{{ form_row(formulaire.telephone_tuteur) }}
-			</div>
-		</div>
+
 	</div>
+	<button type="submit" class="flex justify-center mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+		Envoyer
+	</button>
 </div>
 
 {{ form_end(formulaire)}}
+<div class="bg-white">aze</div>
+<script>
+  flatpickr("#datepicker", {
+    dateFormat: "d-m-Y",
+    locale: {
+      months: {
+        shorthand: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+        longhand: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+      },
+      weekdays: {
+        shorthand: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        longhand: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+      },
+      firstDayOfWeek: 1,
+      rangeSeparator: ' - ',
+      weekAbbreviation: 'Sem',
+      scrollTitle: 'Défiler pour augmenter la valeur',
+      toggleTitle: 'Cliquer pour basculer',
+    },
+    onClose: function(selectedDates, dateStr, instance) {
+      instance.close();
+    },
+  });
+</script>
+	<script>
+		const expOui = document.getElementById("exp-oui");
+const expNon = document.getElementById("exp-non");
+const experienceNon = document.getElementById("experience-non");
+const experienceOui = document.getElementById("experience-oui");
+
+expOui.addEventListener("change", () => {
+if (expOui.checked) { // Code à exécuter si la checkbox "oui" est cochée
+experienceOui.classList.remove("hidden");
+experienceOui.classList.add("block");
+
+// Vérifie si la case "non" est cochée et masque le contenu correspondant si c'est le cas
+if (expNon.checked) {
+expNon.checked = false;
+experienceNon.classList.remove("block");
+experienceNon.classList.add("hidden");
+experienceNon.classList.remove("selected");
+}
+
+// Ajoute la classe "selected" à l'élément correspondant
+expOui.classList.add("selected");
+} else { // Code à exécuter si la checkbox "oui" n'est pas cochée
+experienceOui.classList.remove("block");
+experienceOui.classList.add("hidden");
+experienceOui.classList.remove("selected");
+}
+});
+
+expNon.addEventListener("change", () => {
+if (expNon.checked) { // Code à exécuter si la checkbox "non" est cochée
+experienceNon.classList.remove("hidden");
+experienceNon.classList.add("block");
+
+// Vérifie si la case "oui" est cochée et masque le contenu correspondant si c'est le cas
+if (expOui.checked) {
+expOui.checked = false;
+experienceOui.classList.remove("block");
+experienceOui.classList.add("hidden");
+experienceOui.classList.remove("selected");
+}
+
+// Ajoute la classe "selected" à l'élément correspondant
+expNon.classList.add("selected");
+} else { // Code à exécuter si la checkbox "non" n'est pas cochée
+experienceNon.classList.remove("block");
+experienceNon.classList.add("hidden");
+experienceNon.classList.remove("selected");
+}
+});
+	</script>
+
 
 
 
