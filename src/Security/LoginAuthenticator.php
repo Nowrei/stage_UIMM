@@ -60,7 +60,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         
         //$exist= $this->validationApiService -> ypareo_exists($email);
 
-        dd($this->validationApiService->getToken());
+        //dd($this->validationApiService->getToken());
     
 /*
          if ($exist){
@@ -75,7 +75,9 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
 
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_formulaire'));
+        
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
+        //return new RedirectResponse($this->urlGenerator->generate('app_formulaire'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
