@@ -13,18 +13,19 @@ class FormulaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $builder->setRequired(false);
         $builder
         ->add('civilite', ChoiceType::class, [
-            'label' => 'Civilité *',
+            'label' => false,
             'required' => true,
             'choices' => [
                 'Séléctioné votre civilité dans la liste' => '',
-                'Monsieur' => 'Monsieur',
-                'Madame' => 'Madama',
+                'Monsieur' => '1',
+                'Madame' => '2',
 
             ],
             'attr' => [
-                'class' => 'appearance-none w-full py-1 px-2 bg-white rounded-lg',
+                'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
             ],
         ])
             ->add('nom', TextType::class, [
@@ -40,11 +41,6 @@ class FormulaireType extends AbstractType
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('prenom', TextType::class, [
-                    'label' => false,
-                'attr' => [
-                    'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('date_naissance', TextType::class, [
                     'label' => false,
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
@@ -113,9 +109,6 @@ class FormulaireType extends AbstractType
                     'Ardennes' => 'Ardennes',
                     'Aube' => 'Aube',
                     'Haute-Marne' => 'Haute-Marne',
-               
-                    
-    
                 ],
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 w-30 bg-white rounded-lg',
@@ -142,16 +135,6 @@ class FormulaireType extends AbstractType
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ],
             ])
-            ->add('date_debut', TextType::class, [
-                    'label' => false,
-                'attr' => [
-                    'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('date_fin', TextType::class, [
-                    'label' => false,
-                'attr' => [
-                    'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('diplome', TextType::class, [
                     'label' => false,
                 'attr' => [
@@ -181,11 +164,7 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('exp', TextType::class, [
-                    'label' => false,
-                'attr' => [
-                    'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            
             ->add('metier', TextType::class, [
                     'label' => false,
                 'attr' => [
@@ -220,11 +199,7 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ],  ],)
-            ->add('salarie', TextType::class, [
-                    'label' => false,
-                'attr' => [
-                    'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            
             ->add('statut', ChoiceType::class, [
                 'label' => false,
                 'required' => true,
@@ -263,8 +238,6 @@ class FormulaireType extends AbstractType
                     'Pro A' => 'Pro A',
                     'VAE' => 'VAE',
                     'Autre' => 'Autre'
-                    
-    
                 ],
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
@@ -313,6 +286,7 @@ class FormulaireType extends AbstractType
                         
                     
                 ])
+                
 
 
 

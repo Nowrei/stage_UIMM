@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./templates/**/*.html.twig',
-  './node_modules/tw-elements/dist/js/**/*.js'],
+  './node_modules/tw-elements/dist/js/**/*.js',
+  "./node_modules/flowbite/**/*.js"],
   theme: {
     fontSize: {
       small: ['14px'],
@@ -34,9 +35,9 @@ module.exports = {
       '85': '85%',
       '90%': '90%',
       '95': '95%',
-      '100%': '100%',
+      '100': '100%',
       '536px': '536px',
-      '200px': '200px',
+      '250': '250px',
       '260': '260.26px',
       'px': '75px',
     },
@@ -63,6 +64,7 @@ module.exports = {
 
     },},
   },
-  plugins: [require("tw-elements/dist/plugin")],
+  plugins: [require("tw-elements/dist/plugin"),
+  require('flowbite/plugin')],
 }
 

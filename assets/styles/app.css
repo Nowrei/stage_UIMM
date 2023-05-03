@@ -13,11 +13,20 @@ body {
     margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 50%;
+    width: 45%;
+    padding: 10px;
 
     
 
     
+}
+
+.button {
+
+    margin-left: auto;
+    margin-right: auto; 
+
+   
 }
 
 .formation {
@@ -26,7 +35,8 @@ body {
   margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 50%;
+    width: 45%;
+    padding: 10px;
 
 
     
@@ -38,14 +48,15 @@ body {
     margin-right: auto;
     background-color: #e9e9e9b9;
     border-radius: 5px;
-    width: 50%;
+    width: 45%;
+    padding: 10px;
 
     
 }
 
 .text {
 
-    padding: 30px;
+    padding: 0px;
 }
 
 .duo {
@@ -91,6 +102,12 @@ body {
     flex: 1;
 }
 
+#formulaire_civilite {
+
+    width: 560px;
+
+}
+
 #formulaire_nom {
 
     width: 250px;
@@ -124,7 +141,7 @@ body {
 }
 #formulaire_adresse {
 
-    width: 585px
+    width: 560px
 }
 #formulaire_detail {
 
@@ -159,7 +176,7 @@ body {
 
 #formulaire_pole {
 
-    width: 300px
+    width: 250px
 }
 
 #formulaire_intitule {
@@ -169,7 +186,7 @@ body {
 
 #formulaire_certif {
 
-    width: 300px
+    width: 200px
 }
 
 #formulaire_date_debut {
@@ -186,7 +203,7 @@ body {
 
 #formulaire_diplome {
 
-    width: 585px
+    width: 560px
 }
 
 #formulaire_qualif {
@@ -246,12 +263,12 @@ body {
 
 #formulaire_entreprise_tuteur {
 
-    width: 585px
+    width: 640px
 }
 
 #formulaire_adresse_entreprise {
 
-    width: 585px
+    width: 640px
 }
 
 #formulaire_ville_entreprise {
@@ -283,4 +300,5 @@ body {
 
     width: 250px
 }
+
 

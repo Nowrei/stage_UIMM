@@ -1,56 +1,21 @@
-import {
-    Datepicker,
-    Input,
-    initTE,
-  } from "tw-elements";
-  
-  initTE({ Datepicker, Input });
-  
-  const datepickerTranslated = new Datepicker(
-    document.querySelector("#datepicker-translated"),
-    {
-      title: "Datum auswählen",
-      monthsFull: [
-        "Januar",
-        "Februar",
-        "März",
-        "April",
-        "Mai",
-        "Juni",
-        "Juli",
-        "August",
-        "September",
-        "Oktober",
-        "November",
-        "Dezember",
-      ],
-      monthsShort: [
-        "Jan",
-        "Feb",
-        "Mär",
-        "Apr",
-        "Mai",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Okt",
-        "Nov",
-        "Dez",
-      ],
-      weekdaysFull: [
-        "Sonntag",
-        "Montag",
-        "Dienstag",
-        "Mittwoch",
-        "Donnerstag",
-        "Freitag",
-        "Samstag",
-      ],
-      weekdaysShort: ["Son", "Mon", "Die", "Mit", "Don", "Fre", "Sam"],
-      weekdaysNarrow: ["S", "M", "D", "M", "D", "F", "S"],
-      okBtnText: "Ok",
-      clearBtnText: "Klar",
-      cancelBtnText: "Schließen",
-    }
-  );
+flatpickr("#datepicker", {
+  dateFormat: "d-m-Y",
+  locale: {
+    months: {
+      shorthand: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+      longhand: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    },
+    weekdays: {
+      shorthand: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+      longhand: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+    },
+    firstDayOfWeek: 1,
+    rangeSeparator: ' - ',
+    weekAbbreviation: 'Sem',
+    scrollTitle: 'Défiler pour augmenter la valeur',
+    toggleTitle: 'Cliquer pour basculer',
+  },
+  onClose: function(selectedDates, dateStr, instance) {
+    instance.close();
+  },
+});

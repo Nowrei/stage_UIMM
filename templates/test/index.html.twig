@@ -1,28 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TestController!{% endblock %}
+{% block title %}Fiche renseignement{% endblock %}
 
 {% block body %}
-<link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.3/dist/flowbite.min.css" />
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/flowbite@1.4.3/dist/flowbite.js"></script>
-<script src="https://unpkg.com/flowbite@1.4.3/dist/datepicker.js"></script>
-<!-- end of CDN -->
 
-<!-- end of datepicker-default -->
-<div class="relative">
-	<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-		<svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-			<path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-		</svg>
-	</div>
-	<input datepicker="" datepicker-autohide type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="Select date">
-</div>
-<!-- end of datepicker-autohide -->
-<hr>
-<h2 class="text-3xl font-bold underline">
-	Hello world!
-</h2>
-<hr>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon datepicker</title>
+    <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/forms@0.3.3/dist/forms.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.4.0/dist/typography.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <style>
+      .datepicker-input {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='h-5 w-5'%3E%3Cpath d='M5 8h14v12H5z' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 4v2M8 4v2M5 12h14M12 16v4' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+        background-size: 1.25rem 1.25rem;
+        padding-right: 2.5rem;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+  </head>
+  <body class="p-4">
+    
+      <input
+        type="text"
+        class="form-input datepicker-input"
+        id="datepicker"
+        placeholder="Sélectionner une date"
+      />
+  
+<script>
+  flatpickr("#datepicker", {
+    dateFormat: "d-m-Y",
+    locale: {
+      months: {
+        shorthand: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+        longhand: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+      },
+      weekdays: {
+        shorthand: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        longhand: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+      },
+      firstDayOfWeek: 1,
+      rangeSeparator: ' - ',
+      weekAbbreviation: 'Sem',
+      scrollTitle: 'Défiler pour augmenter la valeur',
+      toggleTitle: 'Cliquer pour basculer',
+    },
+    onClose: function(selectedDates, dateStr, instance) {
+      instance.close();
+    },
+  });
+</script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
