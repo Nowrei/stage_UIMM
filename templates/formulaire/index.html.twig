@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.4.0/dist/typography.min.css"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+	
 	<style>
 		.datepicker-input {
 			background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='h-5 w-5'%3E%3Cpath d='M5 8h14v12H5z' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 4v2M8 4v2M5 12h14M12 16v4' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -44,87 +45,87 @@
 	<div class="text">
 		<div class="solo p-2">
 			<label for="nom" class="py-1 px-2">Nom *</label>
-			{{ form_row(formulaire.civilite) }}
+			{{ form_row(formulaire.codeCiviliteApprenant) }}
 		</div>
 	</div>
 	<div class="duo p-2">
 		<div>
 			<label for="nom" class="py-1 px-2">Nom *</label>
-			{{ form_row(formulaire.nom) }}
+			{{ form_row(formulaire.nomApprenant) }}
 		</div>
 		<div>
-			<label for="nom_usage" class="py-1 px-2">Nom d'usage</label>
-			{{ form_row(formulaire.nom_usage) }}
+			<label for="nomJf" class="py-1 px-2">Nom d'usage</label>
+			{{ form_row(formulaire.nomJf) }}
 		</div>
 	</div>
 	<div class="duo p-2">
 		<div>
-			<label for="prenom" class="py-1 px-2">Prenom *</label>
-			{{ form_row(formulaire.prenom) }}
+			<label for="prenomApprenant" class="py-1 px-2">Prenom *</label>
+			{{ form_row(formulaire.prenomApprenant) }}
 		</div>
 		<div>
 			<label for="date_naissance" class="py-1 px-2">Date de naissance *</label>
-			<input type="text" class="form-input datepicker-input w-250" id="datepicker" placeholder="Sélectionner une date"/>
-
+			
+{{ form_row(formulaire.dateNaissance) }}
 
 		</div>
 	</div>
 	<div class="duo p-2">
 		<div>
-			<label for="portable" class="py-1 px-2">Téléphone portable *</label>
-			{{ form_row(formulaire.portable) }}
+			<label for="tel1Appr" class="py-1 px-2">Téléphone portable *</label>
+			{{ form_row(formulaire.tel1Appr) }}
 		</div>
 		<div>
-			<label for="fixe" class="py-1 px-2">Téléphone fixe</label>
-			{{ form_row(formulaire.fixe) }}
+			<label for="tel2Appr" class="py-1 px-2">Téléphone fixe</label>
+			{{ form_row(formulaire.tel2Appr) }}
 		</div>
 	</div>
 
 	<div class="only p-2">
 		<div>
-			<label for="email" class="py-1 px-2">Email *</label>
-			{{ form_row(formulaire.email) }}
+			<label for="emailAppr" class="py-1 px-2">Email *</label>
+			{{ form_row(formulaire.emailAppr) }}
 		</div>
 	</div>
 
 	<div class="solo p-2" class="py-1 px-2">
-		<label for="adresse">Adresse *</label>
-		{{ form_row(formulaire.adresse) }}
+		<label for="adresse1">Adresse *</label>
+		{{ form_row(formulaire.adresse1) }}
 	</div>
 	<div class="duo p-2">
 		<div>
-			<label for="detail" class="py-1 px-2">Détail (Batiment, numéro d'appartement)*</label>
-			{{ form_row(formulaire.detail) }}
+			<label for="adrresse2" class="py-1 px-2">Détail (Bâtiment, N° Appt)*</label>
+			{{ form_row(formulaire.adresse2) }}
 		</div>
 		<div>
-			<label for="cp" class="py-1 px-2">Code postal *</label>
-			{{ form_row(formulaire.cp) }}
+			<label for="cpAppr" class="py-1 px-2">Code postal *</label>
+			{{ form_row(formulaire.cpAppr) }}
 		</div>
 	</div>
 	<div class="only p-2">
 		<div>
 			<label for="ville" class="py-1 px-2">Ville *</label>
-			{{ form_row(formulaire.ville) }}
+			{{ form_row(formulaire.villeAppr) }}
 		</div>
 	</div>
 	<div class="duo p-2">
 		<div>
 			<label for="pays" class="py-1 px-2">Pays de naissance *</label>
-			{{ form_row(formulaire.pays) }}
+			{{ form_row(formulaire.paysNaissance) }}
 		</div>
 		<div>
 			<label for="nationalite" class="py-1 px-2">Nationalité *</label>
-			{{ form_row(formulaire.nationalite) }}
+			{{ form_row(formulaire.idNationalite) }}
 		</div>
 	</div>
 	<div class="duo p-2">
 		<div>
 			<label for="dept" class="py-1 px-2">Département de naissance *</label>
-			{{ form_row(formulaire.dept) }}
+			{{ form_row(formulaire.departementNaissance) }}
 		</div>
 		<div>
 			<label for="naissance" class="py-1 px-2">Ville de naissance *</label>
-			{{ form_row(formulaire.ville_naissance) }}
+			{{ form_row(formulaire.lieuNaissance) }}
 		</div>
 	</div>
 
@@ -140,25 +141,26 @@
 		<div class="duo p-2">
 			<div>
 				<label for="pole" class="py-1 px-2">Pôle formation Champagne-Ardenne *</label>
-				{{ form_row(formulaire.pole) }}
+				{{ form_row(formulaire.poleFormation) }}
 			</div>
 			<div>
 				<label for="intitule" class="py-1 px-2">Intitulé de la formation *</label>
-				{{ form_row(formulaire.intitule) }}
+				{{ form_row(formulaire.intituleFormation) }}
 			</div>
 		</div>
 		<div class="duo p-2">
 			<div>
 				<label for="certif" class="py-1 px-2">Type de certification</label>
-				{{ form_row(formulaire.certif) }}
+				{{ form_row(formulaire.typeCertFormation) }}
 			</div>
 			<div>
 				<label for="debut" class=" py-1 px-2">Date de début</label>
-				<input type="text" class="form-input datepicker-input w-250" id="datepicker" placeholder="Sélectionner une date"/>
+				
+			{{ form_row(formulaire.dateDebutFormation) }}
 			</div>
 			<div>
 				<label for="fin" class="py-1 px-2">Date de fin</label>
-				<input type="text" class="form-input datepicker-input w-250" id="datepicker" placeholder="Sélectionner une date"/>
+							{{ form_row(formulaire.dateFinFormation) }}
 			</div>
 		</div>
 	</div>
@@ -173,17 +175,17 @@
 		<div class="solo p-2">
 			<div>
 				<label for="diplome" class="py-1 px-2">Dernier diplôme obtenu *</label>
-				{{ form_row(formulaire.diplome) }}
+				{{ form_row(formulaire.dernierDiplome) }}
 			</div>
 		</div>
 		<div class="duo p-2">
 			<div>
 				<label for="qualif" class="py-1 px-2">Niveau qualification</label>
-				{{ form_row(formulaire.qualif) }}
+				{{ form_row(formulaire.niveauQualification) }}
 			</div>
 			<div>
 				<label for="obtention" class="py-1 px-2">Date d'obtention *</label>
-				{{ form_row(formulaire.date_obtention) }}
+				{{ form_row(formulaire.dateObtention) }}
 			</div>
 		</div>
 		<div class="solo p-2">
@@ -204,23 +206,23 @@
 			<div class="duo p-2">
 				<div>
 					<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
-					{{ form_row(formulaire.metier) }}
+					{{ form_row(formulaire.dernierMetier) }}
 				</div>
 				<div>
 					<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
-					{{ form_row(formulaire.duree) }}
+					{{ form_row(formulaire.dureeExperience) }}
 				</div>
 			</div>
 			<div class="solo p-2">
 				<div>
 					<label for="entreprise" class="py-1 px-2">Entreprise *</label>
-					{{ form_row(formulaire.entreprise) }}
+					{{ form_row(formulaire.entrepriseExperience) }}
 				</div>
 			</div>
 			<div class="solo p-2">
 				<div>
 					<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
-					{{ form_row(formulaire.remu) }}
+					{{ form_row(formulaire.niveauRemuneration) }}
 				</div>
 			</div>
 		</div>
@@ -246,7 +248,7 @@
 			<div class="solo p-2">
 				<div>
 					<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
-					{{ form_row(formulaire.commentaire) }}
+					{{ form_row(formulaire.statutCommentaire) }}
 				</div>
 			</div>
 		</div>
@@ -254,49 +256,49 @@
 			<div class="solo p-2">
 				<div>
 					<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
-					{{ form_row(formulaire.statut_salarie) }}
+					{{ form_row(formulaire.statutSalarie) }}
 				</div>
 			</div>
 			<div class="solo p-2">
 				<div>
 					<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
-					{{ form_row(formulaire.entreprise_tuteur) }}
+					{{ form_row(formulaire.entrepriseSalarie) }}
 				</div>
 			</div>
 			<div class="solo p-2">
 				<div>
 					<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
-					{{ form_row(formulaire.adresse_entreprise) }}
+					{{ form_row(formulaire.adresseEntreprise) }}
 				</div>
 			</div>
 			<div class="duo p-2">
 				<div>
 					<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
-					{{ form_row(formulaire.ville_entreprise) }}
+					{{ form_row(formulaire.villeEntreprise) }}
 				</div>
 				<div>
 					<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
-					{{ form_row(formulaire.cp_entreprise) }}
+					{{ form_row(formulaire.cpEntreprise) }}
 				</div>
 			</div>
 			<div class="duo p-2">
 				<div>
 					<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
-					{{ form_row(formulaire.nom_tuteur) }}
+					{{ form_row(formulaire.nomTuteur) }}
 				</div>
 				<div>
 					<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
-					{{ form_row(formulaire.prenom_tuteur) }}
+					{{ form_row(formulaire.prenomTuteur) }}
 				</div>
 			</div>
 			<div class="duo p-2">
 				<div>
 					<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
-					{{ form_row(formulaire.mail_tuteur) }}
+					{{ form_row(formulaire.adresseMailTuteur) }}
 				</div>
 				<div>
 					<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
-					{{ form_row(formulaire.telephone_tuteur) }}
+					{{ form_row(formulaire.telephoneTuteur) }}
 				</div>
 			</div>
 		</div>
