@@ -26,3 +26,4 @@ services:
     App\Service\ValidationApiService:
         arguments:
             $customParam: '%env(APP_CUSTOM_PARAM)%'
+            $customUrl: '%env(URL)%'

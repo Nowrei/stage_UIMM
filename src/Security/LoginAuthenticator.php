@@ -61,6 +61,8 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         //$exist= $this->validationApiService -> ypareo_exists($email);
 
         //dd($this->validationApiService->getToken());
+        //dd($this->validationApiService->getUrl());
+        //die;
     
 /*
          if ($exist){
