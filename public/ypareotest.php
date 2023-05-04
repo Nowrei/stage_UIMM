@@ -1,21 +1,36 @@
 <?php
-echo 'ypareo api send <br>';
+echo 'send <br>';
 $nomApprenant="";
 $prenomApprenant="";
 $emailYpareo;
 $emailFormulaire;
 
 try {
-        $baseUrl = "http://eot13muzw2iqeft.m.pipedream.net";  //les test fontionnent dans http et pas dans https
-        $jeton = "token";
+        
+
+        $myfile = fopen("c://data//url.txt", "r") or die("Unable to open file!");
+        $baseUrl=fread($myfile,filesize("c://data//url.txt"));
+        //echo $jeton;
+        fclose($myfile);
+        //$baseUrl="";
+
+
+        $myfile = fopen("c://data//file.txt", "r") or die("Unable to open file!");
+        $jeton=fread($myfile,filesize("c://data//file.txt"));
+        //echo $jeton;
+        fclose($myfile);
+
+        
+
+       // $jeton = "token";
 
         // REQUÊTE CONSULTATION
-        $url = $baseUrl . "/";
+        //$url = $baseUrl . "/";
 
         //    example utilisation             /r/v1/rechercher/apprenants?@filtre=X&@filtre=Y
         //    example utilisation             /r/v1/rechercher/apprenants?nomApprenant=NOM&prenomApprenant=PRENOM   
 
-        //$url = $baseUrl . "/r/v1/rechercher/apprenants?nomApprenant=".$nomApprenant."&prenomApprenant=".$prenomApprenant;
+        $url = $baseUrl . "/r/v1/preinscription/candidat/1889";
 
 
         // options de la session
@@ -45,6 +60,7 @@ try {
         $data = json_decode($response, true);
         Array($data);
         var_dump($data);
+        
     }
     catch (Exception $e) {
     echo $e;
@@ -55,7 +71,7 @@ echo "email search <br>";
 
 // remplacer le text dans valeurcherche avec ceci "emailAppr"
 
-$valeurCherche="owner_id";
+$valeurCherche="emailAppr";
 
 $arrayEmail=array($valeurCherche=>"");
 $result=array_intersect_key($data,$arrayEmail);
