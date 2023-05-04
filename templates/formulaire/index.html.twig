@@ -90,12 +90,12 @@
 
 	<div class="solo p-2" class="py-1 px-2">
 		<label for="adresse1">Adresse *</label>
-		{{ form_row(formulaire.adresse1) }}
+		{{ form_row(formulaire.adresse1Appr) }}
 	</div>
 	<div class="duo p-2">
 		<div>
 			<label for="adrresse2" class="py-1 px-2">Détail (Bâtiment, N° Appt)*</label>
-			{{ form_row(formulaire.adresse2) }}
+			{{ form_row(formulaire.adresse2Appr) }}
 		</div>
 		<div>
 			<label for="cpAppr" class="py-1 px-2">Code postal *</label>
@@ -141,26 +141,26 @@
 		<div class="duo p-2">
 			<div>
 				<label for="pole" class="py-1 px-2">Pôle formation Champagne-Ardenne *</label>
-				{{ form_row(formulaire.poleFormation) }}
+				
 			</div>
 			<div>
 				<label for="intitule" class="py-1 px-2">Intitulé de la formation *</label>
-				{{ form_row(formulaire.intituleFormation) }}
+				
 			</div>
 		</div>
 		<div class="duo p-2">
 			<div>
 				<label for="certif" class="py-1 px-2">Type de certification</label>
-				{{ form_row(formulaire.typeCertFormation) }}
+				
 			</div>
 			<div>
 				<label for="debut" class=" py-1 px-2">Date de début</label>
 				
-			{{ form_row(formulaire.dateDebutFormation) }}
+			
 			</div>
 			<div>
 				<label for="fin" class="py-1 px-2">Date de fin</label>
-							{{ form_row(formulaire.dateFinFormation) }}
+						
 			</div>
 		</div>
 	</div>
@@ -294,7 +294,7 @@
 			<div class="duo p-2">
 				<div>
 					<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
-					{{ form_row(formulaire.adresseMailTuteur) }}
+					{{ form_row(formulaire.adresseMaillTuteur) }}
 				</div>
 				<div>
 					<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>

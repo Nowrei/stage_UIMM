@@ -5,7 +5,10 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserFormType extends AbstractType
@@ -18,25 +21,122 @@ class UserFormType extends AbstractType
             ->add('password')
             ->add('token')
             ->add('isVerified')
-            ->add('codeCiviliteApprenant')
-            ->add('nomApprenant')
-            ->add('nomJf')
-            ->add('prenomApprenant')
-            ->add('dateNaissance')
-            ->add('tel1Appr')
-            ->add('tel2Appr')
-            ->add('emailAppr')
-            ->add('adresse1Appr')
-            ->add('adresse2Appr')
-            ->add('cpAppr')
-            ->add('villeAppr')
-            ->add('lieuNaissance')
-            ->add('idPays')
-            ->add('paysNaissance')
-            ->add('idNationalite')
-            ->add('departementNaissance')
+            //coordonnées
+            ->add('codeCiviliteApprenant', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Séléctioné votre civilité dans la liste' => '',
+                    'Monsieur' => '1',
+                    'Madame' => '2',
+    
+                ],
+                'attr' => [
+                    'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
+                ],
+            ])
+            ->add('nomApprenant', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],
+          
+        )
+        ->add('nomJf',TextType::class, [
+            'label' => false,
+        'attr' => [
+            'class' => 'form-control py-1 px-2',
+            'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('prenomApprenant', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('dateNaissance', DateType::class, [
+                'label' => false,
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'html5' => false,
+                'attr' => [
+                    'placeholder' => 'JJ/MM/AAAA',
+                ],
+            ])
+            ->add('tel1Appr', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('tel2Appr', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('emailAppr', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('adresse1Appr', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('adresse2Appr', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('cpAppr', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',
+                'maxlength' => 5, // Limite maximale de 5 caractères  
+            ],  
+            'constraints' => [
+                new Length([
+                    'min' => 5, // Limite minimale de 5 caractères
+                    'minMessage' => 'Le champ doit contenir au moins {{ limit }} caractères',
+                ]),
+            ],
+        ],)
+            ->add('villeAppr', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('lieuNaissance', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('idPays', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('paysNaissance', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('idNationalite', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('departementNaissance', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            //formation
             ->add('idFormationSouhait1')
-            ->add('dernierDiplome')
+            ->add('dernierDiplome', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('niveauQualification', ChoiceType::class, [
                 'label' => false,
                 'required' => true,
@@ -56,24 +156,138 @@ class UserFormType extends AbstractType
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ], ],)
-            ->add('dateObtention')
-            ->add('dejaExperience')
-            ->add('dernierMetier')
-            ->add('dureeExperience')
-            ->add('entrepriseExperience')
-            ->add('niveauRemuneration')
+            ->add('dateObtention', DateType::class, [
+                'label' => false,
+                'widget' => 'single_text',
+                'format' => 'yyyy',
+                'html5' => false,
+                'attr' => [
+                    'placeholder' => 'AAAA',
+                ],
+            ])
+            ->add('dejaExperience', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('dernierMetier', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('dureeExperience', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('entrepriseExperience', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('niveauRemuneration', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Niveau de rémunération' => '',
+                    'Ne souhaite pas répondre' => 'Ne souhaite pas répondre',
+                    'Aucune' => 'Aucune',
+                    'Hors métalurgie' => 'Hors métalurgie',
+                    'Inférieur au coef 170' => 'Inférieur au coef 170',
+                    'Entre coef 170 et 215' => 'Entre coef 170 et 215',
+                    'Entre coef 215 et 255' => 'Entre coef 215 et 255',
+                    'Entre coef 255 et 285' => 'Entre coef 255 et 285',
+                    'Supérieur au coef 285' => 'Supérieur au coef 285',
+                    
+    
+                ],
+                'attr' => [
+                    'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
+                ],  ],)
             ->add('salarie')
-            ->add('statut')
-            ->add('statutSalarie')
-            ->add('statutCommentaire')
-            ->add('entrepriseSalarie')
-            ->add('adresseEntreprise')
-            ->add('villeEntreprise')
-            ->add('cpEntreprise')
-            ->add('nomTuteur')
-            ->add('prenomTuteur')
-            ->add('adresseMaillTuteur')
-            ->add('telephoneTuteur')
+            ->add('statut', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Statut' => '',
+                    'CPF' => 'CPF',
+                    'Financement Région' => 'Financement Région',
+                    'POE Individuelle' => 'POE Individuelle',
+                    'POE COllective' => 'POE Collective',
+                    'VAR' => 'VAE',
+                    'Autre' => 'Autre',
+
+                    
+    
+                ],
+                'attr' => [
+                    'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
+                ],  ],)
+            ->add('statutSalarie', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    'Statut salarié' => '',
+                    'Contrat de professionnalisation' => 'Contrat de professionnalisation',
+                    'Contrat de professionnalisation expérimental' => 'Contrat de professionnalisation expérimental',
+                    'Contrat d\'apprentissage' => 'Contrat d\'apprentissage',
+                    'Contrat pro intérimaire' => 'Contrat pro intérimaire',
+                    'Plan de développement des Compétences' => 'Plan de développement des Compétences',
+                    'CPF' => 'CPF',
+                    'CPF Transition professionnelle' => 'CPF Transition professionnelle',
+                    'Pro A' => 'Pro A',
+                    'VAE' => 'VAE',
+                    'Autre' => 'Autre'
+                ],
+                'attr' => [
+                    'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
+                ],  ],)
+            ->add('statutCommentaire', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('entrepriseSalarie', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('adresseEntreprise', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('villeEntreprise', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('cpEntreprise', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('nomTuteur', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('prenomTuteur', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('adresseMaillTuteur', TextType::class, [
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('telephoneTuteur', TextType::class, [
+                'label' => false,
+        'attr' => [
+            'class' => 'form-control py-1 px-2',
+            'style' => 'border: none; border-radius: 5px;',  ],
+        ])
             ->add('user_form')
         ;
     }

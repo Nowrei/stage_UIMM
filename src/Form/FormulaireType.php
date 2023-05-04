@@ -71,10 +71,10 @@ class FormulaireType extends AbstractType
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('emailAppr', TextType::class, [
-                    'label' => false,
-                'attr' => [
-                    'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'label' => false,
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('adresse1', TextType::class, [
                     'label' => false,
                 'attr' => [
@@ -205,10 +205,10 @@ class FormulaireType extends AbstractType
             ->add('dateObtention', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
+                'format' => 'yyyy',
                 'html5' => false,
                 'attr' => [
-                    'placeholder' => 'JJ/MM/AAAA',
+                    'placeholder' => 'AAAA',
                 ],
             ])
             ->add('dernierMetier', TextType::class, [

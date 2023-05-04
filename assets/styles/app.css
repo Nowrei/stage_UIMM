@@ -102,201 +102,201 @@ body {
     flex: 1;
 }
 
-#formulaire_codeCiviliteApprenant {
+#user_form_codeCiviliteApprenant {
 
     width: 560px;
 
 }
 
-#formulaire_nomApprenant {
+#user_form_nomApprenant {
 
     width: 250px;
 
 }
 
-#formulaire_nomJf {
+#user_form_nomJf {
 
     width: 250px
 }
 
-#formulaire_prenomApprenant {
+#user_form_prenomApprenant {
 
     width: 250px
 }
-#formulaire_dateNaissance {
+#user_form_dateNaissance {
 
     width: 250px
 }
-#formulaire_tel1Appr {
+#user_form_tel1Appr {
 
     width: 250px
 }
-#formulaire_tel2Appr {
+#user_form_tel2Appr {
 
     width: 250px
 }
-#formulaire_emailAppr {
+#user_form_emailAppr {
 
     width: 250px
 }
-#formulaire_adresse1 {
+#user_form_adresse1Appr {
 
     width: 560px
 }
-#formulaire_adresse2 {
+#user_form_adresse2Appr {
 
     width: 250px
 }
-#formulaire_cpAppr {
+#user_form_cpAppr {
 
     width: 250px
 }
-#formulaire_villeAppr {
+#user_form_villeAppr {
 
     width: 250px
 }
-#formulaire_paysNaissance {
+#user_form_paysNaissance {
 
     width: 250px
 }
-#formulaire_idNationalite {
-
-    width: 250px
-}
-
-#formulaire_departementNaissance {
+#user_form_idNationalite {
 
     width: 250px
 }
 
-#formulaire_lieuNaissance {
+#user_form_departementNaissance {
 
     width: 250px
 }
 
-#formulaire_poleFormation {
+#user_form_lieuNaissance {
 
     width: 250px
 }
 
-#formulaire_intituleFormation {
+#user_form_poleFormation {
 
     width: 250px
 }
 
-#formulaire_typeCertFormation {
+#user_form_intituleFormation {
+
+    width: 250px
+}
+
+#user_form_typeCertFormation {
 
     width: 200px
 }
 
-#formulaire_dateDebutFormation {
+#user_form_dateDebutFormation {
 
     width: 100px;
     margin-left: 30px;
     
 }
 
-#formulaire_dateFinFormation {
+#user_form_dateFinFormation {
 
     width: 100px
 }
 
-#formulaire_dernierDiplome {
+#user_form_dernierDiplome {
 
     width: 560px
 }
 
-#formulaire_niveauQualification {
+#user_form_niveauQualification {
 
     width: 250px
 }
 
-#formulaire_exp {
+#user_form_exp {
 
     width: 250px
 }
 
-#formulaire_dateObtention {
+#user_form_dateObtention {
 
     width: 250px
 }
 
-#formulaire_dernierMetier {
+#user_form_dernierMetier {
 
     width: 250px
 }
 
-#formulaire_dureeExperience {
+#user_form_dureeExperience {
 
     width: 250px
 }
 
-#formulaire_entrepriseExperience {
+#user_form_entrepriseExperience {
 
     width: 250px
 }
 
-#formulaire_niveauRemuneration {
+#user_form_niveauRemuneration {
 
     width: 250px
 }
 
-#formulaire_salarie {
+#user_form_salarie {
 
     width: 250px
 }
 
-#formulaire_statut {
+#user_form_statut {
 
     width: 250px
 }
 
-#formulaire_statutCommentaire {
+#user_form_statutCommentaire {
 
     width: 250px
 }
 
-#formulaire_satatut_salarie {
+#user_form_satatut_salarie {
 
     width: 250px
 }
 
-#formulaire_entrepriseSalarie {
+#user_form_entrepriseSalarie {
 
     width: 640px
 }
 
-#formulaire_adresseEntreprise {
+#user_form_adresseEntreprise {
 
     width: 640px
 }
 
-#formulaire_villeEntreprise {
+#user_form_villeEntreprise {
 
     width: 250px
 }
 
-#formulaire_cpEntreprise {
+#user_form_cpEntreprise {
 
     width: 250px
 }
 
-#formulaire_nomTuteur{
+#user_form_nomTuteur{
 
     width: 250px
 }
 
-#formulaire_prenomTuteur {
+#user_form_prenomTuteur {
 
     width: 250px
 }
 
-#formulaire_adresseMailTuteur{
+#user_form_adresseMailTuteur{
 
     width: 250px
 }
 
-#formulaire_telephoneTuteur {
+#user_form_telephoneTuteur {
 
     width: 250px
 }
