@@ -5,6 +5,7 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -86,7 +87,16 @@ class FormulaireType extends AbstractType
                     'label' => false,
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    'style' => 'border: none; border-radius: 5px;',
+                    'maxlength' => 5, // Limite maximale de 5 caractères  
+                ],  
+                'constraints' => [
+                    new Length([
+                        'min' => 5, // Limite minimale de 5 caractères
+                        'minMessage' => 'Le champ doit contenir au moins {{ limit }} caractères',
+                    ]),
+                ],
+            ],)
             ->add('ville', TextType::class, [
                     'label' => false,
                 'attr' => [
