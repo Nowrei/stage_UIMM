@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.4.0/dist/typography.min.css"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+	
 	<style>
 		.datepicker-input {
 			background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='h-5 w-5'%3E%3Cpath d='M5 8h14v12H5z' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 4v2M8 4v2M5 12h14M12 16v4' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -28,7 +29,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
 {% endblock %}
-
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
   
 <div class="formulaire mt-1">
 	<div class="solo flex flex-col items-center justify-center pt-10">
@@ -60,7 +65,7 @@
 		<div>
 			<label for="date_naissance" class="py-1 px-2">Date de naissance *</label>
 			<input type="text" class="form-input datepicker-input w-250" id="datepicker" placeholder="Sélectionner une date"/>
-
+{{ form_row(formulaire.date_naissance) }}
 
 		</div>
 	</div>
@@ -84,12 +89,12 @@
 
 	<div class="solo p-2" class="py-1 px-2">
 		<label for="adresse">Adresse *</label>
-		{{ form_row(formulaire.adresse) }}
+		{{ form_row(formulaire.adr1) }}
 	</div>
 	<div class="duo p-2">
 		<div>
-			<label for="detail" class="py-1 px-2">Détail (Batiment, numéro d'appartement)*</label>
-			{{ form_row(formulaire.detail) }}
+			<label for="detail" class="py-1 px-2">Détail (Bâtiment, N° Appt)*</label>
+			{{ form_row(formulaire.adr2) }}
 		</div>
 		<div>
 			<label for="cp" class="py-1 px-2">Code postal *</label>

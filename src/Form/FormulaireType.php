@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -15,6 +16,17 @@ class FormulaireType extends AbstractType
     {
         $builder->setRequired(false);
         $builder
+
+        
+        ->add('date_naissance', DateType::class, [
+            'label' => 'Date de naissance',
+            'widget' => 'single_text',
+            'format' => 'dd/MM/yyyy',
+            'html5' => false,
+            'attr' => [
+                'placeholder' => 'JJ/MM/AAAA',
+            ],
+        ])
         ->add('civilite', ChoiceType::class, [
             'label' => false,
             'required' => true,
@@ -60,12 +72,12 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('adresse', TextType::class, [
+            ->add('adr1', TextType::class, [
                     'label' => false,
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('detail', TextType::class, [
+            ->add('adr2', TextType::class, [
                     'label' => false,
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
