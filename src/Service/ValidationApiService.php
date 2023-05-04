@@ -11,11 +11,13 @@ class ValidationApiService extends AbstractController
 {
 
     protected $customParam;
+    protected $customUrl;
 
 
 
-    public function __construct( $customParam   ) 
+    public function __construct( $customParam, $customUrl  ) 
     {
+        $this->customUrl=$customUrl;
         $this->customParam = $customParam;
         //dd($customParam);
     }
@@ -26,6 +28,11 @@ class ValidationApiService extends AbstractController
         return $this->customParam;
     }
 
+    public function getUrl() {
+        //$projectDir = $this->getParameter('app.custom_param');
+        return $this->customUrl;
+    }
+
     // config/packages/doctrine.php
 
 
@@ -33,15 +40,10 @@ class ValidationApiService extends AbstractController
 
                 
         try {
-            //$baseUrl = "http://eot13muzw2iqeft.m.pipedream.net";  //les test fontionnent dans http et pas dans https
-            $baseUrl = "http://www.ypareo-portail08.com/netypareo/index.php" ;
+            
+            $baseUrl = $this->customUrl ;
             $jeton = $this->customParam;
-    
-            // REQUÊTE CONSULTATION
-            //$url = $baseUrl . "/";
-    
-            //    example utilisation             /r/v1/rechercher/apprenants?@filtre=X&@filtre=Y
-            //    example utilisation             /r/v1/rechercher/apprenants?nomApprenant=NOM&prenomApprenant=PRENOM   
+      
     
             $url = $baseUrl . "/r/v1/pays";
     
@@ -84,22 +86,13 @@ class ValidationApiService extends AbstractController
 
 
 
-    public function apiGetIdPays(string $pays):string{
-
-                
+    public function apiGetIdPays(string $pays):string{    
         try {
-            //$baseUrl = "http://eot13muzw2iqeft.m.pipedream.net";  //les test fontionnent dans http et pas dans https
-            $baseUrl = "http://www.ypareo-portail08.com/netypareo/index.php" ;
+
+            $baseUrl = $this->customUrl;  //les test fontionnent dans http et pas dans https
             $jeton = $this->customParam;
     
-            // REQUÊTE CONSULTATION
-            //$url = $baseUrl . "/";
-    
-            //    example utilisation             /r/v1/rechercher/apprenants?@filtre=X&@filtre=Y
-            //    example utilisation             /r/v1/rechercher/apprenants?nomApprenant=NOM&prenomApprenant=PRENOM   
-    
             $url = $baseUrl . "/r/v1/pays";
-    
     
             // options de la session
             $options = [
@@ -229,31 +222,19 @@ class ValidationApiService extends AbstractController
     }
 
 
-
-
-
-
-    public static function ypareo_exists(string $loginEmail): bool
+    public function ypareo_exists(string $loginEmail): bool
     {
-        $nomApprenant="";
-        $prenomApprenant="";
         $emailYpareo="";
         $emailFormulaire=$loginEmail;
 
         
         try {
-                $baseUrl = "http://eot13muzw2iqeft.m.pipedream.net";  //les test fontionnent dans http et pas dans https
-                $jeton = "token";
+                $baseUrl = $this->customUrl;  //les test fontionnent dans http et pas dans https
+                $jeton = $this->customParam;
         
                 // REQUÊTE CONSULTATION
                 $url = $baseUrl . "/";
-        
-                //    example utilisation             /r/v1/rechercher/apprenants?@filtre=X&@filtre=Y
-                //    example utilisation             /r/v1/rechercher/apprenants?nomApprenant=NOM&prenomApprenant=PRENOM   
-        
-                //$url = $baseUrl . "/r/v1/rechercher/apprenants?nomApprenant=".$nomApprenant."&prenomApprenant=".$prenomApprenant;
-        
-        
+    
                 // options de la session
                 $options = [
                                 CURLOPT_URL => $url,
