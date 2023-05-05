@@ -16,7 +16,7 @@ class FormulaireController extends AbstractController
     #[Route('/formulaire', name: 'app_formulaire')]
     public function index(Request $request): Response
     {
-        $form = $this->createForm(UserFormType::class, $this->getUser());
+        $form = $this->createForm(UserFormType::class);//, $this->getUser()
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
