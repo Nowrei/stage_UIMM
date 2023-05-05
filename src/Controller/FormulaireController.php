@@ -27,7 +27,7 @@ class FormulaireController extends AbstractController
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
 
-            $this->getUser()->setNomApprenant( $task['nom']);
+            //$this->getUser()->setNomApprenant( $task['nom']);
 
             //$request->request->get('email', '');
            

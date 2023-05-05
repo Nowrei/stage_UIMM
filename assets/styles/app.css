@@ -104,7 +104,7 @@ body {
 
 #user_form_codeCiviliteApprenant {
 
-    width: 560px;
+    width: 600px;
 
 }
 
@@ -141,7 +141,7 @@ body {
 }
 #user_form_adresse1Appr {
 
-    width: 560px
+    width: 600px
 }
 #user_form_adresse2Appr {
 
@@ -203,7 +203,7 @@ body {
 
 #user_form_dernierDiplome {
 
-    width: 560px
+    width: 600px
 }
 
 #user_form_niveauQualification {
@@ -233,7 +233,7 @@ body {
 
 #user_form_entrepriseExperience {
 
-    width: 250px
+    width: 590px
 }
 
 #user_form_niveauRemuneration {
@@ -263,12 +263,12 @@ body {
 
 #user_form_entrepriseSalarie {
 
-    width: 640px
+    width: 590px
 }
 
 #user_form_adresseEntreprise {
 
-    width: 640px
+    width: 590px
 }
 
 #user_form_villeEntreprise {
@@ -291,7 +291,7 @@ body {
     width: 250px
 }
 
-#user_form_adresseMailTuteur{
+#user_form_adresseMaillTuteur{
 
     width: 250px
 }
