@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class PoleFormationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    {  $builder->setRequired(false);
         $builder
             ->add('poleFormation', TextType::class, [
                 'label' => false,
