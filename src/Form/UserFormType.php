@@ -20,11 +20,7 @@ class UserFormType extends AbstractType
     {
         $builder->setRequired(false);
         $builder
-            ->add('email', HiddenType::class,)
-            ->add('roles', HiddenType::class,)
-            ->add('password', HiddenType::class,)
-            ->add('token', HiddenType::class,)
-            ->add('isVerified', HiddenType::class,)
+ 
             //coordonnées
             ->add('codeCiviliteApprenant', ChoiceType::class, [
                 'label' => false,
@@ -56,15 +52,11 @@ class UserFormType extends AbstractType
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('dateNaissance', DateType::class, [
+            ->add('dateNaissance', TextType::class, [
                 'label' => false,
-                'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
-                'html5' => false,
-                'attr' => [
-                    'placeholder' => 'JJ/MM/AAAA',
-                ],
-            ])
+            'attr' => [
+                'class' => 'form-control py-1 px-2',
+                'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('tel1Appr', TextType::class, [
                 'label' => false,
             'attr' => [
@@ -131,12 +123,7 @@ class UserFormType extends AbstractType
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             //formation
-            ->add('idFormationSouhait1')
-            ->add('poleFormation', PoleFormationType::class)
-            ->add('intituleFormation', PoleFormationType::class)
-            ->add('typeCertification', PoleFormationType::class)
-            ->add('dateDebutFormation', PoleFormationType::class)
-            ->add('dateFinFormation', PoleFormationType::class)
+      
             ->add('dernierDiplome', TextType::class, [
                 'label' => false,
             'attr' => [
@@ -293,7 +280,7 @@ class UserFormType extends AbstractType
             'class' => 'form-control py-1 px-2',
             'style' => 'border: none; border-radius: 5px;',  ],
         ])
-            ->add('user_form', HiddenType::class,)
+      
         ;
     }
 

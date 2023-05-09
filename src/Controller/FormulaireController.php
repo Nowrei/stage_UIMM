@@ -16,10 +16,12 @@ class FormulaireController extends AbstractController
     #[Route('/formulaire', name: 'app_formulaire')]
     public function index(Request $request): Response
     {
-        $form = $this->createForm(UserFormType::class);//, $this->getUser()
+        $form = $this->createForm(UserFormType::class);
+        $this->getUser();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            dd($form->isValid());
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             $task = $form->getData();
