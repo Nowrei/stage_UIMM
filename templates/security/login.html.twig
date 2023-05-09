@@ -1,59 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Log in!
+{% endblock %}
 
 {% block body %}
-<div class="flex justify-center">
-<div class="h-fit w-40 p-6 bg-konbini-100 mt-12 rounded-lg">
-<div class="solo flex flex-col items-center justify-center pt-10">
-		<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
-		<p class="text-s font-bold tracking-widest">Se connecter</p>
-	</div>
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<div class="flex justify-center">
+		<div class="h-fit w-40 p-6 bg-konbini-100 mt-12 rounded-lg">
+			<div class="solo flex flex-col items-center justify-center pt-10">
+				<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
+				<p class="text-s font-bold tracking-widest">Se connecter</p>
+			</div>
+			<form method="post">
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
 
-    {% if app.user %}
-        <div class="mb-3 flex justify-center p-4">
-            Vous êtes déjà connecté, <a href="{{ path('app_formulaire') }}">veuillez vous rendre sur la page formulaire
-</a>
-        </div>
-        {% else %}
-<div class="only_login p-2 flex justify-center">
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control ml-4 mr-6" autocomplete="email" required autofocus>
-    </div>
-    <div class="only_login p-2 mr-8 flex justify-center">
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control ml-4 mr-6" autocomplete="current-password" required>
-</div>
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+				{% if app.user %}
+					<div class="mb-3 flex justify-center p-4">
+						Vous êtes déjà connecté,
+						<a href="{{ path('app_formulaire') }}">veuillez vous rendre sur la page formulaire
+						</a>
+					</div>
+				{% else %}
+					<div class="only_login p-2 flex justify-center">
+						<label for="inputEmail">Email</label>
+						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control ml-4 mr-6" autocomplete="email" required autofocus>
+					</div>
+					<div class="only_login p-2 mr-8 flex justify-center">
+						<label for="inputPassword">Password</label>
+						<input type="password" name="password" id="inputPassword" class="form-control ml-4 mr-6" autocomplete="current-password" required>
+					</div>
+					<input
+					type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-    #}
+					{#
+					        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+					        See https://symfony.com/doc/current/security/remember_me.html
+					    #}
 
-        <div class="checkbox mb-3 flex justify-center">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    
-<div class="flex justify-center">
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-    </div>
+					<div class="checkbox mb-3 flex justify-center">
+						<label>
+							<input type="checkbox" name="_remember_me">
+							Se souvenir de moi
+						</label>
+					</div>
 
-    <div class="flex justify-center border-t-4 border-zinc-500">
-    <a href="{{ path('app_register') }}">S'enregistrer</a>
-    </div>
-</form>
-</div>
-</div>
-    {% endif %}
+					<div class="flex justify-center">
+						<button class="mb-8  mt-4 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]" type="submit">
+							Se connecter
+						</button>
+					</div>
+
+					  <div class="mb-3 flex justify-center border-t-4 border-zinc-500 p-2">
+						Pas encore inscrit ?
+						<a href="{{ path('app_register') }}" class="ml-1"> S'inscrire.
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	{% endif %}
 {% endblock %}
+
