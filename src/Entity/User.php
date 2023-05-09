@@ -524,21 +524,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateObtention(): ?DateType
+    public function getDateObtention(): ?DateTime
     {
-        $date   = new DateType();                   //creation de objet date avec la date du jour aujourdhui
+        $date   = new DateTime();                   //creation de objet date avec la date du jour aujourdhui
         if (!is_null($this->dateObtention)){   //si lobjet nest pas null on return lobjet obtenu depuis la bdd
             return $this->dateObtention;
         }else{                                      //si lobjet est null on return la date daujourdhui
             return $date;
+            //return $date->format("Y");
+            
         }
         
     }
 
-    public function setDateObtention(?DateType $dateObtention): self
+    public function setDateObtention(?DateTime $dateObtention): string
     {
-        $this->dateObtention=$dateObtention; //ici on recoit un objet datetime depuis lutilisateur et on met le valeur dedans la propriete du objet this
-        return $this;                                  // et on return lobjet pour etre ecrit dans la bdd
+
+        $date=$dateObtention;
+        
+        $this->dateObtention=date_format($date,"Y"); //ici on recoit un objet datetime depuis lutilisateur et on met le valeur dedans la propriete du objet this
+        return ( $this->dateObtention  );   
+        //die;                               // et on return lobjet pour etre ecrit dans la bdd
         
     }
 
