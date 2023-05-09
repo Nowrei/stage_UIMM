@@ -104,23 +104,28 @@ class ValidationApiService extends AbstractController
                             CURLOPT_RETURNTRANSFER => true
                         ];
     
+
+
             // initialisation de la session
             $ch = curl_init();
-    
+
             // configuration de la session
             curl_setopt_array($ch, $options);
-    
+
             // exécution de la requête
             $response = curl_exec($ch);
+
             //echo $response;
-    
+
             // fermeture de la session
             curl_close($ch);
-    
             // affiche les données au format tableau
             $data = json_decode($response, true);
             Array($data);
-            var_dump($data);
+            //var_dump($data);
+            //dd($data);
+            //die;
+            
         }
         catch (Exception $e) {
         echo $e;
@@ -131,16 +136,19 @@ class ValidationApiService extends AbstractController
     
     // remplacer le text dans valeurcherche avec ceci "$pays"
     
-    $valeurCherche=$pays;
+    //$valeurCherche=$pays;
+    $valeurCherche=1;
+    echo "pays : ".$valeurCherche;
     
     $arrayEmail=array($valeurCherche=>"");
     $result=array_intersect_key($data,$arrayEmail);
     //print_r($result);
-    echo 'Pays cherché: '.$valeurCherche.'<br> result: '.$result[$valeurCherche];
+    //echo 'Pays cherché: '.$valeurCherche.'<br> result: '.$result[$valeurCherche];
     echo "<br>";
-    echo $result[$valeurCherche];
+    //echo $result[$valeurCherche];
 
-
+    dd($result[$valeurCherche]);
+    die;
         return $result[$valeurCherche];
     }
 
