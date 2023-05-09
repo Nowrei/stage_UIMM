@@ -22,9 +22,11 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control ml-4 mr-6',
                 ],
+                'label' => false
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
@@ -36,11 +38,12 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
+             
                 'attr' => ['autocomplete' => 'new-password',
                             'class' => 'form-control ml-4 mr-6'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veillez entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
