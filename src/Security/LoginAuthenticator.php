@@ -58,12 +58,12 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
         //$email="o_VRIMzpr";
         
-        $exist= $this->validationApiService -> apiGetIdPays("FRANCE");
+        //$exist= $this->validationApiService -> apiGetIdPays("FRANCE");
 
-        var_dump($exist);
-        dd($exist);
+        //var_dump($exist);
+        //dd($exist);
         //dd($this->validationApiService->getUrl());
-        die;
+        //die;
     
 /*
          if ($exist){
