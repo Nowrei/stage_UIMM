@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -522,16 +524,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateObtention(): ?string
+    public function getDateObtention(): ?DateType
     {
-        return $this->dateObtention;
+        $date   = new DateType();                   //creation de objet date avec la date du jour aujourdhui
+        if (!is_null($this->dateObtention)){   //si lobjet nest pas null on return lobjet obtenu depuis la bdd
+            return $this->dateObtention;
+        }else{                                      //si lobjet est null on return la date daujourdhui
+            return $date;
+        }
+        
     }
 
-    public function setDateObtention(?string $dateObtention): self
+    public function setDateObtention(?DateType $dateObtention): self
     {
-        $this->dateObtention = $dateObtention;
-
-        return $this;
+        $this->dateObtention=$dateObtention; //ici on recoit un objet datetime depuis lutilisateur et on met le valeur dedans la propriete du objet this
+        return $this;                                  // et on return lobjet pour etre ecrit dans la bdd
+        
     }
 
     public function isDejaExperience(): ?bool
