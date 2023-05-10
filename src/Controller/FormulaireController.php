@@ -99,14 +99,8 @@ class FormulaireController extends AbstractController
             dd($resultado);
             die;
 
-
-
-
-
-
-
             //$this->getUser()->setNomApprenant( $dataForm['nom']);
->
+
 
             //$request->request->get('email', '');
            
