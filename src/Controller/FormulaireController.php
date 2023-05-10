@@ -32,6 +32,7 @@ class FormulaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //dd($form->isValid());
             // $form->getData() holds the submitted values
+
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
             //$dataForm = $form->get('nom');
@@ -49,6 +50,7 @@ class FormulaireController extends AbstractController
 */
 
             //$this->getUser()->setNomApprenant( $dataForm['nom']);
+>
 
             //$request->request->get('email', '');
            
