@@ -53,7 +53,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         //when the user is validated , we have to go and search in ypareo to see if he already exists to show the right form
         //echo ypareo_exists($email);
         //$email="a@a.com";
-        $email = $request->request->get('email', '');
+        //$email = $request->request->get('email', '');
 
 
         //$email="o_VRIMzpr";
