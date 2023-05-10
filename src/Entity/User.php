@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -522,16 +524,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateObtention(): ?string
+    public function getDateObtention(): ?DateTime
     {
-        return $this->dateObtention;
+        $date   = new DateTime();                   //creation de objet date avec la date du jour aujourdhui
+        if (!is_null($this->dateObtention)){   //si lobjet nest pas null on return lobjet obtenu depuis la bdd
+            return $this->dateObtention;
+        }else{                                      //si lobjet est null on return la date daujourdhui
+            return $date;
+            //return $date->format("Y");
+            
+        }
+        
     }
 
-    public function setDateObtention(?string $dateObtention): self
+    public function setDateObtention(?DateTime $dateObtention): string
     {
-        $this->dateObtention = $dateObtention;
 
-        return $this;
+        $date=$dateObtention;
+        
+        $this->dateObtention=date_format($date,"Y"); //ici on recoit un objet datetime depuis lutilisateur et on met le valeur dedans la propriete du objet this
+        return ( $this->dateObtention  );   
+        //die;                               // et on return lobjet pour etre ecrit dans la bdd
+        
     }
 
     public function isDejaExperience(): ?bool
