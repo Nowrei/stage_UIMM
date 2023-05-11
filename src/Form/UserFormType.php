@@ -16,20 +16,22 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class UserFormType extends AbstractType
 {
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->setRequired(false);
         $builder
- 
+
             //coordonnées
+
             ->add('codeCiviliteApprenant', ChoiceType::class, [
                 'label' => false,
                 'required' => true,
                 'choices' => [
-                    'Séléctioné votre civilité dans la liste' => '',
+                    'Civilité' => '',
                     'Monsieur' => '1',
                     'Madame' => '2',
-    
+
                 ],
                 'attr' => [
                     'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
@@ -112,11 +114,21 @@ class UserFormType extends AbstractType
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('idNationalite', TextType::class, [
+            ->add('idNationalite', ChoiceType::class, [
                 'label' => false,
-            'attr' => [
-                'class' => 'form-control py-1 px-2',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'required' => false,
+                'choices' => [
+                    'Séléctioné votre nationalité' => '',
+                    'Français' => '0',
+                    'Union Européene' => '1',
+                    'Hors union européene' => '2',
+                    'Autre' => '3032',
+    
+                ],
+                'attr' => [
+                    'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
+                ],
+            ])
             ->add('departementNaissance', TextType::class, [
                 'label' => false,
             'attr' => [
@@ -220,7 +232,7 @@ class UserFormType extends AbstractType
                 'required' => true,
                 'choices' => [
                     'Statut salarié' => '',
-                    'Contrat de professionnalisation' => 'Contrat de professionnalisation',
+                    'Contrat de professionnalisation' => 'Contrat de professionnalisation', 
                     'Contrat de professionnalisation expérimental' => 'Contrat de professionnalisation expérimental',
                     'Contrat d\'apprentissage' => 'Contrat d\'apprentissage',
                     'Contrat pro intérimaire' => 'Contrat pro intérimaire',
@@ -232,7 +244,8 @@ class UserFormType extends AbstractType
                     'Autre' => 'Autre'
                 ],
                 'attr' => [
-                    'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
+                    'class' => 'appearance-none py-1 px-2 bg-white rounded-lg sm:text-ellipsis',
+                    'style' => 'max-width: 100%; word-wrap: break-word;',
                 ],  ],)
             ->add('statutCommentaire', TextType::class, [
                 'label' => false,

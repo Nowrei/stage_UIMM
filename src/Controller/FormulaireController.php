@@ -6,7 +6,11 @@ use DateTime;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Form\FormulaireType;
+
+use App\Form\PoleFormationType;
+
 use App\Service\ValidationApiService;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,8 +72,11 @@ class FormulaireController extends AbstractController
 
         //$form = $this->createForm(UserFormType::class);
         $form = $this->createForm(UserFormType::class, $user);
+        $form1 = $this->createForm(PoleFormationType::class);
+        
 
         $form->handleRequest($request);
+        $form1->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             //dd($form->isValid());
             // $form->getData() holds the submitted values

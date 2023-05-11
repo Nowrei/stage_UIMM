@@ -16,14 +16,7 @@ import './styles/slider.scss';
 import './bootstrap';
 import 'tw-elements';
 
-// Initialization for ES Users
-import {
-    Dropdown,
-    Ripple,
-    initTE,
-  } from "tw-elements";
-  
-  initTE({ Dropdown, Ripple });
+
 
 
   const checkboxOui = document.getElementById("checkbox-oui");
@@ -113,7 +106,18 @@ import {
       });
     });
     
+/** Require:
+Alpinejs 3: https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js
+Tailwind CSS: https://cdn.tailwindcss.com/3.1.8 */
+/* Open/Close modal from console or any js */
+function openModal(id) {
+  document.getElementById(id).dispatchEvent(new CustomEvent('open-me', { detail: {}}));
+}
+function closeModal(id) {
+  document.getElementById(id).dispatchEvent(new CustomEvent('close-me', { detail: {}}));
+}
 
+openModal('basicModal');
   
 
 
