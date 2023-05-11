@@ -5,8 +5,8 @@ $prenomApprenant="";
 $emailYpareo;
 $emailFormulaire;
 
-try {
-        
+
+try { 
 
         $myfile = fopen("c://data//url.txt", "r") or die("Unable to open file!");
         $baseUrl=fread($myfile,filesize("c://data//url.txt"));
@@ -14,21 +14,10 @@ try {
         fclose($myfile);
         //$baseUrl="";
 
-
         $myfile = fopen("c://data//file.txt", "r") or die("Unable to open file!");
         $jeton=fread($myfile,filesize("c://data//file.txt"));
         //echo $jeton;
-        fclose($myfile);
-
-        
-
-       // $jeton = "token";
-
-        // REQUÊTE CONSULTATION
-        //$url = $baseUrl . "/";
-
-        //    example utilisation             /r/v1/rechercher/apprenants?@filtre=X&@filtre=Y
-        //    example utilisation             /r/v1/rechercher/apprenants?nomApprenant=NOM&prenomApprenant=PRENOM   
+        fclose($myfile); 
 
         $url = $baseUrl . "/r/v1/preinscription/candidat/1889";
 
@@ -51,7 +40,7 @@ try {
 
         // exécution de la requête
         $response = curl_exec($ch);
-        echo $response;
+        //echo $response;
 
         // fermeture de la session
         curl_close($ch);

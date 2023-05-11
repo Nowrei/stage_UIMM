@@ -104,6 +104,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $niveauQualification = null;
 
+    //************************************************************************************* */
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $dateObtention = null;
 

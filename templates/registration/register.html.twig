@@ -2,27 +2,51 @@
 
 {% block title %}S'Inscrire{% endblock %}
 
+
 {% block body %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+	{% if app.user %}
+		<div class="mb-3">
+			You are logged in as
+			{{ app.user.userIdentifier }},
+			<a href="{{ path('app_logout') }}">Logout</a>
+		</div>
+	{% endif %}
 
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
 
-    <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+	<div class="flex justify-center">
+		<div class="h-fit w-40 p-6 bg-konbini-100 mt-12 rounded-lg">
+			<div class="solo flex flex-col items-center justify-center pt-10">
+				<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
+				<p class="text-s font-bold tracking-widest">Créer un compte</p>
+			</div>
+			{{ form_start(registrationForm) }}
+			<div class="only_login p-2 flex justify-center">
+				{{ form_row(registrationForm.email) }}
+			</div>
+			<div class="only_login p-2 mr-8 flex justify-center">
+				{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+			</div>
+			<div class="only_login p-2 flex justify-center">
+				{{ form_row(registrationForm.agreeTerms) }}
+			</div>
+			<div class="only_login p-2 flex justify-center">
+				<button type="submit" class="mb-8 flex justify-center mt-4 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">S'inscrire</button>
+			</div>
+            <div class="mb-3 flex justify-center border-t-4 border-zinc-500 p-2">
+						Déjà inscrit ? 
+						<a href="{{ path('app_login') }}" class="ml-1"> Se connecter.
+						</a>
+					</div>
+			{{ form_end(registrationForm) }}
+		</div>
+	</div>
 {% endblock %}
+
+

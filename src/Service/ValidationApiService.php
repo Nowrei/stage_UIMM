@@ -86,7 +86,7 @@ class ValidationApiService extends AbstractController
 
 
 
-    public function apiGetIdPays(string $pays):string{    
+    public function apiGetIdPays(string $pays):array{    
         try {
 
             $baseUrl = $this->customUrl;  //les test fontionnent dans http et pas dans https
@@ -94,7 +94,6 @@ class ValidationApiService extends AbstractController
     
             $url = $baseUrl . "/r/v1/pays";
     
-            // options de la session
             $options = [
                             CURLOPT_URL => $url,
                             CURLOPT_HTTPHEADER => [
@@ -104,22 +103,11 @@ class ValidationApiService extends AbstractController
                             CURLOPT_RETURNTRANSFER => true
                         ];
     
-
-
-            // initialisation de la session
             $ch = curl_init();
-
-            // configuration de la session
             curl_setopt_array($ch, $options);
-
-            // exécution de la requête
             $response = curl_exec($ch);
-
-            //echo $response;
-
-            // fermeture de la session
             curl_close($ch);
-            // affiche les données au format tableau
+
             $data = json_decode($response, true);
             Array($data);
             //var_dump($data);
@@ -136,27 +124,79 @@ class ValidationApiService extends AbstractController
     
     // remplacer le text dans valeurcherche avec ceci "$pays"
     
-    //$valeurCherche=$pays;
-    $valeurCherche=1;
-    echo "pays : ".$valeurCherche;
-    
-    $arrayEmail=array($valeurCherche=>"");
-    $result=array_intersect_key($data,$arrayEmail);
-    //print_r($result);
-    //echo 'Pays cherché: '.$valeurCherche.'<br> result: '.$result[$valeurCherche];
-    echo "<br>";
-    //echo $result[$valeurCherche];
+    $valeurCherche=$pays;
+    //$valeurCherche="GUINE";
+    echo "pays : ".$valeurCherche."<br>";
+    $exito=0;
+    $arrayPays=array("code","pays");
 
-    dd($result[$valeurCherche]);
-    die;
-        return $result[$valeurCherche];
+    foreach ($data as $d){
+
+        if ($d["nomPays"]!=null){
+            
+                $cadena_de_texto = $d["nomPays"];         //'Esta es la frase donde haremos la búsqueda';
+                $cadena_buscada   = $valeurCherche;
+                $posicion_coincidencia = strpos($cadena_de_texto, $cadena_buscada);
+                
+                //se puede hacer la comparacion con 'false' o 'true' y los comparadores '===' o '!=='
+                if ($posicion_coincidencia !== false) {
+                    array_push($arrayPays,$d["codePays"],$d["nomPays"]);
+                    echo " ".$d["codePays"]."-".$d["nomPays"]."<br>";
+                    $exito=1;
+                    }                
+                //echo $d["nomPays"];
+                //var_dump($d);           
+        }
+    }
+    if($exito===0){echo "il n y a pas des resultats pour le pays rentre!!!!";}
+    print_r($arrayPays);
+    //$a=array("red","green");
+    return $arrayPays;
+
+    }
+
+    public function apiDownload(string $urlapi, string $file):bool{
+        //se connecter a la API
+        try {
+
+            $baseUrl = $this->customUrl;  //les test fontionnent dans http et pas dans https
+            $jeton = $this->customParam;
+            
+            $url = $baseUrl . $urlapi;
+            // options de la session
+            $options = [
+                            CURLOPT_URL => $url,
+                            CURLOPT_HTTPHEADER => [
+                                "X-Auth-Token: " . $jeton,
+                                "Content-Type: application/json"
+                            ],
+                            CURLOPT_RETURNTRANSFER => true
+                        ];
+            $ch = curl_init();
+            curl_setopt_array($ch, $options);
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $data = json_decode($response, true);
+            Array($data);
+            //var_dump($data);
+            //dd($data);
+            //die; 
+        }
+        catch (Exception $e) {
+        echo $e;
+        }
+        //creer des fichiers avec les resultats
+        $myfile = fopen($file, "w") or die("Unable to open file!");
+        $stat=fwrite($myfile,$response  ); 
+        fclose($myfile);
+
+        return $stat;
     }
 
 
 
-
-    public function writeCandidat(string $candidatFormulaire):bool{
-        $candidat=$candidatFormulaire;
+    public function apiWrCandidat( $candidatFormulaire):bool{
+        $dataform=$candidatFormulaire;
 
         $candidat='{
             "codeCiviliteApprenant":1,
@@ -224,6 +264,43 @@ class ValidationApiService extends AbstractController
             "isPermisConduire":1,
             "isCotorep":null
             }';
+
+            
+
+            try {
+
+                $baseUrl = "https://eot13muzw2iqeft.m.pipedream.net"; //$this->customUrl;  //les test fontionnent dans http et pas dans https
+                $jeton = "token";  
+                $urlapi="";                                   //$this->customParam;
+                
+                $url = $baseUrl . $urlapi;
+                // options de la session
+                $options = [
+                                CURLOPT_URL => $url,
+                                CURLOPT_HTTPHEADER => [
+                                    "X-Auth-Token: " . $jeton,
+                                    "Content-Type: application/json"
+                                ],
+                                CURLOPT_RETURNTRANSFER => true
+                            ];
+                $ch = curl_init();
+                curl_setopt_array($ch, $options);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                $data = json_decode($response, true);
+                Array($data);
+                var_dump($data);
+                //dd($data);
+                //die; 
+            }
+            catch (Exception $e) {
+            echo $e;
+            }
+
+
+        echo $candidat;
+        dd($dataform);
+        die;
 
         return true;
 
