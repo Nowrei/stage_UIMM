@@ -54,6 +54,9 @@ module.exports = {
       'white': '#ffffff',
       'konbini': {
         100: '#E9E9E9C9', 
+        200: '#1C1C1C', 
+        300: '#ffffff', 
+
 
         
       },
