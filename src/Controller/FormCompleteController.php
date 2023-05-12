@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FormCompleteController extends AbstractController
 {
-    #[Route('/form/complete', name: 'app_form_complete')]
+    #[Route('/confirmation', name: 'app_form_complete')]
     public function index(): Response
     {
         return $this->render('form_complete/index.html.twig', [

@@ -6,7 +6,11 @@ use DateTime;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Form\FormulaireType;
+
+use App\Form\PoleFormationType;
+
 use App\Service\ValidationApiService;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,7 +73,10 @@ class FormulaireController extends AbstractController
         //$form = $this->createForm(UserFormType::class);
         $form = $this->createForm(UserFormType::class, $user);
 
+        
+
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             //dd($form->isValid());
             // $form->getData() holds the submitted values
@@ -79,7 +86,7 @@ class FormulaireController extends AbstractController
             //$dataForm = $form->get('nom');
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
-            /*
+            
             if(!$user->getId()){
                 $entityManager->persist($dataForm);
             }
@@ -88,6 +95,7 @@ class FormulaireController extends AbstractController
 
             //**************  ecrire dans api */
             
+
             //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
             if(!$user->getId()){
                 $resultado=$this->validationApiService -> apiWrCandidat ($dataForm, '/r/v1/preinscription/candidat');
@@ -151,13 +159,17 @@ class FormulaireController extends AbstractController
             //die;
 
             $resultado=$this->validationApiService -> apiWrCandidat ($candidat,'/r/v1/preinscription/candidat');
+
+            // if(!$user->getId()){
+            //     $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
+            // }
+            // $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
+
             
 
 
-            $resultado=$this->validationApiService -> apiGetIdPays("GUINE");
-            dd($resultado);
-            die;
-
+            // $resultado=$this->validationApiService -> apiGetIdPays("GUINE");
+        
             //$this->getUser()->setNomApprenant( $dataForm['nom']);
 
 
@@ -170,7 +182,7 @@ class FormulaireController extends AbstractController
 
             // ... perform some action, such as saving the task to the database
 
-            return $this->redirectToRoute('task_success');
+            return $this->redirectToRoute('app_form_complete');
         }
 
         return $this->render('formulaire/index.html.twig', [
