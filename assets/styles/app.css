@@ -85,8 +85,10 @@ body {
 
 
     
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    grid-template-rows: 30px;
+
    
 }
 
@@ -111,86 +113,107 @@ body {
     flex: 1;
 }
 
+
+#registration_form_email_first {
+
+    width: 75%;
+}
+
+#registration_form_email_second {
+
+    width: 75%;
+}
+
+#registration_form_plainPassword_first {
+
+    width: 75%;
+}
+
+#registration_form_plainPassword_second {
+
+    width: 75%;
+}
+
 #user_form_codeCiviliteApprenant {
 
-    width: 600px;
+    width: 90%;
 
 }
 
 #user_form_nomApprenant {
 
-    width: 250px;
+    width: 80%;
 
 }
 
 #user_form_nomJf {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_prenomApprenant {
 
-    width: 250px
+    width: 80%
 }
 #user_form_dateNaissance {
 
-    width: 250px
+    width: 80%
 }
 #user_form_tel1Appr {
 
-    width: 250px
+    width: 80%
 }
 #user_form_tel2Appr {
 
-    width: 250px
+    width: 80%
 }
 #user_form_emailAppr {
 
-    width: 250px
+    width: 40%
 }
 #user_form_adresse1Appr {
 
-    width: 600px
+    width: 90%
 }
 #user_form_adresse2Appr {
 
-    width: 250px
+    width: 80%
 }
 #user_form_cpAppr {
 
-    width: 250px
+    width: 80%
 }
 #user_form_villeAppr {
 
-    width: 250px
+    width: 40%
 }
 #user_form_paysNaissance {
 
-    width: 250px
+    width: 80%
 }
 #user_form_idNationalite {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_departementNaissance {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_lieuNaissance {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_poleFormation {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_intituleFormation {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_typeCertFormation {
@@ -212,102 +235,102 @@ body {
 
 #user_form_dernierDiplome {
 
-    width: 600px
+    width: 90%
 }
 
 #user_form_niveauQualification {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_exp {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_dateObtention {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_dernierMetier {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_dureeExperience {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_entrepriseExperience {
 
-    width: 590px
+    width: 90%
 }
 
 #user_form_niveauRemuneration {
 
-    width: 250px
+    width: 40%
 }
 
 #user_form_salarie {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_statut {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_statutCommentaire {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_statutSalarie {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_entrepriseSalarie {
 
-    width: 590px
+    width: 90%
 }
 
 #user_form_adresseEntreprise {
 
-    width: 590px
+    width: 90%
 }
 
 #user_form_villeEntreprise {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_cpEntreprise {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_nomTuteur{
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_prenomTuteur {
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_adresseMaillTuteur{
 
-    width: 250px
+    width: 80%
 }
 
 #user_form_telephoneTuteur {
 
-    width: 250px
+    width: 80%
 }
 
 
@@ -583,7 +606,7 @@ body {
     }
 }
 
-@media screen and (min-width:700px) and (max-width:1280px) {
+@media screen and (min-width:700px) and (max-width:1279px) {
 
     .formulaire {
 
@@ -882,4 +905,6 @@ body {
         width: 90%;;
     
     }
+
 }
+@media screen and (min-width:1280px) and (max-width:1920px) {}

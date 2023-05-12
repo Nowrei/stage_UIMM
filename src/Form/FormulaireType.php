@@ -4,7 +4,6 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -25,13 +24,13 @@ class FormulaireType extends AbstractType
             'label' => false,
             'required' => true,
             'choices' => [
-                'Séléctioné votre civilité dans la liste' => '',
-                'Monsieur' => '1',
-                'Madame' => '2',
+                'Séléctionez votre civilité dans la liste' => '',
+                'Monsieur' => 1,
+                'Madame' => 2,
 
             ],
             'attr' => [
-                'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
+                'class' => 'appearance-none  py-1 px-2 w-10 bg-white rounded-lg',
             ],
         ])
             ->add('nomApprenant', TextType::class, [
@@ -86,11 +85,13 @@ class FormulaireType extends AbstractType
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('cpAppr', TextType::class, [
+                    'required' => true,
                     'label' => false,
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',
-                    'maxlength' => 5, // Limite maximale de 5 caractères  
+                    'maxlength' => 5, 
+                    'minlength' => 5, 
                 ],  
                 'constraints' => [
                     new Length([
@@ -104,6 +105,7 @@ class FormulaireType extends AbstractType
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
                     'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    ->add('idPays', Hiddenclass::class, )
                     ->add('lieuNaissance', TextType::class, [
                         'label' => false,
                     'attr' => [
