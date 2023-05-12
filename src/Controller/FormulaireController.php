@@ -95,10 +95,76 @@ class FormulaireController extends AbstractController
 
             //**************  ecrire dans api */
             
+
+            //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
+            if(!$user->getId()){
+                $resultado=$this->validationApiService -> apiWrCandidat ($dataForm, '/r/v1/preinscription/candidat');
+            }
+            //dd($dataForm);
+            //creation du array candidat pour envoyer sur API **************************************
+            $candidat=array();
+            foreach ($form as $f ){
+                //echo $f->getName()." ";
+                //echo $f->getViewData()." ";
+                //echo "<br>";
+                $key=$f->getName();
+                $data=$f->getViewData();
+                if ($data===""){      $data=null;  }
+                if($key==="idPays" ){  $data=1;  }
+                if($key==="codeCiviliteApprenant" && $data==="1"){  $data=1;  }
+                if($key==="codeCiviliteApprenant" && $data==="2"){  $data=2;  }
+
+                if ($key ==="dateObtention" || $key ==="dernierDiplome"||
+                    $key==="niveauQualification" ||
+                    $key==="dejaExperience" ||
+                    $key==="dernierMetier" ||
+                    $key==="dureeExperience" ||
+                    $key==="entrepriseExperience" ||
+                    $key==="niveauRemuneration" ||
+                    $key==="salarie" ||
+                    $key==="statut" ||
+                    $key==="statutSalarie" ||
+                    $key==="statutCommentaire" ||
+                    $key==="entrepriseSalarie" ||
+                    $key==="adresseEntreprise" ||
+                    $key==="villeEntreprise" ||
+                    $key==="cpEntreprise" ||
+                    $key==="nomTuteur" ||
+                    $key==="prenomTuteur" ||
+                    $key==="adresseMaillTuteur" ||
+                    $key==="telephoneTuteur" ) 
+                {
+
+                    //array_push($candidat,$f->getName() , $data);
+                }   else{
+                    
+                    $candidat[$f->getName()] = $data;  //array avec donnees remplis dans le formulaire et a envoyer a ypareo
+                    echo $key;
+                    echo $data;
+                    echo "<br>";
+                }
+            }
+            $candidat["idSite"] = "3071";
+            $candidat["idFormationSouhait1"] = "3911164";
+            //$candidat["idNationalite"] = "0";    
+            $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";    
+
+
+            /*
+            $encodedData = json_encode($candidat);
+            echo ($encodedData);
+            echo "<br>";
+            */
+            //dd($candidat);
+            //die;
+
+            $resultado=$this->validationApiService -> apiWrCandidat ($candidat,'/r/v1/preinscription/candidat');
+
             // if(!$user->getId()){
             //     $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
             // }
             // $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
+
             
 
 

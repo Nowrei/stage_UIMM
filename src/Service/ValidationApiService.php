@@ -196,83 +196,16 @@ class ValidationApiService extends AbstractController
 
 
 
-    public function apiWrCandidat( $candidatFormulaire):bool{
-        $dataform=$candidatFormulaire;
+    public function apiWrCandidat( $candidat, $url2):string{
+        $data=$candidat;
+        //var_dump( $data);
 
-        $candidat='{
-            "codeCiviliteApprenant":1,
-            "codeCiviliteRepLegal":null,
-            "idPays":1,
-            "idPaysRepLegal":null,
-            "adresse1Appr":"3 Rue du recrutement",
-            "adresse1RepLegal":null,
-            "adresse2Appr":null,
-            "adresse2RepLegal":null,
-            "adresse3Appr":null,
-            "adresse3RepLegal":null,
-            "adresse4Appr":null,
-            "adresse4RepLegal":null,
-            "cpAppr":"51100",
-            "villeAppr":"REIMS",
-            "cpRepLegal":null,
-            "villeRepLegal":null,
-            "dateNaissance":"05\/07\/2001",
-            "departementNaissance":null,
-            "emailAppr":"testmail@gmail.com",
-            "tel1Appr":"06000000000",
-            "tel2Appr":"06000000000",
-            "emailRepLegal":null,
-            "tel1RepLegal":null,
-            "tel2RepLegal":null,
-            "idAnnee":null,
-            "idDiplomeObtenu":null,
-            "idEtablissementOrigine":null,
-            "idFormationSouhait1":"3911164",
-            "idFormationSouhait2":null,
-            "idFormationSouhait3":null,
-            "idNationalite":"368994",
-            "idOrigineScolaire":null,
-            "idSite":"3071",
-            "idSite2":null,
-            "idSite3":null,
-            "idStatut":null,
-            "ineApprenant":null,
-            "lieuNaissance":null,
-            "paysNaissance":"FRANCE",
-            "nomApprenant":"PATRICE",
-            "nomJf":null,
-            "nomRepLegal":null,
-            "prenomApprenant":"Test",
-            "prenomRepLegal":null,
-            "observation":"Ce candidat a \u00e9t\u00e9 export\u00e9 depuis Hub3e \u00e9coles : https:\/\/ecoles-v2.hub3e.com",
-            "idRensParam1":null,
-            "idRensParam2":null,
-            "idRensParam3":null,
-            "obsRensParam1":null,
-            "obsRensParam2":null,
-            "obsRensParam3":null,
-            "idSessionTestSouhait1":null,
-            "idSessionTestSouhait2":null,
-            "idSessionTestSouhait3":null,
-            "login":"TPATRICE",
-            "motDePasseTemporaire":"Qv87JfGG",
-            "codeLangue":null,
-            "codeNiveauLangue":null,
-            "codeLangue2":null,
-            "codeNiveauLangue2":null,
-            "isTravailleurHandicape":0,
-            "isMobile":1,
-            "isPermisConduire":1,
-            "isCotorep":null
-            }';
-
-            
-
+   //**************************************************************************************get request  */         
             try {
 
-                $baseUrl = "https://eot13muzw2iqeft.m.pipedream.net"; //$this->customUrl;  //les test fontionnent dans http et pas dans https
-                $jeton = "token";  
-                $urlapi="";                                   //$this->customParam;
+                $baseUrl = $this->customUrl;  //les test fontionnent dans http et pas dans https
+                $jeton = $this->customParam;
+                $urlapi=$url2;                                   
                 
                 $url = $baseUrl . $urlapi;
                 // options de la session
@@ -284,7 +217,7 @@ class ValidationApiService extends AbstractController
                                 ],
                                 CURLOPT_RETURNTRANSFER => true
                             ];
-                $ch = curl_init();
+    /*            $ch = curl_init();
                 curl_setopt_array($ch, $options);
                 $response = curl_exec($ch);
                 curl_close($ch);
@@ -297,12 +230,77 @@ class ValidationApiService extends AbstractController
             catch (Exception $e) {
             echo $e;
             }
+            */
+//********************************************************************************************* post request */
+
+        /*    $handle = curl_init('https://lotvx.free.beeceptor.com');
+
+            $data = [
+                'key' => 'value'
+            ];
+
+            $encodedData = json_encode($data);
+
+            curl_setopt($handle, CURLOPT_POST, 1);
+            curl_setopt($handle, CURLOPT_POSTFIELDS, $encodedData);
+            curl_setopt($handle, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+
+            $result = curl_exec($handle);
+            */
+
+
+                        // URL of the API that is to be invoked and data POSTed
+            //$url = "http://lotvx.free.beeceptor.com";
+            //$url = 'https://eot13muzw2iqeft.m.pipedream.net';
+
+            // request data that is going to be sent as POST to API
+
+
+            // encoding the request data as JSON which will be sent in POST
+            $encodedData = json_encode($data);
+
+            // initiate curl with the url to send request
+            $curl = curl_init($url);
+
+            // return CURL response
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            // Send request data using POST method
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+
+            // Data conent-type is sent as JSON
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                'X-Auth-Token: ' . $jeton,
+                'Content-Type:application/json'
+            ));
+            curl_setopt($curl, CURLOPT_POST, true);
+
+            // Curl POST the JSON data to send the request
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $encodedData);
+
+            // execute the curl POST request and send data
+            $result = curl_exec($curl);
+            curl_close($curl);
+
+            // if required print the curl response
+            print $result;
+            
+        }
+        catch (Exception $e) {
+        echo $e;
+        }
+
+
+
+        //echo $candidat;
+
 
 
 
         die;
 
-        return true;
+
+        return $result;
 
     }
 
