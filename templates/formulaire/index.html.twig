@@ -65,8 +65,8 @@
 		</div>
 		<div class="champ">
 			<label for="date_naissance" class="py-1 px-2">Date de naissance *</label>
-			
-{{ form_row(formulaire.dateNaissance) }}
+
+			{{ form_row(formulaire.dateNaissance) }}
 
 		</div>
 	</div>
@@ -141,32 +141,32 @@
 		<div class="duo p-2">
 			<div class="champ">
 				<label for="pole" class="py-1 px-2">Pôle formation Champagne-Ardenne *</label>
-				
+				{# {{ form_row(formulaires.poleFormation) }} #}
 			</div>
 			<div class="champ">
 				<label for="intitule" class="py-1 px-2">Intitulé de la formation *</label>
-				
+
 			</div>
 		</div>
 		<div class="duo p-2">
 			<div class="champ">
 				<label for="certif" class="py-1 px-2">Type de certification</label>
-				
+
 			</div>
 			<div class="champ">
 				<label for="debut" class=" py-1 px-2">Date de début</label>
-				
-			
+
+
 			</div>
 			<div class="champ">
 				<label for="fin" class="py-1 px-2">Date de fin</label>
-						
+
 			</div>
 		</div>
 	</div>
 
 
-	</div>
+</div>
 <div class="pro mt-10 ">
 	<div class="solo flex flex-col items-center justify-center pt-10 ">
 		<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
@@ -300,9 +300,9 @@
 					<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
 					{{ form_row(formulaire.telephoneTuteur) }}
 				</div>
-				
+
 			</div>
-			
+
 		</div>
 
 	</div>
@@ -310,6 +310,7 @@
 		Envoyer
 	</button>
 </div>
+
 
 {{ form_end(formulaire)}}
 <script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
