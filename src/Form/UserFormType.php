@@ -29,8 +29,8 @@ class UserFormType extends AbstractType
                 'required' => true,
                 'choices' => [
                     'Civilité' => '',
-                    'Monsieur' => '1',
-                    'Madame' => '2',
+                    'Monsieur' => 1,
+                    'Madame' => 2,
 
                 ],
                 'attr' => [
