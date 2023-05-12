@@ -72,11 +72,11 @@ class FormulaireController extends AbstractController
 
         //$form = $this->createForm(UserFormType::class);
         $form = $this->createForm(UserFormType::class, $user);
-        $form1 = $this->createForm(PoleFormationType::class);
+
         
 
         $form->handleRequest($request);
-        $form1->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             //dd($form->isValid());
             // $form->getData() holds the submitted values
@@ -86,7 +86,7 @@ class FormulaireController extends AbstractController
             //$dataForm = $form->get('nom');
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
-            /*
+            
             if(!$user->getId()){
                 $entityManager->persist($dataForm);
             }
@@ -95,17 +95,15 @@ class FormulaireController extends AbstractController
 
             //**************  ecrire dans api */
             
-            if(!$user->getId()){
-                $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
-            }
-            $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
+            // if(!$user->getId()){
+            //     $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
+            // }
+            // $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
             
 
 
-            $resultado=$this->validationApiService -> apiGetIdPays("GUINE");
-            dd($resultado);
-            die;
-
+            // $resultado=$this->validationApiService -> apiGetIdPays("GUINE");
+        
             //$this->getUser()->setNomApprenant( $dataForm['nom']);
 
 
@@ -118,7 +116,7 @@ class FormulaireController extends AbstractController
 
             // ... perform some action, such as saving the task to the database
 
-            return $this->redirectToRoute('task_success');
+            return $this->redirectToRoute('app_form_complete');
         }
 
         return $this->render('formulaire/index.html.twig', [

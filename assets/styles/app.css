@@ -370,6 +370,13 @@ body {
         flex-direction: column;
         flex: 1;
     }
+
+    .only_login {
+
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
     
     .duo div {
     
@@ -400,7 +407,25 @@ body {
           width: 90%;
         
       }
+      #registration_form_email_first {
 
+        width: 90%;
+    }
+    
+    #registration_form_email_second {
+    
+        width: 90%;
+    }
+    
+    #registration_form_plainPassword_first {
+    
+        width: 90%;
+    }
+    
+    #registration_form_plainPassword_second {
+    
+        width: 90%;
+    }
 
     #user_form_codeCiviliteApprenant {
 

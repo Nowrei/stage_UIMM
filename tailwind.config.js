@@ -4,10 +4,27 @@ module.exports = {
   './node_modules/tw-elements/dist/js/**/*.js',
   "./node_modules/flowbite/**/*.js"],
   theme: {
+
+    screens: {
+
+      'mobile': {'min': '300px', 'max': '699px'},
+      // => @media (min-width: 640px) { ... }
+
+      'tablet': {'min': '700px', 'max': '1279px'},
+      // => @media (min-width: 640px) { ... }
+
+      'laptop': '1024px',
+      // => @media (min-width: 1024px) { ... }
+
+      'desktop': '1280px',
+      // => @media (min-width: 1280px) { ... }
+    },
+
     fontSize: {
       small: ['14px'],
       b: ['20px'],
       p: ['14px'],
+      si: ['20px'],
       s: ['25px'],
       big: ['26px'],
 

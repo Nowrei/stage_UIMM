@@ -133,7 +133,8 @@ class UserFormType extends AbstractType
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',
+              ],  ],)
             //formation
       
             ->add('dernierDiplome', TextType::class, [
@@ -169,11 +170,7 @@ class UserFormType extends AbstractType
                     'placeholder' => 'AAAA',
                 ],
             ])
-            ->add('dejaExperience', TextType::class, [
-                'label' => false,
-            'attr' => [
-                'class' => 'form-control py-1 px-2',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+            ->add('dejaExperience', HiddenType::class)
             ->add('dernierMetier', TextType::class, [
                 'label' => false,
             'attr' => [
@@ -208,7 +205,7 @@ class UserFormType extends AbstractType
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ],  ],)
-            ->add('salarie')
+            ->add('salarie', HiddenType::class)
             ->add('statut', ChoiceType::class, [
                 'label' => false,
                 'required' => true,

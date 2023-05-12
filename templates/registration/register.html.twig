@@ -19,17 +19,17 @@
 
 
 <div class="flex justify-center">
-	<div class="h-fit w-40 p-6 bg-konbini-100 mt-12 rounded-lg">
+	<div class="formulaire h-fit w-40 p-6 bg-konbini-100 mt-12 mb-12 rounded-lg mobile:w-80 tablet:w-60%">
 		<div class="solo flex flex-col items-center justify-center pt-10">
 			<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
-			<p class="text-s font-bold tracking-widest">Créer un compte</p>
+			<p class="text-s font-bold tracking-widest mobile:text-si">Créer un compte</p>
 		</div>
 
 		{{ form_start(registrationForm) }}
-		<div class="only_login p-2 ml-10 flex justify-center">
+		<div class="only_login p-2 ml-10 mobile:ml-0 flex justify-center">
 			{{ form_row(registrationForm.email) }}
 		</div>
-		<div class="only_login p-2 ml-10 flex justify-center">
+		<div class="only_login p-2 ml-10 mobile:ml-0 flex justify-center">
 			{{ form_row(registrationForm.plainPassword, {
             label: 'Choissisez votre mot de passe'
         }) }}

@@ -75,7 +75,7 @@ class ValidationApiService extends AbstractController
             // affiche les données au format tableau
             $data = json_decode($response, true);
             Array($data);
-            var_dump($data);
+         
         }
         catch (Exception $e) {
         echo $e;
@@ -290,7 +290,7 @@ class ValidationApiService extends AbstractController
                 curl_close($ch);
                 $data = json_decode($response, true);
                 Array($data);
-                var_dump($data);
+         
                 //dd($data);
                 //die; 
             }
@@ -299,8 +299,7 @@ class ValidationApiService extends AbstractController
             }
 
 
-        echo $candidat;
-        dd($dataform);
+
         die;
 
         return true;
