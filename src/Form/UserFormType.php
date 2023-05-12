@@ -119,7 +119,7 @@ class UserFormType extends AbstractType
                 'required' => false,
                 'choices' => [
                     'Séléctioné votre nationalité' => '',
-                    'Français' => '0',
+                    'Française' => '0',
                     'Union Européene' => '1',
                     'Hors union européene' => '2',
                     'Autre' => '3032',
