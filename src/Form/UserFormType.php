@@ -103,23 +103,27 @@ class UserFormType extends AbstractType
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                
             ->add('lieuNaissance', TextType::class, [
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('idPays', HiddenType::class,)
+
             ->add('paysNaissance', TextType::class, [
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('idNationalite', ChoiceType::class, [
                 'label' => false,
                 'required' => false,
                 'choices' => [
                     'Séléctioné votre nationalité' => '',
-                    'Français' => '0',
+                    'Française' => '0',
                     'Union Européene' => '1',
                     'Hors union européene' => '2',
                     'Autre' => '3032',
@@ -129,6 +133,7 @@ class UserFormType extends AbstractType
                     'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
                 ],
             ])
+
             ->add('departementNaissance', TextType::class, [
                 'label' => false,
             'attr' => [
@@ -142,6 +147,7 @@ class UserFormType extends AbstractType
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('niveauQualification', ChoiceType::class, [
                 'label' => false,
                 'required' => true,
@@ -161,6 +167,7 @@ class UserFormType extends AbstractType
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ], ],)
+
             ->add('dateObtention', DateType::class, [
                 'label' => false,
                 'widget' => 'single_text',
@@ -171,21 +178,25 @@ class UserFormType extends AbstractType
                 ],
             ])
             ->add('dejaExperience', HiddenType::class)
+
             ->add('dernierMetier', TextType::class, [
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('dureeExperience', TextType::class, [
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('entrepriseExperience', TextType::class, [
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('niveauRemuneration', ChoiceType::class, [
                 'label' => false,
                 'required' => true,
@@ -205,7 +216,9 @@ class UserFormType extends AbstractType
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ],  ],)
+
             ->add('salarie', HiddenType::class)
+
             ->add('statut', ChoiceType::class, [
                 'label' => false,
                 'required' => true,
