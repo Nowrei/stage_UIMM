@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserFormType extends AbstractType
 {
@@ -217,7 +218,10 @@ class UserFormType extends AbstractType
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ],  ],)
 
-            ->add('salarie', HiddenType::class)
+                ->add('salarie', CheckboxType::class, array(
+                    'attr' => array('checked'   => 'unchecked'),
+                    'label' => false
+                ))
 
             ->add('statut', ChoiceType::class, [
                 'label' => false,
