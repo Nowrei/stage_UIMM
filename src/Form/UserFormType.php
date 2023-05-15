@@ -6,6 +6,7 @@ use App\Entity\User;
 
 use App\Form\PoleFormationType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -217,7 +218,15 @@ class UserFormType extends AbstractType
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ],  ],)
 
-            ->add('salarie', HiddenType::class)
+            //->add('salarie', CheckboxType::class)
+
+
+
+
+            ->add('salarie', CheckboxType::class, array(
+                    'attr' => array('checked'   => 'unchecked'),
+                    'label' => false
+                ))
 
             ->add('statut', ChoiceType::class, [
                 'label' => false,

@@ -86,12 +86,12 @@ class FormulaireController extends AbstractController
             //$dataForm = $form->get('nom');
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
-            
+            /*
             if(!$user->getId()){
                 $entityManager->persist($dataForm);
             }
             $entityManager->flush();
-
+*/
 
             //**************  ecrire dans api */
             
