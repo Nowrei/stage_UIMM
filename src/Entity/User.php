@@ -527,9 +527,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getDateObtention(): ?DateTime
     {
-        $date   = new DateTime();                   //creation de objet date avec la date du jour aujourdhui
+        $date   = new DateTime("0000-00-00 00:00");                   //creation de objet date avec la date du jour aujourdhui
         if (!is_null($this->dateObtention)){   //si lobjet nest pas null on return lobjet obtenu depuis la bdd
-            $date=date_create($this->dateObtention);
+            $date=date_create($this->dateObtention."-00-00 00:00");
             return $date;
         }else{                                      //si lobjet est null on return la date daujourdhui
             return $date;
