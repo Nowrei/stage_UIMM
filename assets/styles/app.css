@@ -206,31 +206,31 @@ body {
     width: 80%
 }
 
-#user_form_poleFormation {
+#pole_formation_poleFormation {
 
     width: 80%
 }
 
-#user_form_intituleFormation {
+#pole_formation_intituleFormation {
 
     width: 80%
 }
 
-#user_form_typeCertFormation {
+#pole_formation_typeCertFormation {
 
-    width: 200px
+    width: 80%
 }
 
-#user_form_dateDebutFormation {
+#pole_formation_dateDebutFormation {
 
-    width: 100px;
+    width: 80%;
     margin-left: 30px;
     
 }
 
-#user_form_dateFinFormation {
+#pole_formation_dateFinFormation {
 
-    width: 100px
+    width: 80%
 }
 
 #user_form_dernierDiplome {

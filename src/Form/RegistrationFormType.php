@@ -18,6 +18,7 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+      
         $builder
             ->add('email', RepeatedType::class, [
                 'type' => EmailType::class,
@@ -35,38 +36,37 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                
+
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Vous devez être d\'accord avec les thermes.',
                     ]),
                 ],
-                
+
             ])
-                ->add('plainPassword', RepeatedType::class, [
-                    'type' => PasswordType::class,
-                    'invalid_message' => 'Les mots de passe ne sont pas identiques.',
-                    'options' => ['attr' => ['class' => 'duo password-field']],
-                    'required' => true,
-                    'first_options'  => ['label' => 'Choissisez votre mot de passe',],
-                    'second_options' => ['label' => 'Confirmez votre mot de passe'],
-                    // instead of being set onto the object directly,
-                    // this is read and encoded in the controller
-                    'mapped' => false,
-                
-                    'constraints' => [
-                        new NotBlank([
-                            'message' => 'Veillez entrer un mot de passe',
-                        ]),
-                        new Length([
-                            'min' => 8,
-                            'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} charactères.',
-                            // max length allowed by Symfony for security reasons
-                            'max' => 128,
-                        ]),
-                    ],
-                ])
-        ;
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les mots de passe ne sont pas identiques.',
+                'options' => ['attr' => ['class' => 'duo password-field']],
+                'required' => true,
+                'first_options'  => ['label' => 'Choissisez votre mot de passe',],
+                'second_options' => ['label' => 'Confirmez votre mot de passe'],
+                // instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'mapped' => false,
+
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veillez entrer un mot de passe',
+                    ]),
+                    new Length([
+                        'min' => 8,
+                        'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} charactères.',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 128,
+                    ]),
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
