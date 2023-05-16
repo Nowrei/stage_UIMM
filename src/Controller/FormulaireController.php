@@ -22,9 +22,7 @@ class FormulaireController extends AbstractController
 
     #[Route('/formulaire', name: 'app_formulaire')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
-    //public function index(Request $request): Response
     {
-        
 
         $user=$this->getUser();
         if(!$user){
@@ -35,7 +33,9 @@ class FormulaireController extends AbstractController
         //lire les API et stocker les resultats local pour montrer dans le formulaire
 
         //le fichier pays.txt existe?
-        $file="c://data//pays.txt";
+        $file = $this->validationApiService->getFilePays(); //le valeur du route du fichier pays est recupere depuis le service
+        //$file="c://data//pays.txt";
+
 
         //$modifFile="c://data//modifPays.txt";
         
@@ -105,22 +105,15 @@ class FormulaireController extends AbstractController
                 'empty_data' => '', 
             ]);
         
-
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($form->isValid());
             // $form->getData() holds the submitted values
-
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
-            
-            dd($dataForm);
-            //$dataForm = $form->get('nom');
+
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
-            
             if(!$user->getId()){
                 $entityManager->persist($dataForm);
             }
@@ -129,7 +122,6 @@ class FormulaireController extends AbstractController
 
             //**************  ecrire dans api */
             
-            //dd($dataForm);
             //creation du array candidat pour envoyer sur API **************************************
             $candidat=array();
             foreach ($form as $f ){
@@ -163,14 +155,11 @@ class FormulaireController extends AbstractController
                     $key==="adresseMaillTuteur" ||
                     $key==="telephoneTuteur" ) 
                 {
-
-                    //array_push($candidat,$f->getName() , $data);
-                }   else{
-                    
+                }else{
                     $candidat[$f->getName()] = $data;  //array avec donnees remplis dans le formulaire et a envoyer a ypareo
-                    echo $key;
-                    echo $data;
-                    echo "<br>";
+                    //echo $key;
+                    //echo $data;
+                    //echo "<br>";
                 }
             }
             $candidat["idSite"] = "3071";
@@ -178,50 +167,26 @@ class FormulaireController extends AbstractController
             //$candidat["idNationalite"] = "0";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";    
 
-
             /*
             $encodedData = json_encode($candidat);
             echo ($encodedData);
             echo "<br>";
             */
-            //dd($candidat);
-            //die;
 
             //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
             $idAPI = $user -> getToken();//on voit si lutilisateur a ete deja envoyé sur ypareo
 
             if($user->getId() && $idAPI===null  ){
                 $resultado=$this->validationApiService -> apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
-                echo $resultado;
+                //echo $resultado;
                 $user->setToken($resultado);
                 $entityManager->persist($user);
                 // actually executes the queries (i.e. the INSERT query)
                 $entityManager->flush();
-                
             }
             
-
-            //if(!$user->getId()){
-            //    $resultado=$this->validationApiService -> apiWrCandidat ($candidat,'/r/v1/preinscription/candidat');
-            // }
-            // $resultado=$this->validationApiService -> apiWrCandidat ($candidat,'/r/v1/preinscription/candidat');
-
-            
-
-
             // $resultado=$this->validationApiService -> apiGetIdPays("GUINE");
-        
-            //$this->getUser()->setNomApprenant( $dataForm['nom']);
-
-
             //$request->request->get('email', '');
-           
-            //dd($form->isValid(),$user->getId(), $user->getEmail(), $user->getPassword(),$user->isVerified(),$dataForm);
-            //dd($dataForm);
-            //dd($dataForm['nom']);
-            //die;
-
-            // ... perform some action, such as saving the task to the database
 
             return $this->redirectToRoute('app_form_complete');
         }
