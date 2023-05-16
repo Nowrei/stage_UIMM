@@ -59,15 +59,11 @@ class FormulaireController extends AbstractController
             echo "fichier ".$file." pays cree <br>";
         }
         
+        $form = $this->createForm(UserFormType::class, $user);
         /***////////////////////////Lire les pays de l'Api********************* */ */
 
-        //$form = $this->createForm(UserFormType::class);
-        $form = $this->createForm(UserFormType::class, $user);
-
-      
-         $pays = $this->validationApiService->apiGetListPays();
-    
-         
+        //  $pays = $this->validationApiService->apiGetListPays();
+  
         // $choices = [];
         // foreach ($pays as $paysData) {
         //     $nomPays = $paysData['nomPays'];
@@ -77,20 +73,14 @@ class FormulaireController extends AbstractController
 
           /***////////////////////////Lire les pays depuis le fichier********************* */ */
 
-              //$pays = $this->validationApiService->apiGetListPays();
+              
               $myfile = fopen($file, "r") or die("Unable to open file!");
               $content=fread($myfile,filesize($file)  ); 
               fclose($myfile);
       
-              
-      
-              //$form = $this->createForm(UserFormType::class);
-              //$pays = $this->validationApiService->apiGetListPays();
               $content = json_decode($content, true); // Convertit la chaîne JSON en tableau associatif
               $pays = $content;
 
-          
-               
               $choices = [];
               foreach ($pays as $paysData) {
                   $nomPays = $paysData['nomPays'];
