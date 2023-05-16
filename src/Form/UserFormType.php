@@ -127,7 +127,7 @@ class UserFormType extends AbstractType
                     'Française' => '0',
                     'Union Européene' => '1',
                     'Hors union européene' => '2',
-                    'Autre' => '3032',
+             
     
                 ],
                 'attr' => [
