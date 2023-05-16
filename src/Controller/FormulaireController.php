@@ -72,7 +72,36 @@ class FormulaireController extends AbstractController
 
         //$form = $this->createForm(UserFormType::class);
         $form = $this->createForm(UserFormType::class, $user);
+        $form = $this->createForm(UserFormType::class);
+        $pays = $this->validationApiService->apiGetListPays();
+    
+         
+        $choices = [];
+        foreach ($pays as $paysData) {
+            $nomPays = $paysData['nomPays'];
+            $codePays = $paysData['codePays'];
+            $choices[$nomPays] = $codePays;
+        }
+//         $content = json_decode($content, true); // Convertit la chaîne JSON en tableau associatif
 
+// $choices = [];
+// foreach ($content as $paysData) {
+//     $nomPays = $paysData['nomPays'];
+//     $codePays = $paysData['codePays'];
+//     $choices[$nomPays] = $codePays;
+// }
+
+        $form = $this->createForm(UserFormType::class, $user)
+            ->add('paysNaissance', ChoiceType::class, [
+                'label' => false,
+                'required' => true,
+                'choices' => [
+                    
+                    $choices],
+                'attr' => [
+                    'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
+                ],
+            ]);
         
 
         $form->handleRequest($request);
