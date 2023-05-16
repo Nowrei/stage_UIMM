@@ -87,6 +87,8 @@ class FormulaireController extends AbstractController
                   $codePays = $paysData['codePays'];
                   $choices[$nomPays] = $codePays;
               }
+
+      
             
 
         $form = $this->createForm(UserFormType::class, $user)
@@ -100,7 +102,7 @@ class FormulaireController extends AbstractController
                 'attr' => [
                     'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
                 ],
-                'empty_data' => '', // Définit une valeur vide comme option empty_data
+                'empty_data' => '', 
             ]);
         
 
@@ -113,6 +115,8 @@ class FormulaireController extends AbstractController
 
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
+            
+            dd($dataForm);
             //$dataForm = $form->get('nom');
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
