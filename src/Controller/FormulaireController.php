@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -58,33 +59,50 @@ class FormulaireController extends AbstractController
             echo "fichier ".$file." pays cree <br>";
         }
         
-        /***////////////////////////********************* */ */
+        /***////////////////////////Lire les pays de l'Api********************* */ */
 
         //$form = $this->createForm(UserFormType::class);
         $form = $this->createForm(UserFormType::class, $user);
 
       
-        $pays = $this->validationApiService->apiGetListPays();
+         $pays = $this->validationApiService->apiGetListPays();
     
          
-        $choices = [];
-        foreach ($pays as $paysData) {
-            $nomPays = $paysData['nomPays'];
-            $codePays = $paysData['codePays'];
-            $choices[$nomPays] = $codePays;
-        }
-//         $content = json_decode($content, true); // Convertit la chaîne JSON en tableau associatif
+        // $choices = [];
+        // foreach ($pays as $paysData) {
+        //     $nomPays = $paysData['nomPays'];
+        //     $codePays = $paysData['codePays'];
+        //     $choices[$nomPays] = $codePays;
+        // }
 
-// $choices = [];
-// foreach ($content as $paysData) {
-//     $nomPays = $paysData['nomPays'];
-//     $codePays = $paysData['codePays'];
-//     $choices[$nomPays] = $codePays;
-// }
+          /***////////////////////////Lire les pays depuis le fichier********************* */ */
+
+              //$pays = $this->validationApiService->apiGetListPays();
+              $myfile = fopen($file, "r") or die("Unable to open file!");
+              $content=fread($myfile,filesize($file)  ); 
+              fclose($myfile);
+      
+              
+      
+              //$form = $this->createForm(UserFormType::class);
+              //$pays = $this->validationApiService->apiGetListPays();
+              $content = json_decode($content, true); // Convertit la chaîne JSON en tableau associatif
+              $pays = $content;
+
+          
+               
+              $choices = [];
+              foreach ($pays as $paysData) {
+                  $nomPays = $paysData['nomPays'];
+                  $codePays = $paysData['codePays'];
+                  $choices[$nomPays] = $codePays;
+              }
+            
 
         $form = $this->createForm(UserFormType::class, $user)
             ->add('paysNaissance', ChoiceType::class, [
                 'label' => false,
+                'placeholder' => 'Choissisez votre pays de naissance',
                 'required' => true,
                 'choices' => [
                     
@@ -92,6 +110,7 @@ class FormulaireController extends AbstractController
                 'attr' => [
                     'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
                 ],
+                'empty_data' => '', // Définit une valeur vide comme option empty_data
             ]);
         
 
