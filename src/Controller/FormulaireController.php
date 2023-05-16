@@ -3,14 +3,8 @@
 namespace App\Controller;
 
 use DateTime;
-use App\Entity\User;
 use App\Form\UserFormType;
-use App\Form\FormulaireType;
-
-use App\Form\PoleFormationType;
-
 use App\Service\ValidationApiService;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,12 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FormulaireController extends AbstractController
 {
 
-    
     public function __construct( private ValidationApiService $validationApiService)
     {
     }
-
-
 
     #[Route('/formulaire', name: 'app_formulaire')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
@@ -67,12 +58,12 @@ class FormulaireController extends AbstractController
             echo "fichier ".$file." pays cree <br>";
         }
         
-
         /***////////////////////////********************* */ */
 
         //$form = $this->createForm(UserFormType::class);
         $form = $this->createForm(UserFormType::class, $user);
-        $form = $this->createForm(UserFormType::class);
+
+      
         $pays = $this->validationApiService->apiGetListPays();
     
          
@@ -104,6 +95,7 @@ class FormulaireController extends AbstractController
             ]);
         
 
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -115,20 +107,15 @@ class FormulaireController extends AbstractController
             //$dataForm = $form->get('nom');
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
-            /*
+            
             if(!$user->getId()){
                 $entityManager->persist($dataForm);
             }
             $entityManager->flush();
-*/
+
 
             //**************  ecrire dans api */
             
-
-            //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
-            if(!$user->getId()){
-                $resultado=$this->validationApiService -> apiWrCandidat ($dataForm, '/r/v1/preinscription/candidat');
-            }
             //dd($dataForm);
             //creation du array candidat pour envoyer sur API **************************************
             $candidat=array();
@@ -187,12 +174,24 @@ class FormulaireController extends AbstractController
             //dd($candidat);
             //die;
 
-            $resultado=$this->validationApiService -> apiWrCandidat ($candidat,'/r/v1/preinscription/candidat');
+            //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
+            $idAPI = $user -> getToken();//on voit si lutilisateur a ete deja envoyé sur ypareo
 
-            // if(!$user->getId()){
-            //     $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
+            if($user->getId() && $idAPI===null  ){
+                $resultado=$this->validationApiService -> apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
+                echo $resultado;
+                $user->setToken($resultado);
+                $entityManager->persist($user);
+                // actually executes the queries (i.e. the INSERT query)
+                $entityManager->flush();
+                
+            }
+            
+
+            //if(!$user->getId()){
+            //    $resultado=$this->validationApiService -> apiWrCandidat ($candidat,'/r/v1/preinscription/candidat');
             // }
-            // $resultado=$this->validationApiService -> apiWrCandidat ($dataForm);
+            // $resultado=$this->validationApiService -> apiWrCandidat ($candidat,'/r/v1/preinscription/candidat');
 
             
 
