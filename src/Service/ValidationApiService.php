@@ -290,18 +290,8 @@ class ValidationApiService extends AbstractController
         echo $e;
         }
 
-
-
         //echo $candidat;
-
-
-
-
-        die;
-
-
         return $result;
-
     }
 
 
