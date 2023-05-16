@@ -27,3 +27,4 @@ services:
         arguments:
             $customParam: '%env(APP_CUSTOM_PARAM)%'
             $customUrl: '%env(URL)%'
+            $customFilePays: '%env(FILEPAYS)%'
