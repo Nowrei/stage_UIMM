@@ -13,9 +13,9 @@
 			<p class="font-bold tracking-widest p-2">Votre candidature a bien été prise en compte. Nous prendrons contact avec vous dans les plus brefs délais.</p>
 		</div>
 	    {% if app.user %}
-        <div class="mb-3">
-           <a href="{{ path('app_logout') }}" class="hover:underline">Se déconnecter</a>
-        </div>
+     
+           <a href="{{ path('app_logout') }}" class="flex justify-center p-2 font-bold hover:underline">Se déconnecter</a>
+     
     {% endif %}
 	</div>
 </div>

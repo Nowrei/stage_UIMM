@@ -221,13 +221,6 @@ class UserFormType extends AbstractType
             //->add('salarie', CheckboxType::class)
 
 
-
-
-            ->add('salarie', CheckboxType::class, array(
-                    'attr' => array('checked'   => 'unchecked'),
-                    'label' => false
-                ))
-
             ->add('statut', ChoiceType::class, [
                 'label' => false,
                 'required' => true,
