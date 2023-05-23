@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+admin_custom_export:
+    path: '/admin/export'
+    controller: 'App\Controller\Admin\CustomAdminController::exportAction'
+    methods: ['GET']
+admin_excel:
+    path: '/admin/excel'
+    controller: 'App\Controller\Admin\CustomAdminController::exportToExcel'
+    methods: ['GET']

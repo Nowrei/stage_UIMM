@@ -131,7 +131,7 @@ class FormulaireController extends AbstractController
                 $key=$f->getName();
                 $data=$f->getViewData();
                 if ($data===""){      $data=null;  }
-                if($key==="idPays" ){  $data=1;  }
+                if($key==="idPays" ){  $data="1";  }
                 if($key==="codeCiviliteApprenant" && $data==="1"){  $data=1;  }
                 if($key==="codeCiviliteApprenant" && $data==="2"){  $data=2;  }
 
@@ -157,9 +157,9 @@ class FormulaireController extends AbstractController
                 {
                 }else{
                     $candidat[$f->getName()] = $data;  //array avec donnees remplis dans le formulaire et a envoyer a ypareo
-                    //echo $key;
-                    //echo $data;
-                    //echo "<br>";
+                    echo $key;
+                    echo $data;
+                    echo "<br>";
                 }
             }
             $candidat["idSite"] = "3071";
@@ -175,6 +175,9 @@ class FormulaireController extends AbstractController
 
             //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
             $idAPI = $user -> getToken();//on voit si lutilisateur a ete deja envoyé sur ypareo
+
+            //dd($candidat);
+
 
             if($user->getId() && $idAPI===null  ){
                 $resultado=$this->validationApiService -> apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
