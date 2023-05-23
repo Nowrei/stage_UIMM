@@ -3,3 +3,8 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+admin_custom_export:
+    path: '/admin/export'
+    controller: 'App\Controller\Admin\CustomAdminController::exportAction'
+    methods: ['GET']
+

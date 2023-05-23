@@ -49,5 +49,6 @@ class DashboarduimmController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Formation', 'fa-solid fa-school', Formations::class);
         yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
+       // yield MenuItem::linkToCrud('Excel', 'fa-solid fa-user', 'admin_excel');
     }
 }
