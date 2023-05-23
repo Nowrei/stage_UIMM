@@ -185,8 +185,14 @@ body {
 }
 #user_form_villeAppr {
 
-    width: 40%
+    width: 80%
 }
+
+#user_form_idPays {
+
+    width: 80%
+}
+
 #user_form_paysNaissance {
 
     width: 80%

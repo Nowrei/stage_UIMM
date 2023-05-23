@@ -43,22 +43,22 @@ class FormulaireController extends AbstractController
 
 
             $Now = new DateTime('now');
-            echo  "aujourdhui: " . $Now->format('F d Y') . " <br>";   // on prend la date daujourdhui
+            // echo  "aujourdhui: " . $Now->format('F d Y') . " <br>";   // On prend la date d'aujourd'hui
 
-            if ($Now->format('F d Y') > date("F d Y", filemtime($file))) {   //on valide si le fichier a ete deja telecharge aujourdhui
+            if ($Now->format('F d Y') > date("F d Y", filemtime($file))) {   //On valide si le fichier a déjà été telecharger aujourdhui
 
-                $stat = $this->validationApiService->apiDownload("/r/v1/pays", $file); //on telecharge le fichier a nouveau
-                echo "fichier " . $file . " existe mais pas a jour, fichier telecharge  <br>";
-            } else {
-                echo "fichier " . $file . " existe deja  <br>";
+                $stat = $this->validationApiService->apiDownload("/r/v1/pays", $file); //On télécharge le fichier a nouveau
+                // echo "fichier " . $file . " existe mais pas a jour, fichier telecharge  <br>";
+            } else {    
+                // echo "fichier " . $file . " existe deja  <br>";
             }
-        } else {  // si le fichier pays nexiste pas on telecharge depuis lapi
+        } else {  // si le fichier pays nexiste pas on le télécharge depuis lapi
             $stat = $this->validationApiService->apiDownload("/r/v1/pays", $file);
-            echo "fichier " . $file . " pays cree <br>";
+            // echo "fichier " . $file . " pays cree <br>";
         }
 
         $form = $this->createForm(UserFormType::class, $user);
-        /***/ ///////////////////////Lire les pays de l'Api********************* */ */
+        /***/ ///////////////////////Lire les pays depuis l'Api********************* */ */
 
         //  $pays = $this->validationApiService->apiGetListPays();
 
@@ -102,7 +102,35 @@ class FormulaireController extends AbstractController
                     'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
                 ],
                 'empty_data' => '',
+            ])
+            ->add('idPays', ChoiceType::class, [
+                'label' => false,
+                'placeholder' => 'France',
+                'required' => true,
+                'choices' => [
+                            
+                            $choices
+                ],
+                'attr' => [
+                    'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
+                ],
+                'empty_data' => '1',
             ]);
+
+            // ->add('poleFormation', ChoiceType::class, [
+            //     'label' => false,
+            //     'required' => true,
+            //     'choices' => [
+            //         'Pole formation Champagne-Ardenne' => '',
+            //         'Pôle Formation 08 (Charleville)' => '3918430',
+            //         'Pôle Formation 08 (Donchery)' => '2864611',
+            //         'Pôle Formation 10 (Aube)' => '3072',
+            //         'Pôle Formation 51 (Reims) Site 1 Bât.B' => '3071',
+            //         'Pôle Formation 52 (St Dizier)' => '368998',
+            //     ],
+            //     'attr' => [
+            //         'class' => 'appearance-none  py-1 px-2 w-30 bg-white rounded-lg',
+            //     ],  ],);
 
 
 
@@ -115,7 +143,7 @@ class FormulaireController extends AbstractController
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
 
-            //dd($dataForm);
+            dd($dataForm);
             //$dataForm = $form->get('nom');
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
@@ -128,7 +156,7 @@ class FormulaireController extends AbstractController
 
             //**************  ecrire dans api */
 
-            //dd($dataForm);
+            
             //creation du array candidat pour envoyer sur API **************************************
             $candidat = array();
             foreach ($form as $f) {

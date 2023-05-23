@@ -32,7 +32,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+          <a href="{{ path('app_logout') }}" class="mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">Se déconnecter</a>
         </div>
     {% endif %}
   
@@ -102,10 +102,14 @@
 			{{ form_row(formulaire.cpAppr) }}
 		</div>
 	</div>
-	<div class="only p-2">
+	<div class="duo p-2">
 		<div class="champ">
 			<label for="ville" class="py-1 px-2">Ville *</label>
 			{{ form_row(formulaire.villeAppr) }}
+		</div>
+		<div class="champ">
+			<label for="pays" class="py-1 px-2">Pays *</label>
+			{{ form_row(formulaire.idPays) }}
 		</div>
 	</div>
 	<div class="duo p-2">
@@ -141,7 +145,7 @@
 		<div class="duo p-2">
 			<div class="champ">
 				<label for="pole" class="py-1 px-2">Pôle formation Champagne-Ardenne *</label>
-				{# {{ form_row(formulaires.poleFormation) }} #}
+				{# {{ form_row(formulaire.poleFormation) }}  #}
 			</div>
 			<div class="champ">
 				<label for="intitule" class="py-1 px-2">Intitulé de la formation *</label>
@@ -319,7 +323,7 @@
 {{ form_end(formulaire)}}
 <script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 
-<div class="flex justify-center w-full bg-konbini-200 h-fit text-white">
+<div class="flex justify-center w-full bg-konbini-200 h-fit text-white mt-10">
 <div id="basicModal" x-data="{ open: false }" @open-me="open=true" @close-me="open=false">
     <button class="w-full inline-flex justify-center rounded-md p-4 bg-transparent text-blod text-white font-medium sm:text-sm"
             @click.prevent="open = true"
@@ -363,29 +367,6 @@
 </div>
 </div>
 <script>
-  flatpickr("#datepicker", {
-    dateFormat: "d-m-Y",
-    locale: {
-      months: {
-        shorthand: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
-        longhand: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-      },
-      weekdays: {
-        shorthand: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-        longhand: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
-      },
-      firstDayOfWeek: 1,
-      rangeSeparator: ' - ',
-      weekAbbreviation: 'Sem',
-      scrollTitle: 'Défiler pour augmenter la valeur',
-      toggleTitle: 'Cliquer pour basculer',
-    },
-    onClose: function(selectedDates, dateStr, instance) {
-      instance.close();
-    },
-  });
-</script>
-	<script>
 		const expOui = document.getElementById("exp-oui");
 const expNon = document.getElementById("exp-non");
 const experienceNon = document.getElementById("experience-non");
