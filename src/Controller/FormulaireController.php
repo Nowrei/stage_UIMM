@@ -175,7 +175,7 @@ class FormulaireController extends AbstractController
 
             //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
             $idAPI = $user -> getToken();//on voit si lutilisateur a ete deja envoyé sur ypareo
-
+            $user->setIdPays("1");
             //dd($candidat);
 
 
