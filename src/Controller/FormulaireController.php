@@ -226,22 +226,22 @@ class FormulaireController extends AbstractController
             $entityManager->persist($formation);
             $entityManager->flush();
 
- // Récupérer l'ID de la formation nouvellement créée
-$formationId = $formation->getId();
+        // Récupérer l'ID de la formation nouvellement créée
+        $formationId = $formation->getId();
 
-// Récupérer l'objet User correspondant
-$user = $entityManager->getRepository(User::class)->find($user);
+        // Récupérer l'objet User correspondant
+        $user = $entityManager->getRepository(User::class)->find($user);
 
-// Vérifier si l'utilisateur existe
-if (!$user) {
-    throw new \Exception('Utilisateur introuvable'); // Ou gérer l'erreur d'une autre manière
-}
+        // Vérifier si l'utilisateur existe
+        if (!$user) {
+            throw new \Exception('Utilisateur introuvable'); // Ou gérer l'erreur d'une autre manière
+        }
 
-// Mettre à jour le champ idFormationSouhaiter de l'utilisateur
-$user->setIdFormationSouhait1($formationId);
+        // Mettre à jour le champ idFormationSouhaiter de l'utilisateur
+        $user->setIdFormationSouhait1($formationId);
 
-$entityManager->persist($user);
-$entityManager->flush();
+        $entityManager->persist($user);
+        $entityManager->flush();
 
             dd($formation);
             //**************  ecrire dans api */
