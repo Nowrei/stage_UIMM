@@ -212,29 +212,29 @@ body {
     width: 80%
 }
 
-#user_form_poleFormation {
+#poleFormation {
 
     width: 80%
 }
 
-#user_form_intituleFormation {
+#intituleFormation {
 
     width: 80%
 }
 
-#user_form_typeCertFormation {
+#typeCertFormation {
 
     width: 200px
 }
 
-#user_form_dateDebutFormation {
+#dateDebutFormation {
 
     width: 100px;
     margin-left: 30px;
     
 }
 
-#user_form_dateFinFormation {
+#dateFinFormation {
 
     width: 100px
 }

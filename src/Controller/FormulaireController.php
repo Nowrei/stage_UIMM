@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\User;
+use DateTimeImmutable;
+use App\Entity\Formations;
 use App\Form\UserFormType;
+use App\Form\PoleFormationType;
 use App\Service\ValidationApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 
 class FormulaireController extends AbstractController
@@ -135,25 +140,110 @@ class FormulaireController extends AbstractController
 
 
         $form->handleRequest($request);
+        $form1 = $this->createForm(PoleFormationType::class);
+        $form1->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() ){
             //dd($form->isValid());
-            // $form->getData() holds the submitted values
+             $form->getData(); //holds the submitted values
+
+
+            
 
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
 
-            dd($dataForm);
+        
             //$dataForm = $form->get('nom');
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
 
             if (!$user->getId()) {
                 $entityManager->persist($dataForm);
+                if ($dataForm['paysNaissance'] === $codePays) {
+                $pay = $nomPays;
+                $user->setPaysNaissance($pay);
+
+                }
             }
             $entityManager->flush();
 
+            //***********  On recupere les données entrer pour la formation  */
 
+            $additionalData = [
+                'poleFormation' => $request->request->get('poleFormation'),
+                'intituleFormation' => $request->request->get('intituleFormation'),
+                'typeCertFormation' => $request->request->get('typeCertFormation'),
+                'dateDebutFormation' => $request->request->get('dateDebutFormation'),
+                'dateFinFormation' => $request->request->get('dateFinFormation'),
+                'idUser' => $user->getId()
+            
+
+
+                
+                // Ajoutez d'autres champs au besoin
+            ];
+            
+            $formation = new Formations();
+            if ($additionalData['poleFormation'] === '3008262') {
+              
+                $texte = 'Pôle Formation 08 (Campus sup Ard.)';
+                $formation->setPoleFormation($texte);
+            }
+            if ($additionalData['poleFormation'] === '3918430') {
+              
+                $texte = 'Pôle Formation 08 (Charleville)';
+                $formation->setPoleFormation($texte);
+            }
+            if ($additionalData['poleFormation'] === '2864611') {
+              
+                $texte = 'Pôle Formation 08 (Donchery)';
+                $formation->setPoleFormation($texte);
+            }
+            if ($additionalData['poleFormation'] === '3072') {
+              
+                $texte = 'Pôle Formation 10 (Aube)';
+                $formation->setPoleFormation($texte);
+            }
+            if ($additionalData['poleFormation'] === '53071') {
+              
+                $texte = 'Pôle Formation 51 (Reims, Site 1 Bât.B)';
+                $formation->setPoleFormation($texte);
+            }
+            if ($additionalData['poleFormation'] === '368998') {
+              
+                $texte = 'Pôle Formation 52 (St Dizier)';
+                $formation->setPoleFormation($texte);
+            }
+            $formation->setIntituleFormation($additionalData['intituleFormation']);
+            $formation->setTypeCertFormation($additionalData['typeCertFormation']);
+            $dateDebutFormation = DateTimeImmutable::createFromFormat('Y-m-d', $additionalData['dateDebutFormation']);
+            $formation->setDateDebutFormation($dateDebutFormation);
+            $dateFinFormation = DateTimeImmutable::createFromFormat('Y-m-d', $additionalData['dateFinFormation']);
+            $formation->setDateFinFormation($dateFinFormation);
+      
+            
+            $entityManager->persist($formation);
+            $entityManager->flush();
+
+ // Récupérer l'ID de la formation nouvellement créée
+$formationId = $formation->getId();
+
+// Récupérer l'objet User correspondant
+$user = $entityManager->getRepository(User::class)->find($user);
+
+// Vérifier si l'utilisateur existe
+if (!$user) {
+    throw new \Exception('Utilisateur introuvable'); // Ou gérer l'erreur d'une autre manière
+}
+
+// Mettre à jour le champ idFormationSouhaiter de l'utilisateur
+$user->setIdFormationSouhait1($formationId);
+
+$entityManager->persist($user);
+$entityManager->flush();
+
+            dd($formation);
             //**************  ecrire dans api */
 
             
@@ -263,7 +353,8 @@ class FormulaireController extends AbstractController
 
         return $this->render('formulaire/index.html.twig', [
             'controller_name' => 'FormulaireController',
-            'formulaire' => $form
+            'formulaire' => $form,
+            'formulaires' => $form1
         ]);
     }
 }

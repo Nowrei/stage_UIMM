@@ -3,8 +3,6 @@
 {% block title %}Formulaire UIMM
 {% endblock %}
 
-{% block body %}
-{{ form_start(formulaire) }}
 {% block stylesheets %}
 	{{ encore_entry_link_tags('app') }}
 	<link rel="stylesheet" href="https://unpkg.com/@tailwindcss/forms@0.3.3/dist/forms.min.css"/>
@@ -29,13 +27,15 @@
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
 {% endblock %}
+{% block body %}
+{{ form_start(formulaire) }}
 
-    {% if app.user %}
-        <div class="mb-3">
-          <a href="{{ path('app_logout') }}" class="mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">Se déconnecter</a>
-        </div>
-    {% endif %}
-  
+{% if app.user %}
+	<div class="mb-3">
+		<a href="{{ path('app_logout') }}" class="mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">Se déconnecter</a>
+	</div>
+{% endif %}
+
 <div class="formulaire mt-1">
 	<div class="solo flex flex-col items-center justify-center pt-10">
 		<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
@@ -145,182 +145,199 @@
 		<div class="duo p-2">
 			<div class="champ">
 				<label for="pole" class="py-1 px-2">Pôle formation Champagne-Ardenne *</label>
-				{# {{ form_row(formulaire.poleFormation) }}  #}
+				<select data-te-select-init id="poleFormation" name="poleFormation">
+					<option value="3008262">Pôle Formation 08 (Campus sup Ard.)</option>
+					<option value="3918430">Pôle Formation 08 (Charleville)</option>
+					<option value="2864611">Pôle Formation 08 (Donchery)</option>
+					<option value="3072">Pôle Formation 10 (Aube)</option>
+					<option value="53071">Pôle Formation 51 (Reims, Site 1 Bât.B)</option>
+					<option value="368998">Pôle Formation 52 (St Dizier)</option>
+
+				</select>
 			</div>
+
 			<div class="champ">
 				<label for="intitule" class="py-1 px-2">Intitulé de la formation *</label>
-
+				<input type="text" id="intituleFormation" name="intituleFormation"/>
 			</div>
 		</div>
 		<div class="duo p-2">
 			<div class="champ">
 				<label for="certif" class="py-1 px-2">Type de certification</label>
+				<select data-te-select-init id="typeCertFormation" name="typeCertFormation">
+					<option value="CQPM">CQPM</option>
+					<option value="Bloc de compétence">Bloc de compétence</option>
+					<option value="CCPM">CCPM</option>
+					<option value="CCPI">CCPI</option>
+					<option value="Autre">Autre</option>
+			</div>
 
+			<div class="champ">
+					<label for="debut" class=" py-1 px-2">Date de début</label>
+
+					<input type="date" id="dateDebutFormation" name="dateDebutFormation"/>
 			</div>
 			<div class="champ">
-				<label for="debut" class=" py-1 px-2">Date de début</label>
-
-
-			</div>
-			<div class="champ">
-				<label for="fin" class="py-1 px-2">Date de fin</label>
-
+					<label for="fin" class="py-1 px-2">Date de fin</label>
+					<input type="date" id="dateFinFormation" name="dateFinFormation"/>
 			</div>
 		</div>
-	</div>
-
-
-</div>
-<div class="pro mt-10 ">
-	<div class="solo flex flex-col items-center justify-center pt-10 ">
-		<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
-	</div>
-	<div class="text">
-		<div class="solo p-2">
-			<div class="champ">
-				<label for="diplome" class="py-1 px-2">Dernier diplôme obtenu *</label>
-				{{ form_row(formulaire.dernierDiplome) }}
-			</div>
-		</div>
-		<div class="duo p-2">
-			<div class="champ">
-				<label for="qualif" class="py-1 px-2">Niveau qualification</label>
-				{{ form_row(formulaire.niveauQualification) }}
-			</div>
-			<div class="champ">
-				<label for="obtention" class="py-1 px-2">Date d'obtention *</label>
-				{{ form_row(formulaire.dateObtention) }}
-			</div>
-		</div>
-
-
-		<div class="solo p-2">
-			<div class="champ">
-				<label for="exp" class="py-1 px-2">Avez-vous déjà eu une expérience professionnelle ?</label>
-			</div>
-		</div>
-		<div class="flex items-center sm:flex sm:justify-start">
-			<input id="exp-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
-			<label for="exp-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
-
-
-			<input id="exp-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
-			<label for="exp-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
-		</div>
-
-
-		<div id="experience-non" class="solo mt-2 text-sm  hidden"></div>
-		<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
-			<div class="duo p-2">
-				<div>
-					<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
-					{{ form_row(formulaire.dernierMetier) }}
-				</div>
-				<div>
-					<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
-					{{ form_row(formulaire.dureeExperience) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="entreprise" class="py-1 px-2">Entreprise *</label>
-					{{ form_row(formulaire.entrepriseExperience) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
-					{{ form_row(formulaire.niveauRemuneration) }}
-				</div>
-			</div>
-		</div>
-
-		<div class="solo p-2">
-			<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
-		</div>
-		<div class="flex items-center sm:flex sm:justify-start">
-			<input id="checkbox-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out ">
-			<label for="checkbox-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
-
-
-			<input id="checkbox-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
-			<label for="checkbox-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
-		</div>
-		<div id="checkbox-text-non" class="solo hidden">
-			<div class="solo p-2">
-				<div>
-					<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
-					{{ form_row(formulaire.statut) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
-					{{ form_row(formulaire.statutCommentaire) }}
-				</div>
-			</div>
-		</div>
-		<div id="checkbox-text-oui" class=" solo mt-2 text-sm hidden">
-			<div class="solo p-2">
-				<div>
-					<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
-					{{ form_row(formulaire.statutSalarie) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
-					{{ form_row(formulaire.entrepriseSalarie) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
-					{{ form_row(formulaire.adresseEntreprise) }}
-				</div>
-			</div>
-			<div class="duo p-2">
-				<div>
-					<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
-					{{ form_row(formulaire.villeEntreprise) }}
-				</div>
-				<div>
-					<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
-					{{ form_row(formulaire.cpEntreprise) }}
-				</div>
-			</div>
-			<div class="duo p-2">
-				<div>
-					<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
-					{{ form_row(formulaire.nomTuteur) }}
-				</div>
-				<div>
-					<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
-					{{ form_row(formulaire.prenomTuteur) }}
-				</div>
-			</div>
-			<div class="duo p-2">
-				<div>
-					<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
-					{{ form_row(formulaire.adresseMaillTuteur) }}
-				</div>
-				<div>
-					<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
-					{{ form_row(formulaire.telephoneTuteur) }}
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-	<button type="submit" class="flex justify-center mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-		Envoyer
-	</button>
 </div>
 
 
-{{ form_end(formulaire)}}
+
+	</div>
+	<div class="pro mt-10 ">
+		<div class="solo flex flex-col items-center justify-center pt-10 ">
+			<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
+		</div>
+		<div class="text">
+			<div class="solo p-2">
+				<div class="champ">
+					<label for="diplome" class="py-1 px-2">Dernier diplôme obtenu *</label>
+					{{ form_row(formulaire.dernierDiplome) }}
+				</div>
+			</div>
+			<div class="duo p-2">
+				<div class="champ">
+					<label for="qualif" class="py-1 px-2">Niveau qualification</label>
+					{{ form_row(formulaire.niveauQualification) }}
+				</div>
+				<div class="champ">
+					<label for="obtention" class="py-1 px-2">Date d'obtention *</label>
+					{{ form_row(formulaire.dateObtention) }}
+				</div>
+			</div>
+
+
+			<div class="solo p-2">
+				<div class="champ">
+					<label for="exp" class="py-1 px-2">Avez-vous déjà eu une expérience professionnelle ?</label>
+				</div>
+			</div>
+			<div class="flex items-center sm:flex sm:justify-start">
+				<input id="exp-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+				<label for="exp-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+				<input id="exp-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+				<label for="exp-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+			</div>
+
+
+			<div id="experience-non" class="solo mt-2 text-sm  hidden"></div>
+			<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
+				<div class="duo p-2">
+					<div>
+						<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
+						{{ form_row(formulaire.dernierMetier) }}
+					</div>
+					<div>
+						<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
+						{{ form_row(formulaire.dureeExperience) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="entreprise" class="py-1 px-2">Entreprise *</label>
+						{{ form_row(formulaire.entrepriseExperience) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
+						{{ form_row(formulaire.niveauRemuneration) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="solo p-2">
+				<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
+			</div>
+			<div class="flex items-center sm:flex sm:justify-start">
+				<input id="checkbox-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out ">
+				<label for="checkbox-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+				<input id="checkbox-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+				<label for="checkbox-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+			</div>
+			<div id="checkbox-text-non" class="solo hidden">
+				<div class="solo p-2">
+					<div>
+						<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
+						{{ form_row(formulaire.statut) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
+						{{ form_row(formulaire.statutCommentaire) }}
+					</div>
+				</div>
+			</div>
+			<div id="checkbox-text-oui" class=" solo mt-2 text-sm hidden">
+				<div class="solo p-2">
+					<div>
+						<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
+						{{ form_row(formulaire.statutSalarie) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
+						{{ form_row(formulaire.entrepriseSalarie) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
+						{{ form_row(formulaire.adresseEntreprise) }}
+					</div>
+				</div>
+				<div class="duo p-2">
+					<div>
+						<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
+						{{ form_row(formulaire.villeEntreprise) }}
+					</div>
+					<div>
+						<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
+						{{ form_row(formulaire.cpEntreprise) }}
+					</div>
+				</div>
+				<div class="duo p-2">
+					<div>
+						<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
+						{{ form_row(formulaire.nomTuteur) }}
+					</div>
+					<div>
+						<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
+						{{ form_row(formulaire.prenomTuteur) }}
+					</div>
+				</div>
+				<div class="duo p-2">
+					<div>
+						<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
+						{{ form_row(formulaire.adresseMaillTuteur) }}
+					</div>
+					<div>
+						<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
+						{{ form_row(formulaire.telephoneTuteur) }}
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<button type="submit" class="flex justify-center mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+			Envoyer
+		</button>
+	</div>
+
+
+	{{ form_end(formulaire)}}
+
 <script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 
 <div class="flex justify-center w-full bg-konbini-200 h-fit text-white mt-10">
