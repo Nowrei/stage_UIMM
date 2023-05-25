@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FormCompleteController!{% endblock %}
+{% block title %}Confirmation{% endblock %}
 
 {% block body %}
+
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+
 <div class="formation mt-10">
 	<div class="solo flex flex-col items-center justify-center pt-10 ">
     <img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
@@ -10,7 +19,7 @@
 	</div>
 	<div class="text">
 		<div class="solo p-2">
-			<p class="font-bold tracking-widest p-2">Votre candidature a bien été prise en compte. Nous prendrons contact avec vous dans les plus brefs délais.</p>
+			<p class="font-bold tracking-widest p-2">Votre candidature a bien été prise en compte. Un des nos conseillers prendra contact avec vous dans les plus brefs délais.</p>
 		</div>
 	</div>
 {% endblock %}
