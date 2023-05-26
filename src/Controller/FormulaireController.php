@@ -60,6 +60,14 @@ class FormulaireController extends AbstractController
         }
         
         $form = $this->createForm(UserFormType::class, $user);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //$resultado=$this->validationApiService -> check_WrCandidat ();
+        //echo $resultado;
+        
+
+
         /***////////////////////////Lire les pays de l'Api********************* */ */
 
         //  $pays = $this->validationApiService->apiGetListPays();
@@ -72,6 +80,8 @@ class FormulaireController extends AbstractController
         // }
 
           /***////////////////////////Lire les pays depuis le fichier********************* */ */
+
+
 
               
               $myfile = fopen($file, "r") or die("Unable to open file!");

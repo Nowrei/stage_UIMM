@@ -544,7 +544,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         $date=$dateObtention;
         
-        $this->dateObtention=date_format($date,"Y"); //ici on recoit un objet datetime depuis lutilisateur et on met le valeur dedans la propriete du objet this
+        $this->dateObtention=date_format($date,"d/m/Y"); //ici on recoit un objet datetime depuis lutilisateur et on met le valeur dedans la propriete du objet this
         return ( $this->dateObtention  );   
         //die;                               // et on return lobjet pour etre ecrit dans la bdd
         
