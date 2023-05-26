@@ -14,17 +14,12 @@ class ValidationApiService extends AbstractController
     protected $customParam;
     protected $customUrl;
 
-    protected $customFilePays;
-
-    
 
 
-
-    public function __construct( $customParam, $customUrl, $customFilePays  ) 
+    public function __construct( $customParam, $customUrl  ) 
     {
         $this->customUrl=$customUrl;
         $this->customParam = $customParam;
-        $this->customFilePays= $customFilePays;
         //dd($customParam);
     }
 
@@ -37,11 +32,6 @@ class ValidationApiService extends AbstractController
     public function getUrl() {
         //$projectDir = $this->getParameter('app.custom_param');
         return $this->customUrl;
-    }
-
-    public function getFilePays() {
-        //$projectDir = $this->getParameter('app.custom_param');
-        return $this->customFilePays;
     }
 
     // config/packages/doctrine.php
