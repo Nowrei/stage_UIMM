@@ -71,18 +71,6 @@ body {
    
 }
 
-.date {
-
-    display: flex;
-    flex-direction: row;
-    grid-template-rows: 30px;
-    margin-left: 30px;
-    margin-right: auto;
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-
-
 .only {
 
     display: flex;
@@ -103,6 +91,7 @@ body {
 
    
 }
+
 
 
 .solo {
@@ -196,14 +185,8 @@ body {
 }
 #user_form_villeAppr {
 
-    width: 80%
+    width: 40%
 }
-
-#user_form_idPays {
-
-    width: 80%
-}
-
 #user_form_paysNaissance {
 
     width: 80%
@@ -223,29 +206,29 @@ body {
     width: 80%
 }
 
-#poleFormation {
+#user_form_poleFormation {
 
     width: 80%
 }
 
-#intituleFormation {
+#user_form_intituleFormation {
 
     width: 80%
 }
 
-#typeCertFormation {
+#user_form_typeCertFormation {
 
     width: 200px
 }
 
-#dateDebutFormation {
+#user_form_dateDebutFormation {
 
     width: 100px;
     margin-left: 30px;
     
 }
 
-#dateFinFormation {
+#user_form_dateFinFormation {
 
     width: 100px
 }
@@ -517,29 +500,29 @@ body {
         width: 100%;
     }
     
-    #poleFormation {
+    #user_form_poleFormation {
     
         width: 100%;
     }
     
-    #intituleFormation {
+    #user_form_intituleFormation {
     
         width: 100%;
     }
     
-    #typeCertFormation {
+    #user_form_typeCertFormation {
     
         width: 100%;
     }
     
-    #dateDebutFormation {
+    #user_form_dateDebutFormation {
     
         width: 100%;;
-        margin-left: 00px;
+        margin-left: 30px;
         
     }
     
-    #dateFinFormation {
+    #user_form_dateFinFormation {
     
         width: 100%;
     }
@@ -818,29 +801,29 @@ body {
         width: 90%;
     }
     
-    #poleFormation {
+    #user_form_poleFormation {
     
         width: 90%;
     }
     
-    #intituleFormation {
+    #user_form_intituleFormation {
     
         width: 90%;
     }
     
-    #typeCertFormation {
+    #user_form_typeCertFormation {
     
         width: 90%;
     }
     
-    #dateDebutFormation {
+    #user_form_dateDebutFormation {
     
         width: 90%;;
         margin-left: 30px;
         
     }
     
-    #dateFinFormation {
+    #user_form_dateFinFormation {
     
         width: 90%;
     }
