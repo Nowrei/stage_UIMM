@@ -27,7 +27,6 @@ class FormulaireController extends AbstractController
 
     #[Route('/formulaire', name: 'app_formulaire')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
-    //public function index(Request $request): Response
     {
 
 
@@ -40,7 +39,13 @@ class FormulaireController extends AbstractController
         //lire les API et stocker les resultats local pour montrer dans le formulaire
 
         //le fichier pays.txt existe?
+
         $file = "c://data//pays.txt";
+=======
+        $file = $this->validationApiService->getFilePays(); //le valeur du route du fichier pays est recupere depuis le service
+        //$file="c://data//pays.txt";
+
+
 
         //$modifFile="c://data//modifPays.txt";
 
@@ -122,43 +127,20 @@ class FormulaireController extends AbstractController
                 'empty_data' => '1',
             ]);
 
-            // ->add('poleFormation', ChoiceType::class, [
-            //     'label' => false,
-            //     'required' => true,
-            //     'choices' => [
-            //         'Pole formation Champagne-Ardenne' => '',
-            //         'Pôle Formation 08 (Charleville)' => '3918430',
-            //         'Pôle Formation 08 (Donchery)' => '2864611',
-            //         'Pôle Formation 10 (Aube)' => '3072',
-            //         'Pôle Formation 51 (Reims) Site 1 Bât.B' => '3071',
-            //         'Pôle Formation 52 (St Dizier)' => '368998',
-            //     ],
-            //     'attr' => [
-            //         'class' => 'appearance-none  py-1 px-2 w-30 bg-white rounded-lg',
-            //     ],  ],);
-
-
-
         $form->handleRequest($request);
         $form1 = $this->createForm(PoleFormationType::class);
         $form1->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() ){
-            //dd($form->isValid());
-             $form->getData(); //holds the submitted values
 
-
-            
-
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
 
-        
-            //$dataForm = $form->get('nom');
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
+            if(!$user->getId()){
 
-            if (!$user->getId()) {
                 $entityManager->persist($dataForm);
                 if ($dataForm['paysNaissance'] === $codePays) {
                 $pay = $nomPays;
@@ -253,6 +235,7 @@ class FormulaireController extends AbstractController
                 //echo $f->getName()." ";
                 //echo $f->getViewData()." ";
                 //echo "<br>";
+
                 $key = $f->getName();
                 $data = $f->getViewData();
                 if ($data === "") {
@@ -293,6 +276,36 @@ class FormulaireController extends AbstractController
                     //array_push($candidat,$f->getName() , $data);
                 } else {
 
+
+                $key=$f->getName();
+                $data=$f->getViewData();
+                if ($data===""){      $data=null;  }
+                if($key==="idPays" ){  $data="1";  }
+                if($key==="codeCiviliteApprenant" && $data==="1"){  $data=1;  }
+                if($key==="codeCiviliteApprenant" && $data==="2"){  $data=2;  }
+
+                if ($key ==="dateObtention" || $key ==="dernierDiplome"||
+                    $key==="niveauQualification" ||
+                    $key==="dejaExperience" ||
+                    $key==="dernierMetier" ||
+                    $key==="dureeExperience" ||
+                    $key==="entrepriseExperience" ||
+                    $key==="niveauRemuneration" ||
+                    $key==="salarie" ||
+                    $key==="statut" ||
+                    $key==="statutSalarie" ||
+                    $key==="statutCommentaire" ||
+                    $key==="entrepriseSalarie" ||
+                    $key==="adresseEntreprise" ||
+                    $key==="villeEntreprise" ||
+                    $key==="cpEntreprise" ||
+                    $key==="nomTuteur" ||
+                    $key==="prenomTuteur" ||
+                    $key==="adresseMaillTuteur" ||
+                    $key==="telephoneTuteur" ) 
+                {
+                }else{
+
                     $candidat[$f->getName()] = $data;  //array avec donnees remplis dans le formulaire et a envoyer a ypareo
                     //echo $key;
                     //echo $data;
@@ -304,26 +317,35 @@ class FormulaireController extends AbstractController
             //$candidat["idNationalite"] = "0";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";
 
-
             /*
             $encodedData = json_encode($candidat);
             echo ($encodedData);
             echo "<br>";
             */
-            //dd($candidat);
-            //die;
 
             //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
+
             $idAPI = $user->getToken(); //on voit si lutilisateur a ete deja envoyé sur ypareo
 
             if ($user->getId() && $idAPI === null) {
                 $resultado = $this->validationApiService->apiWrCandidat($candidat, '/r/v1/preinscription/candidat');
                 echo $resultado;
+
+            $idAPI = $user -> getToken();//on voit si lutilisateur a ete deja envoyé sur ypareo
+            $user->setIdPays("1");
+            //dd($candidat);
+
+
+            if($user->getId() && $idAPI===null  ){
+                $resultado=$this->validationApiService -> apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
+                //echo $resultado;
+
                 $user->setToken($resultado);
                 $entityManager->persist($user);
                 // actually executes the queries (i.e. the INSERT query)
                 $entityManager->flush();
             }
+
 
 
             //if(!$user->getId()){
@@ -347,6 +369,11 @@ class FormulaireController extends AbstractController
             //die;
 
             // ... perform some action, such as saving the task to the database
+
+            
+            // $resultado=$this->validationApiService -> apiGetIdPays("GUINE");
+            //$request->request->get('email', '');
+
 
             return $this->redirectToRoute('app_form_complete');
         }

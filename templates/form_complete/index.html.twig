@@ -3,6 +3,15 @@
 {% block title %}Confirmation{% endblock %}
 
 {% block body %}
+
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+
 <div class="formation mt-10">
 	<div class="solo flex flex-col items-center justify-center pt-10 ">
 		<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
@@ -10,9 +19,11 @@
 	</div>
 	<div class="text">
 		<div class="solo p-2">
+
 			<p class="font-bold tracking-widest p-2 flex justify-center text-center">Merci pour votre candidature.</p>
 <p class="font-bold tracking-widest p-2 flex justify-center text-center">
 Un de nos conseillers en formation va prendre contact avec vous prochainement.</p>
+
 		</div>
 	    {% if app.user %}
      

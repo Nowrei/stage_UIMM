@@ -1,0 +1,17 @@
+{# {% extends '@EasyAdmin/default/layout.html.twig' %} #}
+
+
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+
+{% block body_id 'Export' %}
+
+{% block main %}
+    <div class="content">
+        {# ... existing dashboard content ... #}
+
+        <a href="{{ path('admin_custom_export') }}" class="btn btn-primary">
+            Export 2 Excel
+        </a>
+    </div>
+{% endblock %}
