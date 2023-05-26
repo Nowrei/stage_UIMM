@@ -40,7 +40,7 @@ class FormulaireController extends AbstractController
 
         //le fichier pays.txt existe?
 
-        $file = "c://data//pays.txt";
+        //$file = "c://data//pays.txt";
 
         $file = $this->validationApiService->getFilePays(); //le valeur du route du fichier pays est recupere depuis le service
         //$file="c://data//pays.txt";
@@ -53,21 +53,23 @@ class FormulaireController extends AbstractController
 
 
             $Now = new DateTime('now');
-            // echo  "aujourdhui: " . $Now->format('F d Y') . " <br>";   // On prend la date d'aujourd'hui
+            echo  "aujourdhui: " . $Now->format('F d Y') . " <br>";   // On prend la date d'aujourd'hui
 
             if ($Now->format('F d Y') > date("F d Y", filemtime($file))) {   //On valide si le fichier a déjà été telecharger aujourdhui
 
                 $stat = $this->validationApiService->apiDownload("/r/v1/pays", $file); //On télécharge le fichier a nouveau
-                // echo "fichier " . $file . " existe mais pas a jour, fichier telecharge  <br>";
+                echo "fichier " . $file . " existe mais pas a jour, fichier telecharge  <br>";
             } else {    
-                // echo "fichier " . $file . " existe deja  <br>";
+                echo "fichier " . $file . " existe deja  <br>";
             }
         } else {  // si le fichier pays nexiste pas on le télécharge depuis lapi
             $stat = $this->validationApiService->apiDownload("/r/v1/pays", $file);
-            // echo "fichier " . $file . " pays cree <br>";
+            echo "fichier " . $file . " pays cree <br>";
         }
 
         $form = $this->createForm(UserFormType::class, $user);
+
+        //dd($form);
 
 
 
@@ -99,19 +101,6 @@ class FormulaireController extends AbstractController
             $codePays = $paysData['codePays'];
             $choices[$nomPays] = $codePays;
         }
-
-
-
-
-              
-              $myfile = fopen($file, "r") or die("Unable to open file!");
-              $content=fread($myfile,filesize($file)  ); 
-              fclose($myfile);
-      
-              $content = json_decode($content, true); // Convertit la chaîne JSON en tableau associatif
-              $pays = $content;
-
-
 
 
         $form = $this->createForm(UserFormType::class, $user)
@@ -155,15 +144,10 @@ class FormulaireController extends AbstractController
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
             if(!$user->getId()){
-
                 $entityManager->persist($dataForm);
-                if ($dataForm['paysNaissance'] === $codePays) {
-                $pay = $nomPays;
-                $user->setPaysNaissance($pay);
-
-                }
             }
             $entityManager->flush();
+            
 
             //***********  On recupere les données entrer pour la formation  */
 
@@ -175,43 +159,17 @@ class FormulaireController extends AbstractController
                 'dateFinFormation' => $request->request->get('dateFinFormation'),
                 'idUser' => $user->getId()
             
-
-
-                
                 // Ajoutez d'autres champs au besoin
             ];
             
             $formation = new Formations();
-            if ($additionalData['poleFormation'] === '3008262') {
-              
-                $texte = 'Pôle Formation 08 (Campus sup Ard.)';
-                $formation->setPoleFormation($texte);
-            }
-            if ($additionalData['poleFormation'] === '3918430') {
-              
-                $texte = 'Pôle Formation 08 (Charleville)';
-                $formation->setPoleFormation($texte);
-            }
-            if ($additionalData['poleFormation'] === '2864611') {
-              
-                $texte = 'Pôle Formation 08 (Donchery)';
-                $formation->setPoleFormation($texte);
-            }
-            if ($additionalData['poleFormation'] === '3072') {
-              
-                $texte = 'Pôle Formation 10 (Aube)';
-                $formation->setPoleFormation($texte);
-            }
-            if ($additionalData['poleFormation'] === '53071') {
-              
-                $texte = 'Pôle Formation 51 (Reims, Site 1 Bât.B)';
-                $formation->setPoleFormation($texte);
-            }
-            if ($additionalData['poleFormation'] === '368998') {
-              
-                $texte = 'Pôle Formation 52 (St Dizier)';
-                $formation->setPoleFormation($texte);
-            }
+            if ($additionalData['poleFormation'] === '3008262') { $texte = 'Pôle Formation 08 (Campus sup Ard.)'; $formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '3918430') { $texte = 'Pôle Formation 08 (Charleville)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '2864611') { $texte = 'Pôle Formation 08 (Donchery)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '3072') { $texte = 'Pôle Formation 10 (Aube)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '53071') {$texte = 'Pôle Formation 51 (Reims, Site 1 Bât.B)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '368998') {$texte = 'Pôle Formation 52 (St Dizier)';$formation->setPoleFormation($texte);}
+            
             $formation->setIntituleFormation($additionalData['intituleFormation']);
             $formation->setTypeCertFormation($additionalData['typeCertFormation']);
             $dateDebutFormation = DateTimeImmutable::createFromFormat('Y-m-d', $additionalData['dateDebutFormation']);
@@ -223,24 +181,24 @@ class FormulaireController extends AbstractController
             $entityManager->persist($formation);
             $entityManager->flush();
 
-        // Récupérer l'ID de la formation nouvellement créée
-        $formationId = $formation->getId();
+            // Récupérer l'ID de la formation nouvellement créée
+            $formationId = $formation->getId();
 
-        // Récupérer l'objet User correspondant
-        $user = $entityManager->getRepository(User::class)->find($user);
+            // Récupérer l'objet User correspondant
+            $user = $entityManager->getRepository(User::class)->find($user);
 
-        // Vérifier si l'utilisateur existe
-        if (!$user) {
-            throw new \Exception('Utilisateur introuvable'); // Ou gérer l'erreur d'une autre manière
-        }
+            // Vérifier si l'utilisateur existe
+            // if (!$user) {
+            //     throw new \Exception('Utilisateur introuvable'); // Ou gérer l'erreur d'une autre manière
+            // }
 
-        // Mettre à jour le champ idFormationSouhaiter de l'utilisateur
-        $user->setIdFormationSouhait1($formationId);
+            // Mettre à jour le champ idFormationSouhaiter de l'utilisateur
+            $user->setIdFormationSouhait1($formationId);
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-            dd($formation);
+            //dd($formation);
             //**************  ecrire dans api */
 
             
@@ -250,47 +208,6 @@ class FormulaireController extends AbstractController
                 //echo $f->getName()." ";
                 //echo $f->getViewData()." ";
                 //echo "<br>";
-
-                $key = $f->getName();
-                $data = $f->getViewData();
-                if ($data === "") {
-                    $data = null;
-                }
-                if ($key === "idPays") {
-                    $data = 1;
-                }
-                if ($key === "codeCiviliteApprenant" && $data === "1") {
-                    $data = 1;
-                }
-                if ($key === "codeCiviliteApprenant" && $data === "2") {
-                    $data = 2;
-                }
-
-                if (
-                    $key === "dateObtention" || $key === "dernierDiplome" ||
-                    $key === "niveauQualification" ||
-                    $key === "dejaExperience" ||
-                    $key === "dernierMetier" ||
-                    $key === "dureeExperience" ||
-                    $key === "entrepriseExperience" ||
-                    $key === "niveauRemuneration" ||
-                    $key === "salarie" ||
-                    $key === "statut" ||
-                    $key === "statutSalarie" ||
-                    $key === "statutCommentaire" ||
-                    $key === "entrepriseSalarie" ||
-                    $key === "adresseEntreprise" ||
-                    $key === "villeEntreprise" ||
-                    $key === "cpEntreprise" ||
-                    $key === "nomTuteur" ||
-                    $key === "prenomTuteur" ||
-                    $key === "adresseMaillTuteur" ||
-                    $key === "telephoneTuteur"
-                ) {
-
-                    //array_push($candidat,$f->getName() , $data);
-                } else {
-
 
                 $key=$f->getName();
                 $data=$f->getViewData();
@@ -327,8 +244,9 @@ class FormulaireController extends AbstractController
                     //echo "<br>";
                 }
             }
-            $candidat["idSite"] = "3071";
-            $candidat["idFormationSouhait1"] = "3911164";
+
+            //$candidat["idSite"] = "3071";
+            //$candidat["idFormationSouhait1"] = "3911164";
             //$candidat["idNationalite"] = "0";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";
 
@@ -341,16 +259,7 @@ class FormulaireController extends AbstractController
             //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
 
             $idAPI = $user->getToken(); //on voit si lutilisateur a ete deja envoyé sur ypareo
-
-            if ($user->getId() && $idAPI === null) {
-                $resultado = $this->validationApiService->apiWrCandidat($candidat, '/r/v1/preinscription/candidat');
-                echo $resultado;
-
-            $idAPI = $user -> getToken();//on voit si lutilisateur a ete deja envoyé sur ypareo
-            $user->setIdPays("1");
-            //dd($candidat);
-
-
+            
             if($user->getId() && $idAPI===null  ){
                 $resultado=$this->validationApiService -> apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
                 //echo $resultado;
