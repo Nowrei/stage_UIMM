@@ -122,20 +122,6 @@ class FormulaireController extends AbstractController
                 'empty_data' => '1',
             ]);
 
-            // ->add('poleFormation', ChoiceType::class, [
-            //     'label' => false,
-            //     'required' => true,
-            //     'choices' => [
-            //         'Pole formation Champagne-Ardenne' => '',
-            //         'Pôle Formation 08 (Charleville)' => '3918430',
-            //         'Pôle Formation 08 (Donchery)' => '2864611',
-            //         'Pôle Formation 10 (Aube)' => '3072',
-            //         'Pôle Formation 51 (Reims) Site 1 Bât.B' => '3071',
-            //         'Pôle Formation 52 (St Dizier)' => '368998',
-            //     ],
-            //     'attr' => [
-            //         'class' => 'appearance-none  py-1 px-2 w-30 bg-white rounded-lg',
-            //     ],  ],);
 
 
 
