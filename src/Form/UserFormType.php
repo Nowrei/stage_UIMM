@@ -40,7 +40,6 @@ class UserFormType extends AbstractType
             ])
             ->add('nomApprenant', TextType::class, [
                 'label' => false,
-                'required' => true,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],
@@ -51,21 +50,17 @@ class UserFormType extends AbstractType
         'attr' => [
             'class' => 'form-control py-1 px-2',
             'style' => 'border: none; border-radius: 5px;',  ],  ],)
-
             ->add('prenomApprenant', TextType::class, [
-                'required' => true,
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('dateNaissance', TextType::class, [
-                'required' => true,
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('tel1Appr', TextType::class, [
-                'required' => true,
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
@@ -77,12 +72,10 @@ class UserFormType extends AbstractType
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('emailAppr', TextType::class, [
                 'label' => false,
-                'required' => true,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('adresse1Appr', TextType::class, [
-                'required' => true,
                 'label' => false,
             'attr' => [
                 'class' => 'form-control py-1 px-2',
@@ -227,6 +220,13 @@ class UserFormType extends AbstractType
 
             //->add('salarie', CheckboxType::class)
 
+
+
+
+            ->add('salarie', CheckboxType::class, array(
+                    'attr' => array('checked'   => 'unchecked'),
+                    'label' => false
+                ))
 
             ->add('statut', ChoiceType::class, [
                 'label' => false,
