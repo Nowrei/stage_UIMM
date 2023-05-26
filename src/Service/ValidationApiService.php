@@ -2,11 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\User;
 use Exception;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ValidationApiService extends AbstractController
 {
@@ -16,17 +15,33 @@ class ValidationApiService extends AbstractController
 
     protected $customFilePays;
 
+    protected $entityManager;
+
     
-
-
-
-    public function __construct( $customParam, $customUrl, $customFilePays  ) 
+    
+    public function __construct2( $customParam, $customUrl, $customFilePays ) 
     {
         $this->customUrl=$customUrl;
         $this->customParam = $customParam;
         $this->customFilePays= $customFilePays;
+        
         //dd($customParam);
     }
+
+
+
+
+    public function __construct( $customParam, $customUrl, $customFilePays , EntityManagerInterface $entityManager ) 
+    {
+        $this->customUrl=$customUrl;
+        $this->customParam = $customParam;
+        $this->customFilePays= $customFilePays;
+        $this->entityManager= $entityManager;
+        //dd($customParam);
+    }
+
+
+    
 
 
     public function getToken() {
@@ -207,8 +222,10 @@ class ValidationApiService extends AbstractController
 
 
     public function apiWrCandidat( $candidat, $url2):string{
+        //ce methode reçoit un array candidat avec les donnees a sauvegarder, un url de la API pour envoiyer les donnees et 
+        // il retourne un numero que corresponde a l'ID du candidat dans YPAREO
+
         $data=$candidat;
-        //var_dump( $data);
 
    //**************************************************************************************get request  */         
             try {
@@ -219,49 +236,10 @@ class ValidationApiService extends AbstractController
                 
                 $url = $baseUrl . $urlapi;
                 // options de la session
-                $options = [
-                                CURLOPT_URL => $url,
-                                CURLOPT_HTTPHEADER => [
-                                    "X-Auth-Token: " . $jeton,
-                                    "Content-Type: application/json"
-                                ],
-                                CURLOPT_RETURNTRANSFER => true
-                            ];
-    /*            $ch = curl_init();
-                curl_setopt_array($ch, $options);
-                $response = curl_exec($ch);
-                curl_close($ch);
-                $data = json_decode($response, true);
-                Array($data);
-         
-                //dd($data);
-                //die; 
-            }
-            catch (Exception $e) {
-            echo $e;
-            }
-            */
+
 //********************************************************************************************* post request */
-
-        /*    $handle = curl_init('https://lotvx.free.beeceptor.com');
-
-            $data = [
-                'key' => 'value'
-            ];
-
-            $encodedData = json_encode($data);
-
-            curl_setopt($handle, CURLOPT_POST, 1);
-            curl_setopt($handle, CURLOPT_POSTFIELDS, $encodedData);
-            curl_setopt($handle, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-
-            $result = curl_exec($handle);
-            */
-
-
-                        // URL of the API that is to be invoked and data POSTed
-            //$url = "http://lotvx.free.beeceptor.com";
-            //$url = 'https://eot13muzw2iqeft.m.pipedream.net';
+            
+            // URL of the API that is to be invoked and data POSTed
 
             // request data that is going to be sent as POST to API
 
@@ -293,16 +271,115 @@ class ValidationApiService extends AbstractController
             curl_close($curl);
 
             // if required print the curl response
-            print $result;
             
         }
         catch (Exception $e) {
         echo $e;
         }
 
-        //echo $candidat;
         return $result;
     }
+
+
+    public function check_wrCandidat(): bool
+    {
+
+        //faire la connexion avec la bdd
+        
+        $users = $this->entityManager -> getRepository (User::class); //users montre lutilisateur actuel
+        //echo $users->
+        //dd($users);
+        
+
+        //chercher si il y a des valeurs qui nont pas ete envoyes sur ypareo  et les ajouter dans un array darrays candidats
+        $notsentuser=$users->findBy(['token' => null]); //touts les utilisateurs que sont pas envoyes sur ypareo 
+
+        //parcourir larray et envoyer les candidats sur ypareo
+        foreach ($notsentuser as $u){
+
+        
+            //dd($u);
+
+
+            $candidat=array();
+            //array avec donnees remplis dans la bdd et a envoyer a ypareo
+            $candidat['codeCiviliteApprenant'] 	= $u->getCodeCiviliteApprenant();
+            $candidat['nomApprenant'] 			= $u->getNomApprenant();
+            $candidat['nomJf'] 					= $u->getNomJf();
+            $candidat['prenomApprenant'] 		= $u->getPrenomApprenant();
+            $candidat['dateNaissance'] 			= $u->getdateNaissance();
+            $candidat['tel1Appr'] 				= $u->gettel1Appr();
+            $candidat['tel2Appr'] 				= $u->gettel2Appr();
+            $candidat['emailAppr'] 				= $u->getemailAppr();
+            $candidat['adresse1Appr'] 			= $u->getadresse1Appr();
+            $candidat['adresse2Appr'] 			= $u->getadresse2Appr();
+            $candidat['cpAppr'] 				= $u->getcpAppr();
+            $candidat['villeAppr'] 				= $u->getvilleAppr();
+            $candidat['lieuNaissance'] 			= $u->getlieuNaissance();
+            $candidat['idPays'] 				= $u->getidPays();
+            $candidat['paysNaissance'] 			= $u->getpaysNaissance();
+            $candidat['idNationalite'] 			= $u->getidNationalite();
+            $candidat['departementNaissance'] 	= $u->getdepartementNaissance();
+            $candidat['idFormationSouhait1'] 	= $u->getidFormationSouhait1();
+            $candidat['dernierDiplome '] 		= $u->getdernierDiplome();
+            $candidat['niveauQualification'] 	= $u->getniveauQualification();
+
+            $candidat['dateObtention'] 			= date_format($u->getdateObtention(),"d/m/Y");
+
+            $candidat['dernierMetier'] 			= $u->getdernierMetier();
+            $candidat['dureeExperience'] 		= $u->getdureeExperience();
+            $candidat['entrepriseExperience'] 	= $u->getentrepriseExperience();
+            $candidat['niveauRemuneration'] 	= $u->getniveauRemuneration();
+
+            $candidat['statut'] 				= $u->getstatut();
+            $candidat['statutSalarie'] 			= $u->getstatutSalarie();
+            $candidat['statutCommentaire'] 		= $u->getstatutCommentaire();
+            $candidat['entrepriseSalarie'] 		= $u->getentrepriseSalarie();
+            $candidat['adresseEntreprise']  	= $u->getadresseEntreprise();
+            $candidat['villeEntreprise'] 		= $u->getvilleEntreprise();
+            $candidat['cpEntreprise'] 			= $u->getcpEntreprise();
+            $candidat['nomTuteur'] 				= $u->getnomTuteur();
+            $candidat['prenomTuteur'] 			= $u->getprenomTuteur();
+            $candidat['adresseMaillTuteur'] 	= $u->getadresseMaillTuteur();
+            $candidat['telephoneTuteur'] 		= $u->gettelephoneTuteur();
+
+            //$candidat["idSite"] = "3071";
+            $candidat["idFormationSouhait1"] = "3911164";    
+            $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";  
+
+
+            $resultado=$this->apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
+            echo "respuesta: ".$resultado;
+            echo "<br>";
+
+            if (strlen($resultado)<7 &&  is_numeric($resultado)){ //si la reponse est du 6 o moins characteres et une chiffre ça veut dire que lAPI a retourne un identifiant valable
+                //alors on va le sauvegarder dans la bdd
+
+                //ecrire la reponse de l API dans la bdd
+                $u->setToken($resultado);
+                $this->entityManager->persist($u);
+                // actually executes the queries (i.e. the INSERT query)
+                $this->entityManager->flush();
+
+            }else{  //on va sauvegarder la reponse dans un fichier dans le dossier temporaire
+
+                $temp_file = tempnam(sys_get_temp_dir(), 'YpareoAPIreponse');
+                echo $temp_file;
+
+                $myfile = fopen($temp_file, "w") or die("Unable to open file!");
+                $stat=fwrite($myfile,$resultado  ); 
+                fclose($myfile);
+                die;
+            
+            }
+
+        }
+
+        return true;
+    }
+
+
+
 
 
     public function ypareo_exists(string $loginEmail): bool

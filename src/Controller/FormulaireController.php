@@ -68,7 +68,11 @@ class FormulaireController extends AbstractController
         }
 
         $form = $this->createForm(UserFormType::class, $user);
+
+
+
         /***/ ///////////////////////Lire les pays depuis l'Api********************* */ */
+
 
         //  $pays = $this->validationApiService->apiGetListPays();
 
@@ -95,6 +99,17 @@ class FormulaireController extends AbstractController
             $codePays = $paysData['codePays'];
             $choices[$nomPays] = $codePays;
         }
+
+
+
+
+              
+              $myfile = fopen($file, "r") or die("Unable to open file!");
+              $content=fread($myfile,filesize($file)  ); 
+              fclose($myfile);
+      
+              $content = json_decode($content, true); // Convertit la chaîne JSON en tableau associatif
+              $pays = $content;
 
 
 
