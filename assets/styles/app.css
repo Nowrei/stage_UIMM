@@ -71,6 +71,18 @@ body {
    
 }
 
+.date {
+
+    display: flex;
+    flex-direction: row;
+    grid-template-rows: 30px;
+    margin-left: 30px;
+    margin-right: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+
 .only {
 
     display: flex;
@@ -91,7 +103,6 @@ body {
 
    
 }
-
 
 
 .solo {
@@ -185,8 +196,14 @@ body {
 }
 #user_form_villeAppr {
 
-    width: 40%
+    width: 80%
 }
+
+#user_form_idPays {
+
+    width: 80%
+}
+
 #user_form_paysNaissance {
 
     width: 80%
@@ -206,29 +223,29 @@ body {
     width: 80%
 }
 
-#user_form_poleFormation {
+#poleFormation {
 
     width: 80%
 }
 
-#user_form_intituleFormation {
+#intituleFormation {
 
     width: 80%
 }
 
-#user_form_typeCertFormation {
+#typeCertFormation {
 
     width: 200px
 }
 
-#user_form_dateDebutFormation {
+#dateDebutFormation {
 
     width: 100px;
     margin-left: 30px;
     
 }
 
-#user_form_dateFinFormation {
+#dateFinFormation {
 
     width: 100px
 }

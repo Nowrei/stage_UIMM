@@ -61,6 +61,7 @@ module.exports = {
 
     height: {
       
+      '90': '90%',
       '350': '350px',
       '100': '100%',
       '501': '501px',
@@ -87,4 +88,5 @@ module.exports = {
   plugins: [require("tw-elements/dist/plugin"),
   require('flowbite/plugin')],
 }
+
 
