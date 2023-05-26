@@ -3,8 +3,6 @@
 {% block title %}Formulaire UIMM
 {% endblock %}
 
-{% block body %}
-{{ form_start(formulaire) }}
 {% block stylesheets %}
 	{{ encore_entry_link_tags('app') }}
 	<link rel="stylesheet" href="https://unpkg.com/@tailwindcss/forms@0.3.3/dist/forms.min.css"/>
@@ -29,13 +27,15 @@
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
 {% endblock %}
+{% block body %}
+{{ form_start(formulaire) }}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-  
+{% if app.user %}
+	<div class="mb-3">
+		<a href="{{ path('app_logout') }}" class="mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">Se déconnecter</a>
+	</div>
+{% endif %}
+
 <div class="formulaire mt-1">
 	<div class="solo flex flex-col items-center justify-center pt-10">
 		<img src="{{ asset('build/images/logo.jpg')}}" alt="Image" class="object-cover mb-2">
@@ -102,10 +102,14 @@
 			{{ form_row(formulaire.cpAppr) }}
 		</div>
 	</div>
-	<div class="only p-2">
+	<div class="duo p-2">
 		<div class="champ">
 			<label for="ville" class="py-1 px-2">Ville *</label>
 			{{ form_row(formulaire.villeAppr) }}
+		</div>
+		<div class="champ">
+			<label for="pays" class="py-1 px-2">Pays *</label>
+			{{ form_row(formulaire.idPays) }}
 		</div>
 	</div>
 	<div class="duo p-2">
@@ -137,255 +141,319 @@
 	<div class="solo flex flex-col items-center justify-center pt-10 ">
 		<p class="text-s font-bold tracking-widest">Votre formation</p>
 	</div>
-	<div class="text">
-		<div class="duo p-2">
+	<div class="duo p-2">
 			<div class="champ">
 				<label for="pole" class="py-1 px-2">Pôle formation Champagne-Ardenne *</label>
-				{# {{ form_row(formulaires.poleFormation) }} #}
+				<select data-te-select-init id="poleFormation" name="poleFormation" required>
+				<option value="">Pôle formation Champagne-Ardenne</option>
+					<option value="3008262">Pôle Formation 08 (Campus sup Ard.)</option>
+					<option value="3918430">Pôle Formation 08 (Charleville)</option>
+					<option value="2864611">Pôle Formation 08 (Donchery)</option>
+					<option value="3072">Pôle Formation 10 (Aube)</option>
+					<option value="53071">Pôle Formation 51 (Reims, Site 1 Bât.B)</option>
+					<option value="368998">Pôle Formation 52 (St Dizier)</option>
+
+				</select>
 			</div>
+
 			<div class="champ">
 				<label for="intitule" class="py-1 px-2">Intitulé de la formation *</label>
-
+				<input type="text" id="intituleFormation" name="intituleFormation"/>
 			</div>
 		</div>
-		<div class="duo p-2">
+	<div class="duo p-2">
 			<div class="champ">
 				<label for="certif" class="py-1 px-2">Type de certification</label>
+				<select data-te-select-init id="typeCertFormation" name="typeCertFormation">
+					<option value="CQPM">CQPM</option>
+					<option value="Bloc de compétence">Bloc de compétence</option>
+					<option value="CCPM">CCPM</option>
+					<option value="CCPI">CCPI</option>
+					<option value="Autre">Autre</option>
+                    </select>
+			</div>
 
+			<div class="champ">
+					<label for="debut" class=" py-1 px-2">Date de début</label>
+
+					<input type="date" id="dateDebutFormation" name="dateDebutFormation"/>
 			</div>
 			<div class="champ">
-				<label for="debut" class=" py-1 px-2">Date de début</label>
-
-
+					<label for="fin" class="py-1 px-2">Date de fin</label>
+					<input type="date" id="dateFinFormation" name="dateFinFormation"/>
 			</div>
-			<div class="champ">
-				<label for="fin" class="py-1 px-2">Date de fin</label>
+		</div>	
+</div>
 
-			</div>
+
+
+	</div>
+	<div class="pro mt-10 ">
+		<div class="solo flex flex-col items-center justify-center pt-10 ">
+			<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
 		</div>
+		<div class="text">
+			<div class="solo p-2">
+				<div class="champ">
+					<label for="diplome" class="py-1 px-2">Dernier diplôme obtenu *</label>
+					{{ form_row(formulaire.dernierDiplome) }}
+				</div>
+			</div>
+			<div class="duo p-2">
+				<div class="champ">
+					<label for="qualif" class="py-1 px-2">Niveau qualification</label>
+					{{ form_row(formulaire.niveauQualification) }}
+				</div>
+				<div class="champ">
+					<label for="obtention" class="py-1 px-2">Date d'obtention *</label>
+					{{ form_row(formulaire.dateObtention) }}
+				</div>
+			</div>
+
+
+			<div class="solo p-2">
+				<div class="champ">
+					<label for="exp" class="py-1 px-2">Avez-vous déjà eu une expérience professionnelle ?</label>
+				</div>
+			</div>
+			<div class="flex items-center sm:flex sm:justify-start">
+				<input id="exp-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+				<label for="exp-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+				<input id="exp-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+				<label for="exp-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+			</div>
+
+
+			<div id="experience-non" class="solo mt-2 text-sm  hidden"></div>
+			<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
+				<div class="duo p-2">
+					<div>
+						<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
+						{{ form_row(formulaire.dernierMetier) }}
+					</div>
+					<div>
+						<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
+						{{ form_row(formulaire.dureeExperience) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="entreprise" class="py-1 px-2">Entreprise *</label>
+						{{ form_row(formulaire.entrepriseExperience) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
+						{{ form_row(formulaire.niveauRemuneration) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="solo p-2">
+				<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
+			</div>
+			<div class="flex items-center sm:flex sm:justify-start">
+				<input id="checkbox-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out ">
+				<label for="checkbox-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
+
+
+				<input id="checkbox-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
+				<label for="checkbox-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
+			</div>
+			<div id="checkbox-text-non" class="solo hidden">
+				<div class="solo p-2">
+					<div>
+						<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
+						{{ form_row(formulaire.statut) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
+						{{ form_row(formulaire.statutCommentaire) }}
+					</div>
+				</div>
+			</div>
+			<div id="checkbox-text-oui" class=" solo mt-2 text-sm hidden">
+				<div class="solo p-2">
+					<div>
+						<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
+						{{ form_row(formulaire.statutSalarie) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
+						{{ form_row(formulaire.entrepriseSalarie) }}
+					</div>
+				</div>
+				<div class="solo p-2">
+					<div>
+						<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
+						{{ form_row(formulaire.adresseEntreprise) }}
+					</div>
+				</div>
+				<div class="duo p-2">
+					<div>
+						<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
+						{{ form_row(formulaire.villeEntreprise) }}
+					</div>
+					<div>
+						<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
+						{{ form_row(formulaire.cpEntreprise) }}
+					</div>
+				</div>
+				<div class="duo p-2">
+					<div>
+						<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
+						{{ form_row(formulaire.nomTuteur) }}
+					</div>
+					<div>
+						<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
+						{{ form_row(formulaire.prenomTuteur) }}
+					</div>
+				</div>
+				<div class="duo p-2">
+					<div>
+						<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
+						{{ form_row(formulaire.adresseMaillTuteur) }}
+					</div>
+					<div>
+						<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
+						{{ form_row(formulaire.telephoneTuteur) }}
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<button type="submit" class="flex justify-center mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+			Envoyer
+		</button>
 	</div>
 
 
-</div>
-<div class="pro mt-10 ">
-	<div class="solo flex flex-col items-center justify-center pt-10 ">
-		<p class="text-s font-bold tracking-widest">Votre vie professionnelle</p>
+	{{ form_end(formulaire)}}
+
+<!-- component -->
+<!-- component -->
+<style>
+		.animated {
+			-webkit-animation-duration: 1s;
+			animation-duration: 1s;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both;
+		}
+
+		.animated.faster {
+			-webkit-animation-duration: 500ms;
+			animation-duration: 500ms;
+		}
+
+		.fadeIn {
+			-webkit-animation-name: fadeIn;
+			animation-name: fadeIn;
+		}
+
+		.fadeOut {
+			-webkit-animation-name: fadeOut;
+			animation-name: fadeOut;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes fadeOut {
+			from {
+				opacity: 1;
+			}
+
+			to {
+				opacity: 0;
+			}
+		}
+	</style>
+
+	<div>
+		<button onclick="openModal('main-modal')" class='w-full mt-10 bg-black text-white p-2 text-2xl font-bold'>Voir nos conditions RGPD</button>
 	</div>
-	<div class="text">
-		<div class="solo p-2">
-			<div class="champ">
-				<label for="diplome" class="py-1 px-2">Dernier diplôme obtenu *</label>
-				{{ form_row(formulaire.dernierDiplome) }}
+
+	<div class="w-80 main-modal fixed w-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
+		<div class="w-70 border border-blue-500 shadow-lg modal-container bg-white w-4/12 md:max-w-11/12 mx-auto rounded-xl shadow-lg z-50 overflow-y-auto">
+			<div class="modal-content py-4 text-left px-6">
+				<!--Title-->
+				<div class="flex justify-between items-center pb-3">
+					<h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-title">
+										Conditions RGPD
+									</h3>
+									<hr>
+					<div class="modal-close cursor-pointer z-50" onclick="modalClose('main-modal')">
+						<svg class="fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+							viewBox="0 0 18 18">
+							<path
+								d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+							</path>
+						</svg>
+					</div>
+				</div>
+				<!--Body-->
+		<div class="bg-white sm:p-6 sm:pb-4">
+							<div class="sm:flex sm:items-start">
+								
+									<div class="mt-2">
+									<hr>
+										<p class="text-sm text-gray-500 mt-2">
+											Conformément au règlement général sur la protection des données (RGPD), nous vous informons que les données que vous nous communiquez font l’objet d’un traitement informatisé dont le Pôle Formation UIMM Champagne-Ardenne est responsable. Elles sont conservées pendant trois ans. Elles sont destinées à nous permettre de gérer votre candidature et de vous informer sur les évènements liés à votre projet de formation en apprentissage. Vos données sont réservées au Pôle Formation UIMM Champagne Ardenne et/ou aux organismes de formations partenaires du pôle dans la gestion des formations à distance. Elles sont susceptibles d’être transmises aux entreprises dans le cadre de la mise en relation candidat/employeur, pour conclure un contrat d’apprentissage ou de professionnalisation. Pour exercer vos droits d’accès, de rectification, d’effacement et d’opposition au traitement de vos données personnelles, ainsi qu’au droit à la limitation et à la portabilité de vos données, vous pourrez adresser, à tout moment, un mail à alternance@formation-industries-ca.fr. Vous pouvez aussi introduire une réclamation auprès de l’autorité de contrôle compétente (CNIL).
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+							
 			</div>
 		</div>
-		<div class="duo p-2">
-			<div class="champ">
-				<label for="qualif" class="py-1 px-2">Niveau qualification</label>
-				{{ form_row(formulaire.niveauQualification) }}
-			</div>
-			<div class="champ">
-				<label for="obtention" class="py-1 px-2">Date d'obtention *</label>
-				{{ form_row(formulaire.dateObtention) }}
-			</div>
-		</div>
-
-
-		<div class="solo p-2">
-			<div class="champ">
-				<label for="exp" class="py-1 px-2">Avez-vous déjà eu une expérience professionnelle ?</label>
-			</div>
-		</div>
-		<div class="flex items-center sm:flex sm:justify-start">
-			<input id="exp-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
-			<label for="exp-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
-
-
-			<input id="exp-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
-			<label for="exp-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
-		</div>
-
-
-		<div id="experience-non" class="solo mt-2 text-sm  hidden"></div>
-		<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
-			<div class="duo p-2">
-				<div>
-					<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
-					{{ form_row(formulaire.dernierMetier) }}
-				</div>
-				<div>
-					<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
-					{{ form_row(formulaire.dureeExperience) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="entreprise" class="py-1 px-2">Entreprise *</label>
-					{{ form_row(formulaire.entrepriseExperience) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
-					{{ form_row(formulaire.niveauRemuneration) }}
-				</div>
-			</div>
-		</div>
-
-		<div class="solo p-2">
-			<label for="salaire" class="py-1 px-2">Êtes-vous salarié ?</label>
-		</div>
-		<div class="flex items-center sm:flex sm:justify-start">
-			<input id="checkbox-oui" type="checkbox" class="ml-10 space-x-4 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out ">
-			<label for="checkbox-oui" class="ml-2 block text-sm leading-5 text-gray-900">Oui</label>
-
-
-			<input id="checkbox-non" type="checkbox" class="ml-3 form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out">
-			<label for="checkbox-non" class="ml-2 block text-sm leading-5 text-gray-900">Non</label>
-		</div>
-		<div id="checkbox-text-non" class="solo hidden">
-			<div class="solo p-2">
-				<div>
-					<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
-					{{ form_row(formulaire.statut) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
-					{{ form_row(formulaire.statutCommentaire) }}
-				</div>
-			</div>
-		</div>
-		<div id="checkbox-text-oui" class=" solo mt-2 text-sm hidden">
-			<div class="solo p-2">
-				<div>
-					<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
-					{{ form_row(formulaire.statutSalarie) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
-					{{ form_row(formulaire.entrepriseSalarie) }}
-				</div>
-			</div>
-			<div class="solo p-2">
-				<div>
-					<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
-					{{ form_row(formulaire.adresseEntreprise) }}
-				</div>
-			</div>
-			<div class="duo p-2">
-				<div>
-					<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
-					{{ form_row(formulaire.villeEntreprise) }}
-				</div>
-				<div>
-					<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
-					{{ form_row(formulaire.cpEntreprise) }}
-				</div>
-			</div>
-			<div class="duo p-2">
-				<div>
-					<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
-					{{ form_row(formulaire.nomTuteur) }}
-				</div>
-				<div>
-					<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
-					{{ form_row(formulaire.prenomTuteur) }}
-				</div>
-			</div>
-			<div class="duo p-2">
-				<div>
-					<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
-					{{ form_row(formulaire.adresseMaillTuteur) }}
-				</div>
-				<div>
-					<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
-					{{ form_row(formulaire.telephoneTuteur) }}
-				</div>
-
-			</div>
-
-		</div>
-
 	</div>
-	<button type="submit" class="flex justify-center mt-10 button inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-		Envoyer
-	</button>
-</div>
+    <div class="another-modal fixed w-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
+		
+	</div>
 
-
-{{ form_end(formulaire)}}
-<script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
-
-<div class="flex justify-center w-full bg-konbini-200 h-fit text-white">
-<div id="basicModal" x-data="{ open: false }" @open-me="open=true" @close-me="open=false">
-    <button class="w-full inline-flex justify-center rounded-md p-4 bg-transparent text-blod text-white font-medium sm:text-sm"
-            @click.prevent="open = true"
-            aria-controls="basic-modal"
-    >Voir nos conditions RGPD</button>
-    <div @keydown.window.escape="open = false" x-show="open" class="relative z-10" aria-labelledby="modal-title" x-ref="dialog" aria-modal="true">
-
-
-        <div x-show="open" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Background backdrop, show/hide based on modal state." class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
-
-        <div class="fixed z-10 inset-0 overflow-y-auto">
-            <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-
-                <div x-show="open" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-description="Modal panel, show/hide based on modal state." class="w-60 relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full" @click.away="open = false">
-                    <div class="bg-white w-full px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                    Conditions RGPD
-                                </h3>
-                                <hr>
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-500">
-                                        Conformément au règlement général sur la protection des données (RGPD), nous vous informons que les données que vous nous communiquez font l’objet d’un traitement informatisé dont le Pôle Formation UIMM Champagne-Ardenne est responsable. Elles sont conservées pendant trois ans. Elles sont destinées à nous permettre de gérer votre candidature et de vous informer sur les évènements liés à votre projet de formation en apprentissage. Vos données sont réservées au Pôle Formation UIMM Champagne Ardenne et/ou aux organismes de formations partenaires du pôle dans la gestion des formations à distance. Elles sont susceptibles d’être transmises aux entreprises dans le cadre de la mise en relation candidat/employeur, pour conclure un contrat d’apprentissage ou de professionnalisation. Pour exercer vos droits d’accès, de rectification, d’effacement et d’opposition au traitement de vos données personnelles, ainsi qu’au droit à la limitation et à la portabilité de vos données, vous pourrez adresser, à tout moment, un mail à alternance@formation-industries-ca.fr. Vous pouvez aussi introduire une réclamation auprès de l’autorité de contrôle compétente (CNIL).
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" @click="open = false">
-                            Fermer
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<script>
-  flatpickr("#datepicker", {
-    dateFormat: "d-m-Y",
-    locale: {
-      months: {
-        shorthand: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
-        longhand: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-      },
-      weekdays: {
-        shorthand: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-        longhand: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
-      },
-      firstDayOfWeek: 1,
-      rangeSeparator: ' - ',
-      weekAbbreviation: 'Sem',
-      scrollTitle: 'Défiler pour augmenter la valeur',
-      toggleTitle: 'Cliquer pour basculer',
-    },
-    onClose: function(selectedDates, dateStr, instance) {
-      instance.close();
-    },
-  });
-</script>
 	<script>
+        all_modals = ['main-modal', 'another-modal']
+        all_modals.forEach((modal)=>{
+            const modalSelected = document.querySelector('.'+modal);
+            modalSelected.classList.remove('fadeIn');
+            modalSelected.classList.add('fadeOut');
+            modalSelected.style.display = 'none';
+        })
+        const modalClose = (modal) => {
+            const modalToClose = document.querySelector('.'+modal);
+            modalToClose.classList.remove('fadeIn');
+            modalToClose.classList.add('fadeOut');
+            setTimeout(() => {
+                modalToClose.style.display = 'none';
+            }, 500);
+        }
+
+        const openModal = (modal) => {
+            const modalToOpen = document.querySelector('.'+modal);
+            modalToOpen.classList.remove('fadeOut');
+            modalToOpen.classList.add('fadeIn');
+            modalToOpen.style.display = 'flex';
+        }
+    
+	</script>
+<script>
 		const expOui = document.getElementById("exp-oui");
 const expNon = document.getElementById("exp-non");
 const experienceNon = document.getElementById("experience-non");
