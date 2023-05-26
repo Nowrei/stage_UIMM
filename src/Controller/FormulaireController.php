@@ -41,7 +41,7 @@ class FormulaireController extends AbstractController
         //le fichier pays.txt existe?
 
         $file = "c://data//pays.txt";
-=======
+
         $file = $this->validationApiService->getFilePays(); //le valeur du route du fichier pays est recupere depuis le service
         //$file="c://data//pays.txt";
 
