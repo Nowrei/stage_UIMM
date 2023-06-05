@@ -125,7 +125,9 @@ class FormulaireType extends AbstractType
                     'label' => false,
                 'attr' => [
                     'class' => 'form-control py-1 px-2',
-                    'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                    'style' => 'border: none; border-radius: 5px;',  ], 
+                    
+                 ],)
             
             ->add('poleFormation', ChoiceType::class, [
                 'label' => false,
@@ -257,7 +259,7 @@ class FormulaireType extends AbstractType
                     'Financement Région' => 'Financement Région',
                     'POE Individuelle' => 'POE Individuelle',
                     'POE COllective' => 'POE Collective',
-                    'VAR' => 'VAE',
+                    'VAE' => 'VAE',
                     'Autre' => 'Autre',
 
                     

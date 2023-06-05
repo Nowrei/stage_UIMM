@@ -48,7 +48,7 @@ class RegistrationFormType extends AbstractType
                     'invalid_message' => 'Les mots de passe ne sont pas identiques.',
                     'options' => ['attr' => ['class' => 'duo password-field']],
                     'required' => true,
-                    'first_options'  => ['label' => 'Choissisez votre mot de passe',],
+                    'first_options'  => ['label' => 'Choissisez votre mot de passe (8 caractères minimum)',],
                     'second_options' => ['label' => 'Confirmez votre mot de passe'],
                     // instead of being set onto the object directly,
                     // this is read and encoded in the controller
@@ -60,7 +60,7 @@ class RegistrationFormType extends AbstractType
                         ]),
                         new Length([
                             'min' => 8,
-                            'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} charactères.',
+                            'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères.',
                             // max length allowed by Symfony for security reasons
                             'max' => 128,
                         ]),

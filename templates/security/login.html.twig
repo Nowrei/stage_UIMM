@@ -59,6 +59,119 @@
 				</form>
 			</div>
 		</div>
+		<!-- component -->
+<style>
+		.animated {
+			-webkit-animation-duration: 1s;
+			animation-duration: 1s;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both;
+		}
+
+		.animated.faster {
+			-webkit-animation-duration: 500ms;
+			animation-duration: 500ms;
+		}
+
+		.fadeIn {
+			-webkit-animation-name: fadeIn;
+			animation-name: fadeIn;
+		}
+
+		.fadeOut {
+			-webkit-animation-name: fadeOut;
+			animation-name: fadeOut;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes fadeOut {
+			from {
+				opacity: 1;
+			}
+
+			to {
+				opacity: 0;
+			}
+		}
+	</style>
+
+	<div>
+		<button onclick="openModal('main-modal')" class='w-full mt-10 bg-black text-white p-2 text-2xl font-bold'>Voir nos conditions RGPD</button>
+	</div>
+
+	<div class="w-80 main-modal fixed w-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
+		<div class="w-70 border border-blue-500 shadow-lg modal-container bg-white w-4/12 md:max-w-11/12 mx-auto rounded-xl shadow-lg z-50 overflow-y-auto">
+			<div class="modal-content py-4 text-left px-6">
+				<!--Title-->
+				<div class="flex justify-between items-center pb-3">
+					<h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-title">
+										Conditions RGPD
+									</h3>
+									<hr>
+					<div class="modal-close cursor-pointer z-50" onclick="modalClose('main-modal')">
+						<svg class="fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+							viewBox="0 0 18 18">
+							<path
+								d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+							</path>
+						</svg>
+					</div>
+				</div>
+				<!--Body-->
+		<div class="bg-white sm:p-6 sm:pb-4">
+							<div class="sm:flex sm:items-start">
+								
+									<div class="mt-2">
+									<hr>
+										<p class="text-sm text-gray-500 mt-2">
+											Conformément au règlement général sur la protection des données (RGPD), nous vous informons que les données que vous nous communiquez font l’objet d’un traitement informatisé dont le Pôle Formation UIMM Champagne-Ardenne est responsable. Elles sont conservées pendant trois ans. Elles sont destinées à nous permettre de gérer votre candidature et de vous informer sur les évènements liés à votre projet de formation en apprentissage. Vos données sont réservées au Pôle Formation UIMM Champagne Ardenne et/ou aux organismes de formations partenaires du pôle dans la gestion des formations à distance. Elles sont susceptibles d’être transmises aux entreprises dans le cadre de la mise en relation candidat/employeur, pour conclure un contrat d’apprentissage ou de professionnalisation. Pour exercer vos droits d’accès, de rectification, d’effacement et d’opposition au traitement de vos données personnelles, ainsi qu’au droit à la limitation et à la portabilité de vos données, vous pourrez adresser, à tout moment, un mail à alternance@formation-industries-ca.fr. Vous pouvez aussi introduire une réclamation auprès de l’autorité de contrôle compétente (CNIL).
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+							
+			</div>
+		</div>
+	</div>
+    <div class="another-modal fixed w-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
+		
+	</div>
+
+	<script>
+        all_modals = ['main-modal', 'another-modal']
+        all_modals.forEach((modal)=>{
+            const modalSelected = document.querySelector('.'+modal);
+            modalSelected.classList.remove('fadeIn');
+            modalSelected.classList.add('fadeOut');
+            modalSelected.style.display = 'none';
+        })
+        const modalClose = (modal) => {
+            const modalToClose = document.querySelector('.'+modal);
+            modalToClose.classList.remove('fadeIn');
+            modalToClose.classList.add('fadeOut');
+            setTimeout(() => {
+                modalToClose.style.display = 'none';
+            }, 500);
+        }
+
+        const openModal = (modal) => {
+            const modalToOpen = document.querySelector('.'+modal);
+            modalToOpen.classList.remove('fadeOut');
+            modalToOpen.classList.add('fadeIn');
+            modalToOpen.style.display = 'flex';
+        }
+    
+	</script>
 	{% endif %}
 {% endblock %}
 
