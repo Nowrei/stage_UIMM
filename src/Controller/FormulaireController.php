@@ -163,12 +163,12 @@ class FormulaireController extends AbstractController
             ];
             
             $formation = new Formations();
-            if ($additionalData['poleFormation'] === '3008262') { $texte = 'Pôle Formation 08 (Campus sup Ard.)'; $formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '3918430') { $texte = 'Pôle Formation 08 (Charleville)';$formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '2864611') { $texte = 'Pôle Formation 08 (Donchery)';$formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '3072') { $texte = 'Pôle Formation 10 (Aube)';$formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '53071') {$texte = 'Pôle Formation 51 (Reims, Site 1 Bât.B)';$formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '368998') {$texte = 'Pôle Formation 52 (St Dizier)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '3008262') { $texte = '3008262.Pôle Formation 08 (Campus sup Ard.)'; $formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '3918430') { $texte = '3918430.Pôle Formation 08 (Charleville)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '2864611') { $texte = '2864611.Pôle Formation 08 (Donchery)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '3072') { $texte = '3072.Pôle Formation 10 (Aube)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '53071') {$texte = '53071.Pôle Formation 51 (Reims, Site 1 Bât.B)';$formation->setPoleFormation($texte);}
+            if ($additionalData['poleFormation'] === '368998') {$texte = '368998.Pôle Formation 52 (St Dizier)';$formation->setPoleFormation($texte);}
             
             $formation->setIntituleFormation($additionalData['intituleFormation']);
             $formation->setTypeCertFormation($additionalData['typeCertFormation']);
