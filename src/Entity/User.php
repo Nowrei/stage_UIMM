@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use phpDocumentor\Reflection\Types\Static_;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -38,6 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
 
 
 
@@ -159,7 +161,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephoneTuteur = null;
 
-  
 
     public function __construct()
     {
@@ -211,6 +212,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getIsAdmin(): bool
+    {
+        return  in_array('ROLE_ADMIN', $this->roles, true) ;
+   
+        
+    }
+
+    public function setIsAdmin(bool $isadmin): self
+    {
+        if($isadmin) {
+            $this->roles[] = 'ROLE_ADMIN';
+            $this->roles = array_unique($this->roles);
+        } else {
+            $this->roles = array_filter($this->roles, function ($e) { return $e !== "ROLE_ADMIN"; });
+        }
+        return $this;
+    }
+
+
+    /*
+    
+    public function isSalarie(): ?bool
+    {
+        return $this->salarie;
+    }
+
+    public function setSalarie(bool $salarie): self
+    {
+        $this->salarie = $salarie;
+
+        return $this;
+    }
+
+    */
 
     /**
      * @see PasswordAuthenticatedUserInterface

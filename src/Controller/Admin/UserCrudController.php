@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use Doctrine\DBAL\Types\ArrayType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -23,6 +24,7 @@ class UserCrudController extends AbstractCrudController
             'email',
             'token',
             'isVerified',
+            BooleanField::new('isAdmin'),
             //'roles[0]',
             //FormField::addPanel('User Details'),
             'nomApprenant',
