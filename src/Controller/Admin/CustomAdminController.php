@@ -51,28 +51,108 @@ class CustomAdminController extends AbstractCrudController
 
         // Crea el array de datos para exportar
         $data = [];
-        $data[] = ['ID', 'Nom', 'Prenom','EmailRegistre', 'IdYpareo', 'addresse', 'CP', 'Date Naissance', 'DernierDiplome','EmailForm', 'Role' ];
+        $data[] = ['Id',
+        'Token',
+        'Verified',
+        'Email',
+        'Roles',
+        'Civilite(1=mr,0=mme)',
+        'Nom',
+        'Prenom',
+        'NomJf',
+        'DateNaissance',
+        'LieuNaissance',
+        'DepartementNaissance',
+        'PaysNaissance',
+        'IdNationalite',
+        'Adresse1',
+        'Adresse2',
+        'Cp',
+        'Ville',
+        'IdPays',
+        'EmailForm',
+        'Tel1',
+        'Tel2',
+        'IdFormationSouhait1',
+        'NiveauQualification',
+        'Experience(1=oui,0=non)',
+        'DernierMetier',
+        'DureeExperience',
+        'EntrepriseExperience',
+        'NiveauRemuneration',
+        'Salarie',
+        'Statut',
+        'StatutSalarie',
+        'StatutCommentaire',
+        'EntrepriseSalarie',
+        'AdresseEntreprise',
+        'VilleEntreprise',
+        'CpEntreprise',
+        'NomTuteur',
+        'PrenomTuteur',
+        'AdresseMaillTuteur',
+        'TelephoneTuteur',
+        'DernierDiplome',
+        'DateObtention' ];
 
         foreach ($users as $user) {
             $data[] = [
                 $user->getId(),
+                $user->getToken(),
+                $user->isVerified(),
+                $user->getEmail(),
+                $user->getRoles()[0],
+
+                $user->getCodeCiviliteApprenant(),
                 $user->getNomApprenant(),
                 $user->getPrenomApprenant(),
-                $user->getEmail(),
-                $user->getToken(),
-                $user->getAdresse1Appr(),
-                $user->getCpAppr(),
+                $user->getNomJf(),
                 $user->getDateNaissance(),
-                $user->getDernierDiplome(),
+                $user->getLieuNaissance(),
+                $user->getDepartementNaissance(),
+                $user->getPaysNaissance(),
+                $user->getIdNationalite(),
+
+
+                $user->getAdresse1Appr(),
+                $user->getAdresse2Appr(),
+                $user->getCpAppr(),
+                $user->getVilleAppr(),
+                $user->getIdPays(),
+
                 $user->getEmailAppr(),
-                $user->getRoles()[0],
+                $user->getTel1Appr(),
+                $user->getTel2Appr(),
+
+                $user->getIdFormationSouhait1(),
+                $user->getNiveauQualification(),
+
+                $user->isDejaExperience(),
+                $user->getDernierMetier(),
+                $user->getDureeExperience(),
+                $user->getEntrepriseExperience(),
+                $user->getNiveauRemuneration(),
+
+                $user->isSalarie(),
+                $user->getStatut(),
+                $user->getStatutSalarie(),
+                $user->getStatutCommentaire(),
+
+                $user->getEntrepriseSalarie(),
+                $user->getAdresseEntreprise(),
+                $user->getVilleEntreprise(),
+                $user->getCpEntreprise(),
+                $user->getNomTuteur(),
+                $user->getPrenomTuteur(),
+                $user->getAdresseMaillTuteur(),
+                $user->getTelephoneTuteur(),
+                    
+                $user->getDernierDiplome(),
+                $user->getDateObtention(),
      
                 //$user->getCreatedAt()->format('Y-m-d H:i:s'),
             ];
         }
-
-
-
 
         // Crea una instancia de la hoja de cálculo y establece los datos
         $spreadsheet = new Spreadsheet();

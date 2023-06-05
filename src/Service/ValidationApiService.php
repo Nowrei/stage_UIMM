@@ -17,6 +17,8 @@ class ValidationApiService extends AbstractController
 
     protected $entityManager;
 
+    protected $temp_file;
+
     
     
     public function __construct2( $customParam, $customUrl, $customFilePays ) 
@@ -41,7 +43,10 @@ class ValidationApiService extends AbstractController
     }
 
 
-    
+    public function getTempFile() {
+        return $this->temp_file;
+    }
+
 
 
     public function getToken() {
@@ -343,13 +348,13 @@ class ValidationApiService extends AbstractController
             $candidat['adresseMaillTuteur'] 	= $u->getadresseMaillTuteur();
             $candidat['telephoneTuteur'] 		= $u->gettelephoneTuteur();
 
-            //$candidat["idSite"] = "3071";
-            $candidat["idFormationSouhait1"] = "3911164";    
+            $candidat["idSite"] = "3071";
+            //$candidat["idFormationSouhait1"] = "3911164";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";  
 
 
             $resultado=$this->apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
-            echo "respuesta: ".$resultado;
+            echo "reponse: ".$resultado;
             echo "<br>";
 
             if (strlen($resultado)<7 &&  is_numeric($resultado)){ //si la reponse est du 6 o moins characteres et une chiffre ça veut dire que lAPI a retourne un identifiant valable
@@ -364,12 +369,13 @@ class ValidationApiService extends AbstractController
             }else{  //on va sauvegarder la reponse dans un fichier dans le dossier temporaire
 
                 $temp_file = tempnam(sys_get_temp_dir(), 'YpareoAPIreponse');
-                echo $temp_file;
+                $this->temp_file=$temp_file;
 
                 $myfile = fopen($temp_file, "w") or die("Unable to open file!");
-                $stat=fwrite($myfile,$resultado  ); 
+                $stat=fwrite($myfile,$resultado." user: ".$u->getemail()." idSite: ".$candidat["idSite"]." FormationSouhaite: ".$candidat["idFormationSouhait1"] ."Regardez la base de donnees pour plus d'information" ); 
+
                 fclose($myfile);
-                die;
+                return false;
             
             }
 
