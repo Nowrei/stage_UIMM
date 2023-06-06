@@ -4,9 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 
-use App\Form\PoleFormationType;
+use App\Form\FormationsType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserFormType extends AbstractType
 {
@@ -118,13 +119,28 @@ class UserFormType extends AbstractType
                 'class' => 'form-control py-1 px-2',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
 
-            ->add('idPays', HiddenType::class,)
+                ->add('idPays', ChoiceType::class, [
+                    'label' => false,
+                    'placeholder' => 'France',
+                    'required' => true,
+                    'choices' => [
+    
+                                $options['listePays']
+                    ],
+                    'attr' => [
+                        'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
+                    ],
+                    'empty_data' => '1',
+                ])
 
-            ->add('paysNaissance', TextType::class, [
+            ->add('paysNaissance', ChoiceType::class, [
                 'label' => false,
-            'attr' => [
-                'class' => 'form-control py-1 px-2',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'choices' => $options['listePays'],
+                'attr' => [
+                    'class' => 'form-control py-1 px-2',
+                    'style' => 'border: none; border-radius: 5px;',  
+                ],  
+            ],)
 
             ->add('idNationalite', ChoiceType::class, [
                 'label' => false,
@@ -312,14 +328,24 @@ class UserFormType extends AbstractType
             'class' => 'form-control py-1 px-2',
             'style' => 'border: none; border-radius: 5px;',  ],
         ])
-      
-        ;
+            ->add('formations', CollectionType::class, [
+                // each entry in the array will be an "email" field
+                'entry_type' => FormationsType::class,
+                // these options are passed to each "email" type
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                //     'attr' => ['class' => 'email-box'],
+                // ],
+            ])
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'listePays' => [],
         ]);
     }
 }

@@ -1,3 +1,27 @@
+{% macro formulaireRowMacro(formationForm, idx) %}
+
+	<li class="only p-2">
+            <div class="champ">{{ form_row(formationForm.poleFormation) }}</div>
+            <div class="champ">{{ form_row(formationForm.intituleFormation) }}</div>
+            <div class="champ">{{ form_row(formationForm.typeCertFormation) }}</div>
+            <div class="champ">{{ form_row(formationForm.dateDebutFormation) }}</div>
+            <div class="champ">{{ form_row(formationForm.dateFinFormation) }}</div>
+
+
+		{# <div class="champ">
+			<label for="tel1Appr" class="py-1 px-2">Téléphone portable *</label>
+			{{ form_row(formulaire.tel1Appr, {attr: {'class': 'champ'}}) }}
+		</div>
+		<div class="champ">
+			<label for="tel2Appr" class="py-1 px-2">Téléphone fixe</label>
+			{{ form_row(formulaire.tel2Appr) }}
+		</div> #}
+	</li>
+
+
+
+{% endmacro %}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Formulaire UIMM
@@ -78,7 +102,7 @@
 	<div class="duo p-2">
 		<div class="champ">
 			<label for="tel1Appr" class="py-1 px-2">Téléphone portable *</label>
-			{{ form_row(formulaire.tel1Appr) }}
+			{{ form_row(formulaire.tel1Appr, {attr: {'class': 'champ'}}) }}
 		</div>
 		<div class="champ">
 			<label for="tel2Appr" class="py-1 px-2">Téléphone fixe</label>
@@ -133,15 +157,42 @@
 			{{ form_row(formulaire.departementNaissance) }}
 		</div>
 		<div class="champ">
-			<label for="naissance" class="py-1 px-2">Ville de naissance *</label>
-			{{ form_row(formulaire.lieuNaissance) }}
+			{{ form_row(formulaire.lieuNaissance, {label: 'Lieu de naissance'}) }}
 		</div>
+		{# the data-index attribute is required for the JavaScript code below #}
 	</div>
-
 
 </div>
 
+<div class="formation mt-10">
+	<div class="solo flex flex-col items-center justify-center pt-10 ">
+		<p class="text-s font-bold tracking-widest">Votre formation</p>
+	</div>
+	<div class="duo p-2">
 
+		<button type="button" class="add_item_link" data-collection-holder-class="formations">Add a ForMaTiOn</button>
+		<ul class="formations"
+			data-index="{{ formulaire.formations|length > 0 ? formulaire.tags|last.vars.name + 1 : 0 }}"
+			data-prototype="{{ _self.formulaireRowMacro(formulaire.formations.vars.prototype)|e('html_attr') }}"
+		>
+        {% for f in formulaire.formations %}
+			{{ _self.formulaireRowMacro(f, loop.index) }}
+        {% endfor %}		
+		
+		
+		
+		
+		
+		</ul>
+		{# <div class="champ">
+			<label for="naissance" class="py-1 px-2">Ville de naissance *</label>
+			{{ form_row(formulaire.formations) }}
+		</div> #}
+	</div>
+
+</div>
+
+{# 
 <div class="formation mt-10">
 	<div class="solo flex flex-col items-center justify-center pt-10 ">
 		<p class="text-s font-bold tracking-widest">Votre formation</p>
@@ -188,7 +239,7 @@
 					<input type="date" id="dateFinFormation" name="dateFinFormation"/>
 			</div>
 		</div>	
-</div>
+</div> #}
 
 
 
@@ -434,6 +485,57 @@
 	</div>
 
 	<script>
+const addTagFormDeleteLink = (item) => {
+    const removeFormButton = document.createElement('button');
+    removeFormButton.innerText = 'Delete this tag';
+
+    item.append(removeFormButton);
+
+    removeFormButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        // remove the li for the tag form
+        item.remove();
+    });
+}
+
+document
+    .querySelectorAll('ul.formations li')
+    .forEach((element) => {
+        addTagFormDeleteLink(element)
+    })
+
+
+	const addFormToCollection = (e) => {
+	const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+	const item = document.createElement('li');
+
+	item.innerHTML = collectionHolder
+		.dataset
+		.prototype
+		.replace(
+		/__name__/g,
+		collectionHolder.dataset.index
+		);
+
+	collectionHolder.appendChild(item);
+
+	collectionHolder.dataset.index++;
+
+	addTagFormDeleteLink(item)
+	};
+
+		document
+		.querySelectorAll('.add_item_link')
+		.forEach(btn => {
+			btn.addEventListener("click", addFormToCollection)
+		});
+
+
+
+
+
+
         all_modals = ['main-modal', 'another-modal']
         all_modals.forEach((modal)=>{
             const modalSelected = document.querySelector('.'+modal);

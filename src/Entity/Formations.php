@@ -17,9 +17,6 @@ class Formations
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $poleFormation = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $intituleFormation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -31,8 +28,13 @@ class Formations
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateFinFormation = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'user_form')]
-    private Collection $users;
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?SiteFormation $poleFormation = null;
 
     public function __construct()
     {
@@ -42,18 +44,6 @@ class Formations
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPoleFormation(): ?string
-    {
-        return $this->poleFormation;
-    }
-
-    public function setPoleFormation(string $poleFormation): self
-    {
-        $this->poleFormation = $poleFormation;
-
-        return $this;
     }
 
     public function getIntituleFormation(): ?string
@@ -104,29 +94,26 @@ class Formations
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(?User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addUserForm($this);
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function getPoleFormation(): ?SiteFormation
     {
-        if ($this->users->removeElement($user)) {
-            $user->removeUserForm($this);
-        }
+        return $this->poleFormation;
+    }
+
+    public function setPoleFormation(?SiteFormation $poleFormation): self
+    {
+        $this->poleFormation = $poleFormation;
 
         return $this;
     }

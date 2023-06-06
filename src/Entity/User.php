@@ -13,6 +13,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -39,12 +41,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
-
-
-
-
-    #[ORM\ManyToMany(targetEntity: Formations::class, inversedBy: 'users')]
-    private Collection $user_form;
 
     #[ORM\Column(nullable: true)]
     private ?int $codeCiviliteApprenant = null;
@@ -95,6 +91,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $idNationalite = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank(
+        message: 'Ne doit pas être laissé vide.'
+    )]
+    #[Assert\Regex(
+        '/^(?:0[1-9]|[1-8][0-9]|9[0-5]|2A|2B|97[1-6]|98[4-7]|99[7-8])$/',
+        '{{ value }} n\'est pas un département français valide.'
+    )]
+    // #[Assert\Regex(
+    //     '/^(chien|chat|cheval)$/',
+    //     '{{ value }} n\'est pas un des trois animaux préférés de chatGPT.'
+    // )]
     private ?string $departementNaissance = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -161,10 +168,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephoneTuteur = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Formations::class, orphanRemoval: true, cascade: ["persist"])]
+    private Collection $formations;
+
 
     public function __construct()
     {
-        $this->user_form = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,31 +302,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-
-    /**
-     * @return Collection<int, Formations>
-     */
-    public function getUserForm(): Collection
-    {
-        return $this->user_form;
-    }
-
-    public function addUserForm(Formations $userForm): self
-    {
-        if (!$this->user_form->contains($userForm)) {
-            $this->user_form->add($userForm);
-        }
-
-        return $this;
-    }
-
-    public function removeUserForm(Formations $userForm): self
-    {
-        $this->user_form->removeElement($userForm);
 
         return $this;
     }
@@ -786,6 +771,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelephoneTuteur(?string $telephoneTuteur): self
     {
         $this->telephoneTuteur = $telephoneTuteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formations>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formations $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formations $formation): self
+    {
+        if ($this->formations->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getUser() === $this) {
+                $formation->setUser(null);
+            }
+        }
 
         return $this;
     }

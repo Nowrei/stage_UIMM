@@ -71,7 +71,8 @@ class FormulaireController extends AbstractController
 
         //dd($form);
 
-
+        //$this->validationApiService->check_wrCandidat();
+//die;
 
         /***/ ///////////////////////Lire les pays depuis l'Api********************* */ */
 
@@ -103,37 +104,11 @@ class FormulaireController extends AbstractController
         }
 
 
-        $form = $this->createForm(UserFormType::class, $user)
-            ->add('paysNaissance', ChoiceType::class, [
-                'label' => false,
-                'placeholder' => 'Choissisez votre pays de naissance',
-                'required' => true,
-                'choices' => [
-
-                    $choices
-                ],
-                'attr' => [
-                    'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
-                ],
-                'empty_data' => '',
-            ])
-            ->add('idPays', ChoiceType::class, [
-                'label' => false,
-                'placeholder' => 'France',
-                'required' => true,
-                'choices' => [
-                            
-                            $choices
-                ],
-                'attr' => [
-                    'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
-                ],
-                'empty_data' => '1',
-            ]);
+        $form = $this->createForm(UserFormType::class, $user, ['listePays' => $choices]);
 
         $form->handleRequest($request);
-        $form1 = $this->createForm(PoleFormationType::class);
-        $form1->handleRequest($request);
+        // $form1 = $this->createForm(PoleFormationType::class);
+        // $form1->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -141,51 +116,37 @@ class FormulaireController extends AbstractController
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
 
-
             //***********  ecrire toutes les donnees dans la base de donnees  */
+            if($dataForm instanceOf User) {
+                foreach($dataForm->getFormations() as $f) {
+                    $f->setUser($user);
+                }
+            }
+
+
             if(!$user->getId()){
                 $entityManager->persist($dataForm);
+                // $entityManager->persist($dataForm);
             }
+
+
+
             $entityManager->flush();
             
 
             //***********  On recupere les données entrer pour la formation  */
 
-            $additionalData = [
-                'poleFormation' => $request->request->get('poleFormation'),
-                'intituleFormation' => $request->request->get('intituleFormation'),
-                'typeCertFormation' => $request->request->get('typeCertFormation'),
-                'dateDebutFormation' => $request->request->get('dateDebutFormation'),
-                'dateFinFormation' => $request->request->get('dateFinFormation'),
-                'idUser' => $user->getId()
             
-                // Ajoutez d'autres champs au besoin
-            ];
+
             
-            $formation = new Formations();
-            if ($additionalData['poleFormation'] === '3008262') { $texte = 'Pôle Formation 08 (Campus sup Ard.)'; $formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '3918430') { $texte = 'Pôle Formation 08 (Charleville)';$formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '2864611') { $texte = 'Pôle Formation 08 (Donchery)';$formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '3072') { $texte = 'Pôle Formation 10 (Aube)';$formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '53071') {$texte = 'Pôle Formation 51 (Reims, Site 1 Bât.B)';$formation->setPoleFormation($texte);}
-            if ($additionalData['poleFormation'] === '368998') {$texte = 'Pôle Formation 52 (St Dizier)';$formation->setPoleFormation($texte);}
-            
-            $formation->setIntituleFormation($additionalData['intituleFormation']);
-            $formation->setTypeCertFormation($additionalData['typeCertFormation']);
-            $dateDebutFormation = DateTimeImmutable::createFromFormat('Y-m-d', $additionalData['dateDebutFormation']);
-            $formation->setDateDebutFormation($dateDebutFormation);
-            $dateFinFormation = DateTimeImmutable::createFromFormat('Y-m-d', $additionalData['dateFinFormation']);
-            $formation->setDateFinFormation($dateFinFormation);
-      
-            
-            $entityManager->persist($formation);
-            $entityManager->flush();
+            // $entityManager->persist($formation);
+            // $entityManager->flush();
 
             // Récupérer l'ID de la formation nouvellement créée
-            $formationId = $formation->getId();
+            // $formationId = $formation->getId();
 
             // Récupérer l'objet User correspondant
-            $user = $entityManager->getRepository(User::class)->find($user);
+            // $user = $entityManager->getRepository(User::class)->find($user);
 
             // Vérifier si l'utilisateur existe
             // if (!$user) {
@@ -193,7 +154,7 @@ class FormulaireController extends AbstractController
             // }
 
             // Mettre à jour le champ idFormationSouhaiter de l'utilisateur
-            $user->setIdFormationSouhait1($formationId);
+            // $user->setIdFormationSouhait1($formationId);
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -246,7 +207,7 @@ class FormulaireController extends AbstractController
             }
 
             //$candidat["idSite"] = "3071";
-            //$candidat["idFormationSouhait1"] = "3911164";
+            $candidat["idFormationSouhait1"] = "4079212";
             //$candidat["idNationalite"] = "0";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";
 
@@ -305,7 +266,7 @@ class FormulaireController extends AbstractController
         return $this->render('formulaire/index.html.twig', [
             'controller_name' => 'FormulaireController',
             'formulaire' => $form,
-            'formulaires' => $form1
+            // 'formulaires' => $form1
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Formations;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -18,21 +19,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 class CustomAdminController extends AbstractCrudController
 {
 
-    private $entityManager;
-    private $requestStack;
-
-    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
-    {
-        $this->entityManager = $entityManager;
-        $this->requestStack = $requestStack;
-    }
+    public function __construct(
+        private EntityManagerInterface $entityManager, 
+        private RequestStack $requestStack
+    ) {    }
     
-    
-      //@Route("/admin/excel", name="admin_excel")
-     
-
-     #[Route('/admin/excel', name: 'admin_excel')]
-
+    #[Route('/admin/excel', name: 'admin_excel')]
     public static function getEntityFqcn(): string
     {
         return User::class; // Replace YourEntity with the actual entity class
@@ -41,10 +33,7 @@ class CustomAdminController extends AbstractCrudController
 
     public function exportToExcel()
     {
-
-        
-
-  // cette solution permet exporter tous les utilisateurs dans la base de donnees vers un fichier excel
+        // cette solution permet exporter tous les utilisateurs dans la base de donnees vers un fichier excel
 
         $userRepository = $this->entityManager->getRepository(User::class);
         $users = $userRepository->findAll();

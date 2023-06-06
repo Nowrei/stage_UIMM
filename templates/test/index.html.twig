@@ -5,7 +5,7 @@
 {% block body %}
 
 
-
+{# 
 <script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 
 <div class="flex justify-center w-full bg-konbini-200  h-fit text-white">
@@ -50,14 +50,18 @@
 </div>
 
 
+ #}
+
+{% for v in violations %}
+
+<h1>{{v.message}}</h1>
+
+{% endfor %}
 
 
 
 
-
-
-
-
+ 
 
 
 {% endblock %}

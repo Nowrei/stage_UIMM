@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\User;
+use App\Entity\Formations;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
@@ -288,13 +289,16 @@ class ValidationApiService extends AbstractController
 
     public function check_wrCandidat(): bool
     {
+        echo "dedans check";
+
 
         //faire la connexion avec la bdd
-        
-        $users = $this->entityManager -> getRepository (User::class); //users montre lutilisateur actuel
+        $formations = $this->entityManager->getRepository(Formations::class);
+        //dd($formations);
+        $users = $this->entityManager->getRepository(User::class); //users montre lutilisateur actuel
         //echo $users->
-        //dd($users);
-        
+        // dd($users);
+       
 
         //chercher si il y a des valeurs qui nont pas ete envoyes sur ypareo  et les ajouter dans un array darrays candidats
         $notsentuser=$users->findBy(['token' => null]); //touts les utilisateurs que sont pas envoyes sur ypareo 
@@ -326,6 +330,17 @@ class ValidationApiService extends AbstractController
             $candidat['idNationalite'] 			= $u->getidNationalite();
             $candidat['departementNaissance'] 	= $u->getdepartementNaissance();
             $candidat['idFormationSouhait1'] 	= $u->getidFormationSouhait1();
+            
+            // dd($candidat['idFormationSouhait1']);
+            $formation=$formations->findBy(['id' => $candidat['idFormationSouhait1']]);    
+            // dd($formation);
+            // dd($formation['poleFormation']);
+
+            $pattern = "/([.])/";
+            $components = preg_split($pattern, $formation['poleFormation'], -1,PREG_SPLIT_DELIM_CAPTURE);
+            // dd($components[0]);
+
+
             $candidat['dernierDiplome '] 		= $u->getdernierDiplome();
             $candidat['niveauQualification'] 	= $u->getniveauQualification();
 
@@ -348,12 +363,13 @@ class ValidationApiService extends AbstractController
             $candidat['adresseMaillTuteur'] 	= $u->getadresseMaillTuteur();
             $candidat['telephoneTuteur'] 		= $u->gettelephoneTuteur();
 
+
             $candidat["idSite"] = "3071";
-            //$candidat["idFormationSouhait1"] = "3911164";    
+            $candidat["idFormationSouhait1"] = "4079212";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";  
 
 
-            $resultado=$this->apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
+            $resultado=$this->apiWrCandidat($candidat, '/r/v1/preinscription/candidat');
             echo "reponse: ".$resultado;
             echo "<br>";
 
