@@ -275,7 +275,7 @@ class UserFormType extends AbstractType
                     'Financement Région' => 'Financement Région',
                     'POE Individuelle' => 'POE Individuelle',
                     'POE COllective' => 'POE Collective',
-                    'VAR' => 'VAE',
+                    'VAE' => 'VAE',
                     'Autre' => 'Autre',
 
                     
