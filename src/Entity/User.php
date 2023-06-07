@@ -91,13 +91,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $idNationalite = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    #[Assert\NotBlank(
-        message: 'Ne doit pas être laissé vide.'
-    )]
-    #[Assert\Regex(
-        '/^(?:0[1-9]|[1-8][0-9]|9[0-5]|2A|2B|97[1-6]|98[4-7]|99[7-8])$/',
-        '{{ value }} n\'est pas un département français valide.'
-    )]
+    // #[Assert\NotBlank(
+    //     message: 'Ne doit pas être laissé vide.'
+    // )]
+    // #[Assert\Regex(
+    //     '/^(?:0[1-9]|[1-8][0-9]|9[0-5]|2A|2B|97[1-6]|98[4-7]|99[7-8])$/',
+    //     '{{ value }} n\'est pas un département français valide.'
+    // )]
     // #[Assert\Regex(
     //     '/^(chien|chat|cheval)$/',
     //     '{{ value }} n\'est pas un des trois animaux préférés de chatGPT.'

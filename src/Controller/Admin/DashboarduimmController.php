@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\SiteFormation;
 use App\Entity\User;
 use App\Entity\Formations;
 use App\Controller\Admin\UserCrudController;
@@ -49,6 +50,7 @@ class DashboarduimmController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Formation', 'fa-solid fa-school', Formations::class);
         yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
+        yield MenuItem::linkToCrud('Site', 'fa-solid fa-book', SiteFormation::class);
         yield MenuItem::linkToRoute('Export to Excel', 'fa-solid fa-file-excel', 'admin_excel');
        // yield MenuItem::linkToCrud('Excel', 'fa-solid fa-user', 'admin_excel');
     }

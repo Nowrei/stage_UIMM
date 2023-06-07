@@ -172,7 +172,7 @@
 
 		<button type="button" class="add_item_link" data-collection-holder-class="formations">Add a ForMaTiOn</button>
 		<ul class="formations"
-			data-index="{{ formulaire.formations|length > 0 ? formulaire.tags|last.vars.name + 1 : 0 }}"
+			data-index="{{ formulaire.formations|length > 0 ? formulaire.formations|last.vars.name + 1 : 0 }}"
 			data-prototype="{{ _self.formulaireRowMacro(formulaire.formations.vars.prototype)|e('html_attr') }}"
 		>
         {% for f in formulaire.formations %}

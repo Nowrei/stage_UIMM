@@ -7,7 +7,9 @@ use App\Entity\User;
 use App\Form\FormationsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -158,12 +160,32 @@ class UserFormType extends AbstractType
                 ],
             ])
 
+            // #[Assert\NotBlank(
+            //     message: 'Ne doit pas être laissé vide.'
+            // )]
+            // #[Assert\Regex(
+            //     '/^(?:0[1-9]|[1-8][0-9]|9[0-5]|2A|2B|97[1-6]|98[4-7]|99[7-8])$/',
+            //     '{{ value }} n\'est pas un département français valide.'
+            // )]
+        
+
             ->add('departementNaissance', TextType::class, [
                 'label' => false,
-            'attr' => [
-                'class' => 'form-control py-1 px-2',
-                'style' => 'border: none; border-radius: 5px;',
-              ],  ],)
+                'attr' => [
+                    'class' => 'form-control py-1 px-2',
+                    'style' => 'border: none; border-radius: 5px;',
+                ],  
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Ne doit pas être laissé vide.'
+                    ),
+                    new Regex(
+                        '/^(?:0[1-9]|[1-8][0-9]|9[0-5]|2A|2B|97[1-6]|98[4-7]|99[7-8])$/',
+                        '{{ value }} n\'est pas un département français valide.'
+                    
+                    )
+                ],
+            ])
             //formation
       
             ->add('dernierDiplome', TextType::class, [
