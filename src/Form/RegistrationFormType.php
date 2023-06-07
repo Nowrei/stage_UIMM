@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -50,6 +51,7 @@ class RegistrationFormType extends AbstractType
                     'required' => true,
                     'first_options'  => ['label' => 'Choissisez votre mot de passe',],
                     'second_options' => ['label' => 'Confirmez votre mot de passe'],
+                    
                     // instead of being set onto the object directly,
                     // this is read and encoded in the controller
                     'mapped' => false,
@@ -64,6 +66,11 @@ class RegistrationFormType extends AbstractType
                             // max length allowed by Symfony for security reasons
                             'max' => 128,
                         ]),
+                        new Regex(
+                            '/^(?=.*[A-Z])(?=.*\d).+$/',
+                            'Votre mot de passe doit au moins comporter une majuscule et un chiffre.',
+                            
+                        )
                     ],
                 ])
         ;

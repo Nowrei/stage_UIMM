@@ -29,7 +29,7 @@ class UserFormType extends AbstractType
             //coordonnées
 
             ->add('codeCiviliteApprenant', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Civilité *',
                 'required' => true,
                 'choices' => [
                     'Civilité' => '',
@@ -38,67 +38,76 @@ class UserFormType extends AbstractType
 
                 ],
                 'attr' => [
-                    'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
+                    'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg flex flex-column',
                 ],
             ])
             ->add('nomApprenant', TextType::class, [
-                'label' => false,
+                'label' => 'Nom *',
                 'required' => true,
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column ',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],
           
         )
         ->add('nomJf',TextType::class, [
-            'label' => false,
+            'label' => 'Nom d\'usage',
         'attr' => [
-            'class' => 'form-control py-1 px-2',
+            'class' => 'form-control py-1 px-2 flex flex-column',
             'style' => 'border: none; border-radius: 5px;',  ],  ],)
 
             ->add('prenomApprenant', TextType::class, [
                 'required' => true,
-                'label' => false,
+                'label' => 'Prenom *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
-            ->add('dateNaissance', TextType::class, [
+            ->add('dateNaissance', DateType::class, [
                 'required' => true,
-                'label' => false,
+                'label' => '>Date de naissance *',
+                'format' => 'dd-MM-yyyy',
+                'years' => range(date('Y') - 100, date('Y') + 18),
+              
             'attr' => [
-                'class' => 'form-control py-1 px-2',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'class' => 'form-control py-1 px-2 flex flex-column',
+                'style' => 'border: none; border-radius: 5px;}',  
+            ],  ],)
             ->add('tel1Appr', TextType::class, [
                 'required' => true,
-                'label' => false,
+                'label' => 'Téléphone portable *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'placeholder' => '0123456789',
+                'class' => 'form-control py-1 px-2 flex flex-column',
+                'style' => 'border: none; border-radius: 5px;',  ],
+                
+                ],)
+
             ->add('tel2Appr', TextType::class, [
-                'label' => false,
+                'label' => 'Téléphone fixe',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'placeholder' => '0123456789',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('emailAppr', TextType::class, [
-                'label' => false,
+                'label' => 'Email *',
                 'required' => true,
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('adresse1Appr', TextType::class, [
                 'required' => true,
-                'label' => false,
+                'label' => 'Adresse *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('adresse2Appr', TextType::class, [
-                'label' => false,
+                'label' => 'Détail (Bâtiment, N° Appt)',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('cpAppr', TextType::class, [
-                'label' => false,
+                'label' => 'Code postal *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',
                 'maxlength' => 5, // Limite maximale de 5 caractères  
             ],  
@@ -110,19 +119,19 @@ class UserFormType extends AbstractType
             ],
         ],)
             ->add('villeAppr', TextType::class, [
-                'label' => false,
+                'label' => 'Ville *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
                 
             ->add('lieuNaissance', TextType::class, [
                 'label' => false,
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
 
                 ->add('idPays', ChoiceType::class, [
-                    'label' => false,
+                    'label' => 'Pays *',
                     'placeholder' => 'France',
                     'required' => true,
                     'choices' => [
@@ -136,16 +145,16 @@ class UserFormType extends AbstractType
                 ])
 
             ->add('paysNaissance', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Pays de naissance *',
                 'choices' => $options['listePays'],
                 'attr' => [
-                    'class' => 'form-control py-1 px-2',
+                    'class' => 'form-control py-1 px-2 flex flex-column',
                     'style' => 'border: none; border-radius: 5px;',  
                 ],  
             ],)
 
             ->add('idNationalite', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Nationalité *',
                 'required' => false,
                 'choices' => [
                     'Séléctioné votre nationalité' => '',
@@ -170,9 +179,9 @@ class UserFormType extends AbstractType
         
 
             ->add('departementNaissance', TextType::class, [
-                'label' => false,
+                'label' => 'Numéro du département de naissance *',
                 'attr' => [
-                    'class' => 'form-control py-1 px-2',
+                    'class' => 'form-control py-1 px-2 flex flex-column',
                     'style' => 'border: none; border-radius: 5px;',
                 ],  
                 'constraints' => [
@@ -189,13 +198,13 @@ class UserFormType extends AbstractType
             //formation
       
             ->add('dernierDiplome', TextType::class, [
-                'label' => false,
+                'label' => 'Dernier diplôme obtenu *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
 
             ->add('niveauQualification', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Niveau qualification *',
                 'required' => true,
                 'choices' => [
                     'Niveau de qualification' => '',
@@ -215,7 +224,7 @@ class UserFormType extends AbstractType
                 ], ],)
 
             ->add('dateObtention', DateType::class, [
-                'label' => false,
+                'label' => 'Année d\'obtention *',
                 'widget' => 'single_text',
                 'format' => 'yyyy',
                 'html5' => false,
@@ -226,26 +235,26 @@ class UserFormType extends AbstractType
             ->add('dejaExperience', HiddenType::class)
 
             ->add('dernierMetier', TextType::class, [
-                'label' => false,
+                'label' => 'Dernier métier exercé *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
 
             ->add('dureeExperience', TextType::class, [
-                'label' => false,
+                'label' => 'Durée de l\'expérience en année *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
 
             ->add('entrepriseExperience', TextType::class, [
-                'label' => false,
+                'label' => 'Entreprise *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
 
             ->add('niveauRemuneration', ChoiceType::class, [
-                'label' => false,
-                'required' => true,
+                'label' => 'Niveau de rémunération',
+                'required' => false,
                 'choices' => [
                     'Niveau de rémunération' => '',
                     'Ne souhaite pas répondre' => 'Ne souhaite pas répondre',
@@ -267,7 +276,7 @@ class UserFormType extends AbstractType
 
 
             ->add('statut', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Sous quel statut-allez vous effectuer la formation ? *',
                 'required' => true,
                 'choices' => [
                     'Statut' => '',
@@ -285,7 +294,7 @@ class UserFormType extends AbstractType
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                 ],  ],)
             ->add('statutSalarie', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Sous quel statut allez vous effecteur la formation ? *',
                 'required' => true,
                 'choices' => [
                     'Statut salarié' => '',
@@ -305,49 +314,61 @@ class UserFormType extends AbstractType
                     'style' => 'max-width: 100%; word-wrap: break-word;',
                 ],  ],)
             ->add('statutCommentaire', TextType::class, [
-                'label' => false,
+                'label' => 'Commentaire autre formation',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('entrepriseSalarie', TextType::class, [
-                'label' => false,
+                'label' => 'Entreprise *',
+                'required' => true,
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('adresseEntreprise', TextType::class, [
-                'label' => false,
+                'label' => 'Adresse de l\'entreprise *',
+                'required' => true,
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('villeEntreprise', TextType::class, [
-                'label' => false,
+                'label' => 'Ville de l\'entreprise *',
+                'required' => true,
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('cpEntreprise', TextType::class, [
-                'label' => false,
+                'label' => 'Code postal *',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'class' => 'form-control py-1 px-2 flex flex-column',
+                'style' => 'border: none; border-radius: 5px;',
+                'maxlength' => 5, // Limite maximale de 5 caractères  
+            ],  
+            'constraints' => [
+                new Length([
+                    'min' => 5, // Limite minimale de 5 caractères
+                    'minMessage' => 'Le champ doit contenir au moins {{ limit }} caractères',
+                ]),
+            ],
+        ],)
             ->add('nomTuteur', TextType::class, [
-                'label' => false,
+                'label' => 'Nom du tuteur',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('prenomTuteur', TextType::class, [
-                'label' => false,
+                'label' => 'Prenom du tuteur',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('adresseMaillTuteur', TextType::class, [
-                'label' => false,
+                'label' => 'Adresse Mail du tuteur',
             'attr' => [
-                'class' => 'form-control py-1 px-2',
+                'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
             ->add('telephoneTuteur', TextType::class, [
-                'label' => false,
+                'label' => 'Téléphone du tuteur',
         'attr' => [
-            'class' => 'form-control py-1 px-2',
+            'class' => 'form-control py-1 px-2 flex flex-column',
             'style' => 'border: none; border-radius: 5px;',  ],
         ])
             ->add('formations', CollectionType::class, [

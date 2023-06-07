@@ -354,16 +354,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateNaissance(): ?string
+    public function getDateNaissance(): ?DateTime
     {
-        return $this->dateNaissance;
+        $date   = new DateTime("0000-00-00 00:00");                   //creation de objet date avec la date du jour aujourdhui
+        if (!is_null($this->dateNaissance)){   //si lobjet nest pas null on return lobjet obtenu depuis la bdd
+            $date=date_create($this->dateNaissance."-00-00 00:00");
+            return $date;
+        }else{                                      //si lobjet est null on return la date daujourdhui
+            return $date;
+            //return $date->format("Y");
+            
+        }
+        
     }
-
-    public function setDateNaissance(string $dateNaissance): self
+    public function setDateNaissance(?DateTime $dateNaissance): string
     {
-        $this->dateNaissance = $dateNaissance;
 
-        return $this;
+        $date=$dateNaissance;
+        
+        $this->dateNaissance=date_format($date,"d/m/Y"); //ici on recoit un objet datetime depuis lutilisateur et on met le valeur dedans la propriete du objet this
+        return ( $this->dateNaissance  );   
+        //die;                               // et on return lobjet pour etre ecrit dans la bdd
+        
     }
 
     public function getTel1Appr(): ?string
