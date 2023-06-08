@@ -409,6 +409,7 @@ class ValidationApiService extends AbstractController
 
                 //ecrire la reponse de l API dans la bdd
                 $u->setToken($resultado);
+                $u->setIdFormationSouhait1($candidat["idFormationSouhait1"]);
                 $this->entityManager->persist($u);
                 // actually executes the queries (i.e. the INSERT query)
                 $this->entityManager->flush();
