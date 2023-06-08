@@ -80,6 +80,16 @@ class UserFormType extends AbstractType
                 'placeholder' => '0123456789',
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Entrer un numéro de téléphone.'
+                    ),
+                    new Regex(
+                        '/^(\\+[1-9]\\d{0,2})?\\s*\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}$/',
+                        '{{ value }} n\'est pas un numéro de téléphone valide.'
+                    
+                    )
+                ],
                 
                 ],)
 
