@@ -115,11 +115,27 @@ class FormulaireController extends AbstractController
             // $form->getData() holds the submitted values
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
+            //dd($dataForm);
+
+
+
+
 
             //***********  ecrire toutes les donnees dans la base de donnees  */
+
+            //ecrire les relations entre user et formation dans bdd
             if($dataForm instanceOf User) {
+                $cont=0;
+                $codeSite="3071";
                 foreach($dataForm->getFormations() as $f) {
                     $f->setUser($user);
+                   
+                    if ($cont===0){  
+                        $codeSite = $f->getPoleFormation()->getCodeSite(); 
+                        echo $codeSite;
+                        $cont=1;
+                    }
+                    
                 }
             }
 
@@ -153,8 +169,8 @@ class FormulaireController extends AbstractController
             //     throw new \Exception('Utilisateur introuvable'); // Ou gérer l'erreur d'une autre manière
             // }
 
-            // Mettre à jour le champ idFormationSouhaiter de l'utilisateur
-            // $user->setIdFormationSouhait1($formationId);
+            // Mettre à jour le champ idFormationSouhaite de l'utilisateur
+            $user->setIdFormationSouhait1("4079212");
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -176,6 +192,10 @@ class FormulaireController extends AbstractController
                 if($key==="idPays" ){  $data="1";  }
                 if($key==="codeCiviliteApprenant" && $data==="1"){  $data=1;  }
                 if($key==="codeCiviliteApprenant" && $data==="2"){  $data=2;  }
+
+                //if($key==="idSite" && $data===null){  $data="3071";  }
+                //if($key==="idFormationSouhait1" ){  $data="4079212";  }
+        
 
                 if ($key ==="dateObtention" || $key ==="dernierDiplome"||
                     $key==="niveauQualification" ||
@@ -205,11 +225,14 @@ class FormulaireController extends AbstractController
                     //echo "<br>";
                 }
             }
+            
 
-            //$candidat["idSite"] = "3071";
+            $candidat["idSite"] = $codeSite;
             $candidat["idFormationSouhait1"] = "4079212";
             //$candidat["idNationalite"] = "0";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";
+
+            //dd($candidat);
 
             /*
             $encodedData = json_encode($candidat);
