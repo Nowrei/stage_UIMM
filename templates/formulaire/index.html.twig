@@ -1,11 +1,20 @@
 {% macro formulaireRowMacro(formationForm, idx) %}
 
-	<li class="only p-2">
-            <div class="champ">{{ form_row(formationForm.poleFormation) }}</div>
-            <div class="champ">{{ form_row(formationForm.intituleFormation) }}</div>
-            <div class="champ">{{ form_row(formationForm.typeCertFormation) }}</div>
-            <div class="champ">{{ form_row(formationForm.dateDebutFormation) }}</div>
-            <div class="champ">{{ form_row(formationForm.dateFinFormation) }}</div>
+	<div class="duo text-black p-2">
+            {{ form_row(formationForm.poleFormation) }}
+            {{ form_row(formationForm.intituleFormation) }}
+			</div>
+			<div class="duo text-black p-2 w-40">
+            {{ form_row(formationForm.typeCertFormation) }}
+			</div>
+			<div class="p-2 ml-6 flex flex-row text-black">
+			<div>
+            {{ form_row(formationForm.dateDebutFormation) }}
+			</div>
+			<div class="ml-20">
+           {{ form_row(formationForm.dateFinFormation) }}
+		   </div>
+			</div>
 
 
 		{# <div class="champ">
@@ -73,92 +82,77 @@
 	<div class="flex justify-center font-extrabold "></div>
 	<div class="text">
 		<div class="solo p-2">
-			<label for="nom" class="py-1 px-2">Civilité *</label>
 			{{ form_row(formulaire.codeCiviliteApprenant) }}
 		</div>
 	</div>
 	<div class="duo p-2">
-		<div class="champ">
-			<label for="nom" class="py-1 px-2">Nom *</label>
-			{{ form_row(formulaire.nomApprenant) }}
-		</div>
-		<div class="champ">
-			<label for="nomJf" class="py-1 px-2">Nom d'usage</label>
-			{{ form_row(formulaire.nomJf) }}
-		</div>
+	
+			{{ form_row(formulaire.nomApprenant, {attr: {'class': 'champ'}}) }}
+	
+			{{ form_row(formulaire.nomJf, {attr: {'class': 'champ'}}) }}
+		
 	</div>
 	<div class="duo p-2">
-		<div class="champ">
-			<label for="prenomApprenant" class="py-1 px-2">Prenom *</label>
-			{{ form_row(formulaire.prenomApprenant) }}
-		</div>
-		<div class="champ">
-			<label for="date_naissance" class="py-1 px-2">Date de naissance *</label>
-
-			{{ form_row(formulaire.dateNaissance) }}
-
-		</div>
+		
+			{{ form_row(formulaire.prenomApprenant, {attr: {'class': 'champ'}}) }}
+	
+			{{ form_row(formulaire.dateNaissance, {attr: {'class': 'champ'}}) }}
+	
 	</div>
 	<div class="duo p-2">
-		<div class="champ">
-			<label for="tel1Appr" class="py-1 px-2">Téléphone portable *</label>
+		
 			{{ form_row(formulaire.tel1Appr, {attr: {'class': 'champ'}}) }}
-		</div>
-		<div class="champ">
-			<label for="tel2Appr" class="py-1 px-2">Téléphone fixe</label>
-			{{ form_row(formulaire.tel2Appr) }}
-		</div>
+	
+			{{ form_row(formulaire.tel2Appr, {attr: {'class': 'champ'}}) }}
+		
 	</div>
 
 	<div class="only p-2">
-		<div class="champ">
-			<label for="emailAppr" class="py-1 px-2">Email *</label>
-			{{ form_row(formulaire.emailAppr) }}
-		</div>
+		
+			{{ form_row(formulaire.emailAppr, {attr: {'class': 'champ'}}) }}
+		
 	</div>
 
 	<div class="solo p-2" class="py-1 px-2">
-		<label for="adresse1">Adresse *</label>
+
 		{{ form_row(formulaire.adresse1Appr) }}
+
+	</div>
+	
+	<div class="duo p-2">
+	
+			
+			{{ form_row(formulaire.adresse2Appr, {attr: {'class': 'champ'}}) }}
+		
+			
+			{{ form_row(formulaire.cpAppr, {attr: {'class': 'champ'}}) }}
+		
 	</div>
 	<div class="duo p-2">
-		<div class="champ">
-			<label for="adrresse2" class="py-1 px-2">Détail (Bâtiment, N° Appt)</label>
-			{{ form_row(formulaire.adresse2Appr) }}
-		</div>
-		<div class="champ">
-			<label for="cpAppr" class="py-1 px-2">Code postal *</label>
-			{{ form_row(formulaire.cpAppr) }}
-		</div>
+	
+
+			{{ form_row(formulaire.villeAppr, {attr: {'class': 'champ'}}) }}
+	
+		
+			{{ form_row(formulaire.idPays, {attr: {'class': 'champ'}}) }}
+	
 	</div>
 	<div class="duo p-2">
-		<div class="champ">
-			<label for="ville" class="py-1 px-2">Ville *</label>
-			{{ form_row(formulaire.villeAppr) }}
-		</div>
-		<div class="champ">
-			<label for="pays" class="py-1 px-2">Pays *</label>
-			{{ form_row(formulaire.idPays) }}
-		</div>
+		
+			
+			{{ form_row(formulaire.paysNaissance, {attr: {'class': 'champ'}}) }}
+		
+			
+			{{ form_row(formulaire.idNationalite, {attr: {'class': 'champ'}}) }}
+		
 	</div>
 	<div class="duo p-2">
-		<div class="champ">
-			<label for="pays" class="py-1 px-2">Pays de naissance *</label>
-			{{ form_row(formulaire.paysNaissance) }}
-		</div>
-		<div class="champ">
-			<label for="nationalite" class="py-1 px-2">Nationalité *</label>
-			{{ form_row(formulaire.idNationalite) }}
-		</div>
-	</div>
-	<div class="duo p-2">
-		<div class="champ">
-			<label for="dept" class="py-1 px-2">Numéro du département de naissance *</label>
-			{{ form_row(formulaire.departementNaissance) }}
-		</div>
-		<div class="champ">
-			{{ form_row(formulaire.lieuNaissance, {label: 'Lieu de naissance'}) }}
-		</div>
+		
+	
+			{{ form_row(formulaire.departementNaissance, {attr: {'class': 'champ'}}) }}
+		
+			{{ form_row(formulaire.lieuNaissance, {attr: {'class': 'champ'}}) }}
+	
 		{# the data-index attribute is required for the JavaScript code below #}
 	</div>
 
@@ -168,9 +162,10 @@
 	<div class="solo flex flex-col items-center justify-center pt-10 ">
 		<p class="text-s font-bold tracking-widest">Votre formation</p>
 	</div>
-	<div class="duo p-2">
+	<div class="solo p-2">
 
-		<button type="button" class="add_item_link" data-collection-holder-class="formations">Add a ForMaTiOn</button>
+		<button type="button" class="add_item_link" data-collection-holder-class="formations">Ajouter une formation</button>
+		</div>
 		<ul class="formations"
 			data-index="{{ formulaire.formations|length > 0 ? formulaire.formations|last.vars.name + 1 : 0 }}"
 			data-prototype="{{ _self.formulaireRowMacro(formulaire.formations.vars.prototype)|e('html_attr') }}"
@@ -250,20 +245,17 @@
 		</div>
 		<div class="text">
 			<div class="solo p-2">
-				<div class="champ">
-					<label for="diplome" class="py-1 px-2">Dernier diplôme obtenu *</label>
-					{{ form_row(formulaire.dernierDiplome) }}
-				</div>
+			
+
+					{{ form_row(formulaire.dernierDiplome, {attr: {'class': 'champ'}}) }}
+			
 			</div>
 			<div class="duo p-2">
-				<div class="champ">
-					<label for="qualif" class="py-1 px-2">Niveau qualification</label>
+				
 					{{ form_row(formulaire.niveauQualification) }}
-				</div>
-				<div class="champ">
-					<label for="obtention" class="py-1 px-2">Année d'obtention *</label>
+				
 					{{ form_row(formulaire.dateObtention) }}
-				</div>
+				
 			</div>
 
 
@@ -285,24 +277,23 @@
 			<div id="experience-non" class="solo mt-2 text-sm  hidden"></div>
 			<div id="experience-oui" class=" solo mt-2 text-sm  hidden">
 				<div class="duo p-2">
-					<div>
-						<label for="metier" class="py-1 px-2">Dernier métier exercé *</label>
-						{{ form_row(formulaire.dernierMetier) }}
-					</div>
-					<div>
-						<label for="duree" class="py-1 px-2">Durée de l'expérience en année *</label>
-						{{ form_row(formulaire.dureeExperience) }}
-					</div>
+					
+						
+						{{ form_row(formulaire.dernierMetier, {attr: {'class': 'champ'}}) }}
+					
+					
+						{{ form_row(formulaire.dureeExperience, {attr: {'class': 'champ'}}) }}
+					
+				</div>
+				<div class="solo p-2">
+					
+
+						{{ form_row(formulaire.entrepriseExperience, {attr: {'class': 'champ'}}) }}
+					
 				</div>
 				<div class="solo p-2">
 					<div>
-						<label for="entreprise" class="py-1 px-2">Entreprise *</label>
-						{{ form_row(formulaire.entrepriseExperience) }}
-					</div>
-				</div>
-				<div class="solo p-2">
-					<div>
-						<label for="remu" class="py-1 px-2">Niveau de rémunération</label>
+					
 						{{ form_row(formulaire.niveauRemuneration) }}
 					</div>
 				</div>
@@ -322,64 +313,64 @@
 			<div id="checkbox-text-non" class="solo hidden">
 				<div class="solo p-2">
 					<div>
-						<label for="statut" class="py-1 px-2">Sous quel statut-allez vous effectuer la formation ? *</label>
-						{{ form_row(formulaire.statut) }}
+						
+						{{ form_row(formulaire.statut, {attr: {'class': 'champ'}}) }}
 					</div>
 				</div>
 				<div class="solo p-2">
 					<div>
-						<label for="commentaire" class="py-1 px-2">Commentaire autre formation</label>
-						{{ form_row(formulaire.statutCommentaire) }}
+
+						{{ form_row(formulaire.statutCommentaire, {attr: {'class': 'champ'}}) }}
 					</div>
 				</div>
 			</div>
 			<div id="checkbox-text-oui" class=" solo mt-2 text-sm hidden">
 				<div class="solo p-2">
 					<div>
-						<label for="statut_salarie" class="py-1 px-2">Sous quel statut allez vous effecteur la formation ? *</label>
-						{{ form_row(formulaire.statutSalarie) }}
+						
+						{{ form_row(formulaire.statutSalarie, {attr: {'class': 'champ'}}) }}
 					</div>
 				</div>
 				<div class="solo p-2">
 					<div>
-						<label for="entreprise_tuteur" class="py-1 px-2">Entreprise *</label>
-						{{ form_row(formulaire.entrepriseSalarie) }}
+
+						{{ form_row(formulaire.entrepriseSalarie, {attr: {'class': 'champ'}}) }}
 					</div>
 				</div>
 				<div class="solo p-2">
 					<div>
-						<label for="adresse_entreprise" class="py-1 px-2">Adresse de l'entreprise *</label>
-						{{ form_row(formulaire.adresseEntreprise) }}
+
+						{{ form_row(formulaire.adresseEntreprise, {attr: {'class': 'champ'}}) }}
 					</div>
 				</div>
 				<div class="duo p-2">
 					<div>
-						<label for="ville_entreprise" class="py-1 px-2">Ville de l'entreprise *</label>
-						{{ form_row(formulaire.villeEntreprise) }}
+						
+						{{ form_row(formulaire.villeEntreprise, {attr: {'class': 'champ'}}) }}
 					</div>
 					<div>
-						<label for="cp_entreprise" class="py-1 px-2">Code postal *</label>
-						{{ form_row(formulaire.cpEntreprise) }}
-					</div>
-				</div>
-				<div class="duo p-2">
-					<div>
-						<label for="nom_tuteur" class="py-1 px-2">Nom du tuteur</label>
-						{{ form_row(formulaire.nomTuteur) }}
-					</div>
-					<div>
-						<label for="prenom" class="py-1 px-2">Prenom du tuteur</label>
-						{{ form_row(formulaire.prenomTuteur) }}
+						
+						{{ form_row(formulaire.cpEntreprise, {attr: {'class': 'champ'}}) }}
 					</div>
 				</div>
 				<div class="duo p-2">
 					<div>
-						<label for="mail_tuteur" class="py-1 px-2">Adresse Mail du tuteur</label>
-						{{ form_row(formulaire.adresseMaillTuteur) }}
+
+						{{ form_row(formulaire.nomTuteur, {attr: {'class': 'champ'}}) }}
 					</div>
 					<div>
-						<label for="telephone_tuteur" class="py-1 px-2">Téléphone du tuteur</label>
-						{{ form_row(formulaire.telephoneTuteur) }}
+						
+						{{ form_row(formulaire.prenomTuteur, {attr: {'class': 'champ'}}) }}
+					</div>
+				</div>
+				<div class="duo p-2">
+					<div>
+						
+						{{ form_row(formulaire.adresseMaillTuteur, {attr: {'class': 'champ'}}) }}
+					</div>
+					<div>
+						
+						{{ form_row(formulaire.telephoneTuteur, {attr: {'class': 'champ'}}) }}
 					</div>
 
 				</div>
@@ -487,7 +478,8 @@
 	<script>
 const addTagFormDeleteLink = (item) => {
     const removeFormButton = document.createElement('button');
-    removeFormButton.innerText = 'Delete this tag';
+    removeFormButton.innerText = 'Supprimer la formation';
+	removeFormButton.classList.add('text-black', 'duo');
 
     item.append(removeFormButton);
 
@@ -530,6 +522,7 @@ document
 		.forEach(btn => {
 			btn.addEventListener("click", addFormToCollection)
 		});
+		
 
 
 
