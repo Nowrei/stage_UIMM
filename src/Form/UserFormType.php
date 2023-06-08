@@ -61,9 +61,10 @@ class UserFormType extends AbstractType
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                
             ->add('dateNaissance', DateType::class, [
                 'required' => true,
-                'label' => '>Date de naissance *',
+                'label' => 'Date de naissance *',
                 'format' => 'dd-MM-yyyy',
                 'years' => range(date('Y') - 100, date('Y') + 18),
               
@@ -71,6 +72,7 @@ class UserFormType extends AbstractType
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;}',  
             ],  ],)
+
             ->add('tel1Appr', TextType::class, [
                 'required' => true,
                 'label' => 'Téléphone portable *',
@@ -87,23 +89,27 @@ class UserFormType extends AbstractType
                 'placeholder' => '0123456789',
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('emailAppr', TextType::class, [
                 'label' => 'Email *',
                 'required' => true,
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('adresse1Appr', TextType::class, [
                 'required' => true,
                 'label' => 'Adresse *',
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('adresse2Appr', TextType::class, [
                 'label' => 'Détail (Bâtiment, N° Appt)',
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
+
             ->add('cpAppr', TextType::class, [
                 'label' => 'Code postal *',
             'attr' => [
@@ -125,7 +131,8 @@ class UserFormType extends AbstractType
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
                 
             ->add('lieuNaissance', TextType::class, [
-                'label' => false,
+                'label' => 'Ville de naissance *',
+                'required' => true,
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
@@ -140,6 +147,7 @@ class UserFormType extends AbstractType
                     ],
                     'attr' => [
                         'class' => 'appearance-none py-1 px-2 w-10 bg-white rounded-lg',
+                        'style' => 'border: none; border-radius: 5px;',
                     ],
                     'empty_data' => '1',
                 ])
@@ -166,6 +174,7 @@ class UserFormType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
+                    'style' => 'border: none; border-radius: 5px;',
                 ],
             ])
 
@@ -230,6 +239,8 @@ class UserFormType extends AbstractType
                 'html5' => false,
                 'attr' => [
                     'placeholder' => 'AAAA',
+                    'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
+                    'style' => 'border: none; border-radius: 5px;',
                 ],
             ])
             ->add('dejaExperience', HiddenType::class)
@@ -269,7 +280,7 @@ class UserFormType extends AbstractType
     
                 ],
                 'attr' => [
-                    'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
+                    'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg flex flex-column',
                 ],  ],)
 
             //->add('salarie', CheckboxType::class)
@@ -292,6 +303,7 @@ class UserFormType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
+                    'style' => 'border: none; border-radius: 5px;',
                 ],  ],)
             ->add('statutSalarie', ChoiceType::class, [
                 'label' => 'Sous quel statut allez vous effecteur la formation ? *',
@@ -311,7 +323,7 @@ class UserFormType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'appearance-none py-1 px-2 bg-white rounded-lg sm:text-ellipsis',
-                    'style' => 'max-width: 100%; word-wrap: break-word;',
+                    'style' => 'max-width: 100%; word-wrap: break-word; border: none; border-radius: 5px;',
                 ],  ],)
             ->add('statutCommentaire', TextType::class, [
                 'label' => 'Commentaire autre formation',
