@@ -98,7 +98,16 @@ class UserFormType extends AbstractType
             'attr' => [
                 'placeholder' => '0123456789',
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',  ], 'constraints' => [
+                   
+                    new Regex(
+                        '/^(\\+[1-9]\\d{0,2})?\\s*\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}$/',
+                        '{{ value }} n\'est pas un numéro de téléphone valide.'
+                    
+                    )
+                ],
+                
+                ],)
 
             ->add('emailAppr', TextType::class, [
                 'label' => 'Email *',
