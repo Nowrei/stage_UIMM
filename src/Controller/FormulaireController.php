@@ -71,7 +71,7 @@ class FormulaireController extends AbstractController
 
         //dd($form);
 
-        //$this->validationApiService->check_wrCandidat();
+//$this->validationApiService->check_wrCandidat();
 //die;
 
         /***/ ///////////////////////Lire les pays depuis l'Api********************* */ */

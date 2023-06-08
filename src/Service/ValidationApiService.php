@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Entity\Formations;
+use App\Entity\siteFormation;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
@@ -295,14 +296,18 @@ class ValidationApiService extends AbstractController
         //faire la connexion avec la bdd
         $formations = $this->entityManager->getRepository(Formations::class);
         //dd($formations);
+        $sites = $this->entityManager->getRepository(siteFormation::class);
+
         $users = $this->entityManager->getRepository(User::class); //users montre lutilisateur actuel
-        //echo $users->
-        // dd($users);
+        $users->findAll() ;
+        //die;
+        //dd($users);
        
 
         //chercher si il y a des valeurs qui nont pas ete envoyes sur ypareo  et les ajouter dans un array darrays candidats
         $notsentuser=$users->findBy(['token' => null]); //touts les utilisateurs que sont pas envoyes sur ypareo 
 
+        //dd($notsentuser);
         //parcourir larray et envoyer les candidats sur ypareo
         foreach ($notsentuser as $u){
 
@@ -332,12 +337,36 @@ class ValidationApiService extends AbstractController
             $candidat['idFormationSouhait1'] 	= $u->getidFormationSouhait1();
             
             // dd($candidat['idFormationSouhait1']);
-            $formation=$formations->findBy(['id' => $candidat['idFormationSouhait1']]);    
-            // dd($formation);
+            //$formationId=$formations->findBy(['id' =>    ]);    
+            //dd($formation);
             // dd($formation['poleFormation']);
+            //$siteformationId->findBy(['id' => $candidat['idFormationSouhait1']])
 
-            $pattern = "/([.])/";
-            $components = preg_split($pattern, $formation['poleFormation'], -1,PREG_SPLIT_DELIM_CAPTURE);
+            $valeur=2; //id user cherche
+
+            $query=$this->entityManager->createQuery(
+                '  SELECT s.codeSite FROM App\Entity\siteFormation  s, 
+                                         App\Entity\formations f,
+                                         App\Entity\user u
+                WHERE 
+                s.id=f.poleFormation 
+                and 
+                u.id=f.user
+                and 
+                u.id= :valeur '
+            )->setParameter('valeur',$valeur);
+
+            $result=$query->getResult();
+
+            //dd($result);
+            $idsite=implode($result[0]);
+            
+            //dd($idsite);
+            $candidat["idSite"] = $idsite;
+            //dd($candidat);
+
+            //$pattern = "/([.])/";
+            //$components = preg_split($pattern, $formation['poleFormation'], -1,PREG_SPLIT_DELIM_CAPTURE);
             // dd($components[0]);
 
 
@@ -364,9 +393,11 @@ class ValidationApiService extends AbstractController
             $candidat['telephoneTuteur'] 		= $u->gettelephoneTuteur();
 
 
-            $candidat["idSite"] = "3071";
+            //$candidat["idSite"] = "3071";
             $candidat["idFormationSouhait1"] = "4079212";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";  
+
+            //dd($candidat);
 
 
             $resultado=$this->apiWrCandidat($candidat, '/r/v1/preinscription/candidat');
