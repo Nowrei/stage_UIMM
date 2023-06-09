@@ -7,7 +7,7 @@ module.exports = {
 
     screens: {
 
-      'mobile': {'min': '300px', 'max': '699px'},
+      'mobil': {'min': '300px', 'max': '699px'},
       // => @media (min-width: 640px) { ... }
 
       'tablet': {'min': '700px', 'max': '1279px'},
@@ -50,7 +50,7 @@ module.exports = {
       '75': '75%',
       '80': '80%',
       '85': '85%',
-      '90%': '90%',
+      '90': '90%',
       '95': '95%',
       '100': '100%',
       '536px': '536px',

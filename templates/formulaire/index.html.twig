@@ -1,13 +1,13 @@
 {% macro formulaireRowMacro(formationForm, idx) %}
 
-	<div class="duo text-black p-2">
+	<div class="duo text-black p-2 mobil:w-90">
             {{ form_row(formationForm.poleFormation) }}
             {{ form_row(formationForm.intituleFormation) }}
 			</div>
-			<div class="duo text-black p-2 w-40">
+			<div class="duo text-black p-2 w-40 mobil:w-90">
             {{ form_row(formationForm.typeCertFormation) }}
 			</div>
-			<div class="p-2 ml-6 flex flex-row text-black">
+			<div class="p-2 ml-6 flex flex-row text-black mobil:flex mobil:flex-column">
 			<div>
             {{ form_row(formationForm.dateDebutFormation) }}
 			</div>
@@ -252,9 +252,9 @@
 			</div>
 			<div class="duo p-2">
 				
-					{{ form_row(formulaire.niveauQualification) }}
+					{{ form_row(formulaire.niveauQualification, {attr: {'class': 'champ'}}) }}
 				
-					{{ form_row(formulaire.dateObtention) }}
+					{{ form_row(formulaire.dateObtention, {attr: {'class': 'champ'}}) }}
 				
 			</div>
 
