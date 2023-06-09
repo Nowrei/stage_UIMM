@@ -62,16 +62,25 @@ class UserFormType extends AbstractType
                 'class' => 'form-control py-1 px-2 flex flex-column',
                 'style' => 'border: none; border-radius: 5px;',  ],  ],)
                 
-            ->add('dateNaissance', DateType::class, [
+            ->add('dateNaissance', TextType::class, [
                 'required' => true,
                 'label' => 'Date de naissance *',
-                'format' => 'dd-MM-yyyy',
-                'years' => range(date('Y') - 100, date('Y') + 18),
-              
+                
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;}',  
-            ],  ],)
+                'style' => 'border: none; border-radius: 5px;}',
+                'placeholder' => 'JJ/MM/AAAA',  
+            ], 
+            'constraints' => [
+                new NotBlank(
+                    message: 'Veillez remplir le champ.'
+                ),
+                new Regex(
+                    '/(?<!\d)(\d{2})\/(\d{2})\/(\d{4})(?!\d)/',
+                    '{{ value }} n\'est pas une date valide.'
+                
+                )
+            ], ],)
 
             ->add('tel1Appr', TextType::class, [
                 'required' => true,
@@ -214,7 +223,7 @@ class UserFormType extends AbstractType
                 ],  
                 'constraints' => [
                     new NotBlank(
-                        message: 'Ne doit pas être laissé vide.'
+                        message: 'Veillez remplir le champ.'
                     ),
                     new Regex(
                         '/^(?:0[1-9]|[1-8][0-9]|9[0-5]|2A|2B|97[1-6]|98[4-7]|99[7-8])$/',
