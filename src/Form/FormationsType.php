@@ -63,6 +63,7 @@ class FormationsType extends AbstractType
                     'month' => 'MM',
                     'day' => 'JJ',
                 ],
+                'years' => range(date('Y'), date('Y') + 3),
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2  rounded-lg',
                     'style' => 'border: none; border-radius: 5px;',
@@ -76,7 +77,8 @@ class FormationsType extends AbstractType
                     'month' => 'MM',
                     'day' => 'JJ',
                 ],
-                'years' => range(date('Y') - 100, date('Y') + 18),'attr' => [
+                'years' => range(date('Y'), date('Y') + 3),
+                'attr' => [
                     'class' => 'appearance-none  py-1 px-2  rounded-lg',
                     'style' => 'border: none; border-radius: 5px;',
                 ],  ],)
