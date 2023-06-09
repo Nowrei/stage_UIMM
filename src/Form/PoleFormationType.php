@@ -49,9 +49,7 @@ class PoleFormationType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'form-control py-1 px-2 flex flex-column',
-                    'style' => 'border: none; border-radius: 5px;}', 
-                    'placeholder' => 'JJ/MM/AAAA', 
+                    'placeholder' => 'JJ/MM/AAAA',
                 ],
             ])
             ->add('dateFinFormation', DateType::class, [
@@ -60,9 +58,7 @@ class PoleFormationType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'form-control py-1 px-2 flex flex-column',
-                    'style' => 'border: none; border-radius: 5px;}', 
-                    'placeholder' => 'JJ/MM/AAAA', 
+                    'placeholder' => 'JJ/MM/AAAA',
                 ],
             ])
             ->add('users' , HiddenType::class,)

@@ -57,15 +57,15 @@ class FormationsType extends AbstractType
                 'required' => false,
                 'label' => 'Date début formation',
                 'format' => 'dd-MM-yyyy',
-                'years' => range(date('Y') - 100, date('Y') + 18),
+                'years' => range(date('Y'), date('Y') + 3),
                 'placeholder' => [
                     'year' => 'AAAA',
                     'month' => 'MM',
                     'day' => 'JJ',
                 ],
                 'attr' => [
-                    'class' => 'appearance-none  py-1 px-2  rounded-lg',
-                    'style' => 'border: none; border-radius: 5px;',
+                    'class' => 'appearance-none  py-1 px-2  rounded-lg flex flex-row text-black',
+                    'style' => 'border: none; border-radius: 5px; display: flex; flex-direction: row;',
                 ],  ],)
             ->add('dateFinFormation', DateType::class, [
                 'required' => false,
@@ -76,9 +76,10 @@ class FormationsType extends AbstractType
                     'month' => 'MM',
                     'day' => 'JJ',
                 ],
-                'years' => range(date('Y') - 100, date('Y') + 18),'attr' => [
-                    'class' => 'appearance-none  py-1 px-2  rounded-lg',
-                    'style' => 'border: none; border-radius: 5px;',
+                'years' => range(date('Y'), date('Y') + 3),
+                'attr' => [
+                    'class' => 'appearance-none  py-1 px-2  rounded-lg flex flex-row text-black',
+                    'style' => 'border: none; border-radius: 5px; display: flex; flex-direction: row;',
                 ],  ],)
         ;
     }
