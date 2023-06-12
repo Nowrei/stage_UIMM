@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -33,7 +34,7 @@ class UserFormType extends AbstractType
                 'label' => 'Civilité *',
                 'required' => true,
                 'choices' => [
-                    'Civilité' => '',
+                    'Civilité' => null,
                     'Monsieur' => 1,
                     'Madame' => 2,
 
@@ -41,13 +42,25 @@ class UserFormType extends AbstractType
                 'attr' => [
                     'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg flex flex-column',
                 ],
+                'constraints' => [
+                 
+                    new NotNull(
+                        message: 'Veuillez renseigner votre civilité.'
+                    ),
+                ],
             ])
             ->add('nomApprenant', TextType::class, [
                 'label' => 'Nom *',
                 'required' => true,
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column ',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],
+                'style' => 'border: none; border-radius: 5px;',  ],
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Veuillez entrer votre nom.'
+                    ),
+                ],  
+              ],
           
         )
         ->add('nomJf',TextType::class, [
@@ -61,7 +74,12 @@ class UserFormType extends AbstractType
                 'label' => 'Prenom *',
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',  ],
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Veuillez entrer votre prénom.'
+                    ),
+                ],    ],)
                 
             ->add('dateNaissance', TextType::class, [
                 'required' => true,
@@ -74,7 +92,7 @@ class UserFormType extends AbstractType
             ], 
             'constraints' => [
                 new NotBlank(
-                    message: 'Veillez remplir le champ.'
+                    message: 'Veuillez entrer une date de naissance.'
                 ),
                 new Regex(
                     '/(?<!\d)(\d{2})\/(\d{2})\/(\d{4})(?!\d)/',
@@ -92,7 +110,7 @@ class UserFormType extends AbstractType
                 'style' => 'border: none; border-radius: 5px;',  ],
                 'constraints' => [
                     new NotBlank(
-                        message: 'Entrer un numéro de téléphone.'
+                        message: 'Veuillez entrer un numéro de téléphone.'
                     ),
                     new Regex(
                         '/^(\\+[1-9]\\d{0,2})?\\s*\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}$/',
@@ -124,20 +142,34 @@ class UserFormType extends AbstractType
                 'required' => true,
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',  ],
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Veuillez entrer une adresse email.'
+                    ),
+                ],  
+            ],)
 
             ->add('adresse1Appr', TextType::class, [
                 'required' => true,
                 'label' => 'Adresse *',
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',  ],
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Veuillez entrer une adresse.'
+                    ),
+                ],  
+              ],)
 
             ->add('adresse2Appr', TextType::class, [
                 'label' => 'Détail (Bâtiment, N° Appt)',
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',  ],  
+               
+            ],)
 
             ->add('cpAppr', TextType::class, [
                 'label' => 'Code postal *',
@@ -151,20 +183,37 @@ class UserFormType extends AbstractType
                     'min' => 5, // Limite minimale de 5 caractères
                     'minMessage' => 'Le champ doit contenir au moins {{ limit }} caractères',
                 ]),
+                new NotBlank(
+                    message: 'Veuillez entrer un code postal'
+                ),
+                new Regex(
+                    '/^\d+$/',
+                    'Seul des chiffres sont autorisés.'
+                )
             ],
         ],)
             ->add('villeAppr', TextType::class, [
                 'label' => 'Ville *',
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',  ],
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Veuillez entrer une ville de résidance.'
+                    ),
+                ],    ],)
                 
             ->add('lieuNaissance', TextType::class, [
                 'label' => 'Ville de naissance *',
                 'required' => true,
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',  ], 
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Veuillez entrer votre ville de naissance.'
+                    ),
+                ],   ],)
 
                 ->add('idPays', ChoiceType::class, [
                     'label' => 'Pays *',
@@ -183,18 +232,28 @@ class UserFormType extends AbstractType
 
             ->add('paysNaissance', ChoiceType::class, [
                 'label' => 'Pays de naissance *',
+                'placeholder' => 'Pays de naissance',
+                'empty_data' =>null,
                 'choices' => $options['listePays'],
                 'attr' => [
                     'class' => 'form-control py-1 px-2 flex flex-column',
                     'style' => 'border: none; border-radius: 5px;',  
                 ],  
+                'constraints' => [
+                 
+                    new NotNull(
+                        message: 'Veuillez renseigner votre pays de naissance.'
+                    ),
+                ],
             ],)
 
             ->add('idNationalite', ChoiceType::class, [
                 'label' => 'Nationalité *',
                 'required' => false,
+                'placeholder' => 'Séléctioné votre nationalité',
+                'empty_data' =>null,
                 'choices' => [
-                    'Séléctioné votre nationalité' => '',
+    
                     'Française' => '0',
                     'Union Européene' => '1',
                     'Hors union européene' => '2',
@@ -204,6 +263,12 @@ class UserFormType extends AbstractType
                 'attr' => [
                     'class' => 'appearance-none w-250 py-1 px-2 w-10 bg-white rounded-lg',
                     'style' => 'border: none; border-radius: 5px;',
+                ],
+                'constraints' => [
+                 
+                    new NotNull(
+                        message: 'Veuillez renseigner votre pays de naissance.'
+                    ),
                 ],
             ])
 
@@ -224,7 +289,7 @@ class UserFormType extends AbstractType
                 ],  
                 'constraints' => [
                     new NotBlank(
-                        message: 'Veillez remplir le champ.'
+                        message: 'Veuillez entrer un département.'
                     ),
                     new Regex(
                         '/^(?:0[1-9]|[1-8][0-9]|9[0-5]|2A|2B|97[1-6]|98[4-7]|99[7-8])$/',
@@ -239,13 +304,18 @@ class UserFormType extends AbstractType
                 'label' => 'Dernier diplôme obtenu *',
             'attr' => [
                 'class' => 'form-control py-1 px-2 flex flex-column',
-                'style' => 'border: none; border-radius: 5px;',  ],  ],)
+                'style' => 'border: none; border-radius: 5px;',  ],
+                'constraints' => [
+                    new NotBlank(
+                        message: 'Veuillez entrer votre dernier diplme obtenu.'
+                    ),
+                ],    ],)
 
             ->add('niveauQualification', ChoiceType::class, [
                 'label' => 'Niveau qualification *',
                 'required' => true,
+                
                 'choices' => [
-                    'Niveau de qualification' => '',
                     'Niv 1' => 'Niv 1',
                     'Niv 2 (CFG DNB)' => 'Niv 2 (CFG DNB)',
                     'Niv 3 (CAP)' => 'Niv 3 (CAP)',
@@ -259,6 +329,7 @@ class UserFormType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
+                    'placeholder' => 'Niveau de qualification'
                 ], ],)
 
             ->add('dateObtention', DateType::class, [
@@ -271,6 +342,7 @@ class UserFormType extends AbstractType
                     'class' => 'appearance-none  py-1 px-2 bg-white rounded-lg',
                     'style' => 'border: none; border-radius: 5px;',
                 ],
+                
             ])
             ->add('dejaExperience', HiddenType::class)
 
