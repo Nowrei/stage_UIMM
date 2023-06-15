@@ -98,7 +98,7 @@ class FormulaireController extends AbstractController
 
         $choices = [];
         foreach ($pays as $paysData) {
-            $nomPays = $paysData['nomPays'];
+            $nomPays = ucwords(strtolower($paysData['nomPays']));
             $codePays = $paysData['codePays'];
             $choices[$nomPays] = $codePays;
         }
