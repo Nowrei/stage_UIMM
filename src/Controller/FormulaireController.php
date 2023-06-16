@@ -69,7 +69,7 @@ class FormulaireController extends AbstractController
 
         $form = $this->createForm(UserFormType::class, $user);
 
-        //dd($form);
+    
 
 //$this->validationApiService->check_wrCandidat();
 //die;
@@ -115,7 +115,7 @@ class FormulaireController extends AbstractController
             // $form->getData() holds the submitted values
             // but, the original `$dataForm` variable has also been updated
             $dataForm = $form->getData();
-            //dd($dataForm);
+           
 
 
 
@@ -175,7 +175,7 @@ class FormulaireController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            //dd($formation);
+         
             //**************  ecrire dans api */
 
             
@@ -232,7 +232,7 @@ class FormulaireController extends AbstractController
             //$candidat["idNationalite"] = "0";    
             $candidat["observation"] = "Ce candidat a ete cree a partir de l'interface FCDE";
 
-            //dd($candidat);
+         
 
             /*
             $encodedData = json_encode($candidat);
