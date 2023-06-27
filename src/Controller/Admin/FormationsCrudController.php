@@ -23,9 +23,10 @@ class FormationsCrudController extends AbstractCrudController
             IdField::new('id'),
             AssociationField::new('user')
                 ->formatValue(function ($value, $entity) {
-                    $civilite = ($entity->getUser()->getCodeCiviliteApprenant() == 1) ? 'M.' : 'Mme';
+                    $civilite = ($entity->getUser()->getCodeCiviliteApprenant() == 1) ? 'M.' : 'Mme.';
                     $prenom = ($entity->getUser()->getPrenomApprenant());
-                    return $civilite . ' ' . $prenom . ' ' . $entity->getUser()->getPrenomApprenant();
+                    $nom = ($entity->getUser()->getNomApprenant());
+                    return $civilite . ' ' . $nom . ' ' . $prenom;
                 }),
             AssociationField::new('poleFormation')
                 ->formatValue(function ($value, $entity) {
@@ -33,8 +34,8 @@ class FormationsCrudController extends AbstractCrudController
                 }),
             TextField::new('intituleFormation')->setLabel('Nom de la formation'),
             TextField::new('typeCertFormation'),
-            DateField::new('dateDebutFormation'),
-            DateField::new('dateFinFormation'),
+            DateField::new('dateDebutFormation')->setFormat('dd-MM-yyyy'),
+            DateField::new('dateFinFormation')->setFormat('dd-MM-yyyy'),
         ];
     }
     
