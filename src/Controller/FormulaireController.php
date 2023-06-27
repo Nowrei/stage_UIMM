@@ -146,7 +146,13 @@ class FormulaireController extends AbstractController
             }
 
 
+           
+            $validationApiService= $this->validationApiService->updateBoolExperience($user);
 
+            $validationApiService= $this->validationApiService->updateBoolSalarie($user);
+
+
+         
             $entityManager->flush();
             
 
@@ -171,11 +177,11 @@ class FormulaireController extends AbstractController
 
             // Mettre à jour le champ idFormationSouhaite de l'utilisateur
             $user->setIdFormationSouhait1("4079212");
-
+          
             $entityManager->persist($user);
             $entityManager->flush();
 
-            //dd($formation);
+            dd($user);
             //**************  ecrire dans api */
 
             
