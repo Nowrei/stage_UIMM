@@ -505,4 +505,30 @@ class ValidationApiService extends AbstractController
         
     }
 
+    public function updateBoolExperience(User $user)
+    {
+        if ($user->getDernierMetier()) {
+            // Le champ dernierMetier est rempli
+            $user->setDejaExperience(true);
+        } else {
+            // Le champ dernierMetier n'est pas rempli
+            $user->setDejaExperience(false);
+        }
+
+        $this->entityManager->flush();
+    }
+
+    public function updateBoolSalarie(User $user)
+    {
+        if ($user->getStatutSalarie()) {
+            // Le champ dernierMetier est rempli
+            $user->setSalarie(true);
+        } else {
+            // Le champ dernierMetier n'est pas rempli
+            $user->setSalarie(false);
+        }
+
+        $this->entityManager->flush();
+    }
+
 }
