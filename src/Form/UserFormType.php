@@ -50,7 +50,10 @@ class UserFormType extends AbstractType
                 ],
             ])
 
-            ->add('nomApprenant',TextType::class,[
+            ->add(
+                'nomApprenant',
+                TextType::class,
+                [
                     'label' => 'Nom *',
                     'required' => true,
                     'attr' => [
@@ -64,7 +67,7 @@ class UserFormType extends AbstractType
                     ],
                 ],
 
-                
+
             )
             ->add('nomJf', TextType::class, [
                 'label' => 'Nom d\'usage',
@@ -102,7 +105,7 @@ class UserFormType extends AbstractType
                         message: 'Veuillez entrer une date de naissance.'
                     ),
                     new Regex(
-                        '/(?<!\d)(\d{2})\/(\d{2})\/(\d{4})(?!\d)/',
+                        '/\d{1,2}\/\d{1,2}\/\d{4}/',
                         '{{ value }} n\'est pas une date valide.'
 
                     )
@@ -370,7 +373,7 @@ class UserFormType extends AbstractType
                     'class' => 'form-control py-1 px-2 flex flex-column',
                     'style' => 'border: none; border-radius: 5px;',
                 ],
-                
+
             ],)
 
             ->add('dureeExperience', TextType::class, [
@@ -542,10 +545,10 @@ class UserFormType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'constraints' => [
-                        new NotBlank(
-                            message: 'Veuillez entrer votre dernier diplme obtenu.'
-                        ),
-                    ],
+                    new NotBlank(
+                        message: 'Veuillez entrer votre dernier diplme obtenu.'
+                    ),
+                ],
             ]);
     }
 
