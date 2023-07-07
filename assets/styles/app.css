@@ -1,5 +1,5 @@
 body {
-    background-image: url(https://candidature-cfai-ca.hub3e.com/background-alpha.077b673e77a7ed044a5f.jpg);
+    background-image: url('../images/uimm-stage.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -7,6 +7,16 @@ body {
     height: 100vh;
   }
 
+  li {
+
+    color: red;
+    display: row;
+  }
+
+  label {
+
+    color: black;
+  }
 .formulaire {
 
     margin-left: auto;
@@ -17,10 +27,13 @@ body {
     padding: 10px;
 
     
-
-    
+  
 }
 
+.erreur {
+
+    color: red;
+}
 .button {
 
     margin-left: auto;
@@ -63,14 +76,23 @@ body {
 
     display: flex;
     flex-direction: row;
-    grid-template-rows: 30px;
     margin-left: 30px;
     margin-right: auto;
     margin-top: 3px;
     margin-bottom: 3px;
+
    
 }
 
+.alert {
+
+    color: red;
+}
+
+button {
+
+    color: black;
+}
 .date {
 
     display: flex;
@@ -125,6 +147,8 @@ body {
 }
 
 
+
+
 #registration_form_email_first {
 
     width: 75%;
@@ -168,8 +192,12 @@ body {
 }
 #user_form_dateNaissance {
 
-    width: 80%
+    width: 80%;
+    display: flex;
+    flex-direction: row;
 }
+
+
 #user_form_tel1Appr {
 
     width: 80%
