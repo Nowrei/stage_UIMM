@@ -59,7 +59,7 @@ class FormulaireController extends AbstractController
 
                 $stat = $this->validationApiService->apiDownload("/r/v1/pays", $file); //On télécharge le fichier a nouveau
                 echo "fichier " . $file . " existe mais pas a jour, fichier telecharge  <br>";
-            } else {    
+            } else {
                 echo "fichier " . $file . " existe deja  <br>";
             }
         } else {  // si le fichier pays nexiste pas on le télécharge depuis lapi
@@ -71,8 +71,8 @@ class FormulaireController extends AbstractController
 
         //dd($form);
 
-//$this->validationApiService->check_wrCandidat();
-//die;
+        //$this->validationApiService->check_wrCandidat();
+        //die;
 
         /***/ ///////////////////////Lire les pays depuis l'Api********************* */ */
 
@@ -124,43 +124,42 @@ class FormulaireController extends AbstractController
             //***********  ecrire toutes les donnees dans la base de donnees  */
 
             //ecrire les relations entre user et formation dans bdd
-            if($dataForm instanceOf User) {
-                $cont=0;
-                $codeSite="3071";
-                foreach($dataForm->getFormations() as $f) {
+            if ($dataForm instanceof User) {
+                $cont = 0;
+                $codeSite = "3071";
+                foreach ($dataForm->getFormations() as $f) {
                     $f->setUser($user);
-                   
-                    if ($cont===0){  
-                        $codeSite = $f->getPoleFormation()->getCodeSite(); 
+
+                    if ($cont === 0) {
+                        $codeSite = $f->getPoleFormation()->getCodeSite();
                         echo $codeSite;
-                        $cont=1;
+                        $cont = 1;
                     }
-                    
                 }
             }
 
 
-            if(!$user->getId()){
+            if (!$user->getId()) {
                 $entityManager->persist($dataForm);
                 // $entityManager->persist($dataForm);
             }
 
 
-           
-            $validationApiService= $this->validationApiService->updateBoolExperience($user);
 
-            $validationApiService= $this->validationApiService->updateBoolSalarie($user);
+            $validationApiService = $this->validationApiService->updateBoolExperience($user);
+
+            $validationApiService = $this->validationApiService->updateBoolSalarie($user);
 
 
-         
+
             $entityManager->flush();
-            
+
 
             //***********  On recupere les données entrer pour la formation  */
 
-            
 
-            
+
+
             // $entityManager->persist($formation);
             // $entityManager->flush();
 
@@ -177,14 +176,14 @@ class FormulaireController extends AbstractController
 
             // Mettre à jour le champ idFormationSouhaite de l'utilisateur
             $user->setIdFormationSouhait1("4079212");
-          
+
             $entityManager->persist($user);
             $entityManager->flush();
 
-            dd($user);
+
             //**************  ecrire dans api */
 
-            
+
             //creation du array candidat pour envoyer sur API **************************************
             $candidat = array();
             foreach ($form as $f) {
@@ -192,38 +191,47 @@ class FormulaireController extends AbstractController
                 //echo $f->getViewData()." ";
                 //echo "<br>";
 
-                $key=$f->getName();
-                $data=$f->getViewData();
-                if ($data===""){      $data=null;  }
-                if($key==="idPays" ){  $data="1";  }
-                if($key==="codeCiviliteApprenant" && $data==="1"){  $data=1;  }
-                if($key==="codeCiviliteApprenant" && $data==="2"){  $data=2;  }
+                $key = $f->getName();
+                $data = $f->getViewData();
+                if ($data === "") {
+                    $data = null;
+                }
+                if ($key === "idPays") {
+                    $data = "1";
+                }
+                if ($key === "codeCiviliteApprenant" && $data === "1") {
+                    $data = 1;
+                }
+                if ($key === "codeCiviliteApprenant" && $data === "2") {
+                    $data = 2;
+                }
 
                 //if($key==="idSite" && $data===null){  $data="3071";  }
                 //if($key==="idFormationSouhait1" ){  $data="4079212";  }
-        
 
-                if ($key ==="dateObtention" || $key ==="dernierDiplome"||
-                    $key==="niveauQualification" ||
-                    $key==="dejaExperience" ||
-                    $key==="dernierMetier" ||
-                    $key==="dureeExperience" ||
-                    $key==="entrepriseExperience" ||
-                    $key==="niveauRemuneration" ||
-                    $key==="salarie" ||
-                    $key==="statut" ||
-                    $key==="statutSalarie" ||
-                    $key==="statutCommentaire" ||
-                    $key==="entrepriseSalarie" ||
-                    $key==="adresseEntreprise" ||
-                    $key==="villeEntreprise" ||
-                    $key==="cpEntreprise" ||
-                    $key==="nomTuteur" ||
-                    $key==="prenomTuteur" ||
-                    $key==="adresseMaillTuteur" ||
-                    $key==="telephoneTuteur" ) 
-                {
-                }else{
+
+                if (
+                    $key === "dateObtention" || $key === "dernierDiplome" ||
+                    $key === "niveauQualification" ||
+                    $key === "dejaExperience" ||
+                    $key === "dernierMetier" ||
+                    $key === "dureeExperience" ||
+                    $key === "entrepriseExperience" ||
+                    $key === "niveauRemuneration" ||
+                    $key === "salarie" ||
+                    $key === "statut" ||
+                    $key === "statutSalarie" ||
+                    $key === "statutCommentaire" ||
+                    $key === "entrepriseSalarie" ||
+                    $key === "adresseEntreprise" ||
+                    $key === "villeEntreprise" ||
+                    $key === "cpEntreprise" ||
+                    $key === "nomTuteur" ||
+                    $key === "prenomTuteur" ||
+                    $key === "adresseMaillTuteur" ||
+                    $key === "telephoneTuteur"
+                ) {
+                } else {
 
                     $candidat[$f->getName()] = $data;  //array avec donnees remplis dans le formulaire et a envoyer a ypareo
                     //echo $key;
@@ -231,7 +239,7 @@ class FormulaireController extends AbstractController
                     //echo "<br>";
                 }
             }
-            
+
 
             $candidat["idSite"] = $codeSite;
             $candidat["idFormationSouhait1"] = "4079212";
@@ -249,9 +257,9 @@ class FormulaireController extends AbstractController
             //si lutilisateur est loggue  et le champ token dans la base de donnees est vide on envoi le candidat a la aPI
 
             $idAPI = $user->getToken(); //on voit si lutilisateur a ete deja envoyé sur ypareo
-            
-            if($user->getId() && $idAPI===null  ){
-                $resultado=$this->validationApiService -> apiWrCandidat ($candidat, '/r/v1/preinscription/candidat');
+
+            if ($user->getId() && $idAPI === null) {
+                $resultado = $this->validationApiService->apiWrCandidat($candidat, '/r/v1/preinscription/candidat');
                 //echo $resultado;
 
                 $user->setToken($resultado);
@@ -284,7 +292,7 @@ class FormulaireController extends AbstractController
 
             // ... perform some action, such as saving the task to the database
 
-            
+
             // $resultado=$this->validationApiService -> apiGetIdPays("GUINE");
             //$request->request->get('email', '');
 
